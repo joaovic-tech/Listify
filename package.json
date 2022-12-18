@@ -1,0 +1,19 @@
+{
+  "name": "task-zone",
+  "version": "1.0.0",
+  "description": "aplicativo de gerenciamento de tarefas",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "João Victor @joaovic-tech",
+  "license": "MIT License",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2"
+  }
+}
