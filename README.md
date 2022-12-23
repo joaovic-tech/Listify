@@ -1,2 +1,2 @@
-# task zone
- aplicativo de gerenciamento de tarefas
+# To-do list with NodeJS
+* Task management app
