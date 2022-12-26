@@ -7,16 +7,33 @@
     <title>Task Zone</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-  <form id="task-form" class="mx-auto max-w-sm bg-gray-100 p-6 rounded-lg shadow-xl">
-    <label for="task-input" class="block font-bold text-2xl mb-2 text-gray-800">Nova tarefa:</label>
-    <input type="text" id="task-input" class="border w-full px-4 py-2 rounded-full focus:outline-none focus:shadow-outline" placeholder="Exemplo: comprar leite" />
-    <button type="submit" id="add-button" class="w-full mt-4 bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
-      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-      Adicionar
-    </button>
-  </form>
-  <ul id="task-list" class="mt-8 list-none"></ul>
-    <script src="js/main.js"></script>
-  </body>
+    <body>
+      <form id="task-form" class="flex flex-col items-center justify-center p-4" method="post">
+        <label class="text-xl font-bold" for="task">Task:</label>
+        <input class="border rounded w-full py-2 px-3" type="text" id="task" name="task" required>
+
+        <div class="flex items-center mt-4">
+          <input type="checkbox" class="form-checkbox h-6 w-6 text-indigo-600" id="important" name="important">
+          <label class="ml-2 text-xl font-bold" for="important">Mark as important</label>
+        </div>
+
+        <label class="text-xl font-bold mt-4" for="hours">Hours:</label>
+        <input class="border rounded w-full py-2 px-3" type="number" id="hours" name="hours">
+
+        <div class="flex items-center mt-4">
+          <input type="checkbox" class="form-checkbox h-6 w-6 text-indigo-600" id="repeat" name="repeat">
+          <label class="ml-2 text-xl font-bold" for="repeat">Repeat</label>
+        </div>
+
+        <label class="text-xl font-bold mt-4" for="reminder">Reminder:</label>
+        <input class="border rounded w-full py-2 px-3" type="text" id="reminder" name="reminder">
+
+        <label class="text-xl font-bold mt-4" for="conclusion">Conclusion:</label>
+        <input class="border rounded w-full py-2 px-3" type="text" id="conclusion" name="conclusion">
+
+        <button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded mt-4" type="submit">Submit</button>
+      </form>
+      <ul id="task-list" class="mt-8 list-none"></ul>
+      <script type="module" src="/main.js"></script>
+    </body>
 </html>

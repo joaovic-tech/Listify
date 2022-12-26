@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js --ignore frontend"
   },
   "author": "João Victor @joaovic-tech",
   "license": "MIT License",
@@ -13,6 +13,7 @@
     "nodemon": "^2.0.20"
   },
   "dependencies": {
+    "body-parser": "^1.20.1",
     "connect-mongo": "^4.6.0",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",

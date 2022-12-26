@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 
-class TaskModel {
+module.exports = class TaskModel {
   constructor() {
     this.taskModel = mongoose.models.TodoList || mongoose.model('TodoList', this.taskSchema);
     this.errors = [];
   }
-
 
   get taskSchema() {
     return new mongoose.Schema({
@@ -14,9 +13,9 @@ class TaskModel {
         required: true,
       },
       important: {
-        type: Boolean,
+        type: String,
         required: false,
-        default: false,
+        default: '',
       },
       hours: {
         type: String,
@@ -38,14 +37,19 @@ class TaskModel {
         required: false,
         default: '',
       },
+      createdAt: { 
+        type: Date,
+        default: Date.now
+      }
     });
   }
 
   validate(taskData) {
     const { task } = taskData;
+    this.errors = [];
 
     if (!task) {
-      this.errors.push('A tarefas é obrigatório!', String.prototype.trim(task));
+      this.errors.push('Tarefa não encontrada!');
     } else if (task.length <= 1) {
       this.errors.push('A tarefa deve ter mais de um carácter.');
     }
@@ -63,8 +67,6 @@ class TaskModel {
       await task.save();
     } catch (error) {
       console.error(error);
-    } finally {
-      mongoose.connection.close();
     }
   }
 
@@ -74,6 +76,14 @@ class TaskModel {
     const task = await this.taskModel.findOneAndDelete({ _id: id });
     return task;
   }
-}
 
-module.exports = TaskModel;
+  async index() {
+    try {
+      const tasks = await this.taskModel.find().sort({ createdAt: -1 });
+      return tasks;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+}
