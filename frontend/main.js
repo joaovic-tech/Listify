@@ -1,4 +1,34 @@
 import TaskModel from './modules/TaskModel.js';
+import IconCheck from './components/IconCheck.js';
+import EventListeners from './assets/js/eventListeners.js';
+import ModalEvents from './components/ModalEvents.js';
 
-const task = new TaskModel();
-task.init();
+const taskModel = new TaskModel();
+const iconCheck = new IconCheck();
+const eventListeners = new EventListeners(taskModel);
+const taskModalEffect = new ModalEvents('task', 'task-modal', 'click');
+const btnImportantModalOver = new ModalEvents('label-important', 'span-important', 'mouseover');
+const btnImportantModalOut = new ModalEvents('label-important', 'span-important', 'mouseout');
+const btnReminderModalOver = new ModalEvents('label-reminder', 'span-reminder', 'mouseover');
+const btnReminderModalOut = new ModalEvents('label-reminder', 'span-reminder', 'mouseout');
+const btnRepeatModalOver = new ModalEvents('label-repeat', 'span-repeat', 'mouseover');
+const btnRepeatModalOut = new ModalEvents('label-repeat', 'span-repeat', 'mouseout');
+const btnConclusionModalOver = new ModalEvents('input-conclusion', 'span-conclusion', 'mouseover');
+const btnConclusionModalOut = new ModalEvents('input-conclusion', 'span-conclusion', 'mouseout');
+const btnHoursModalOver = new ModalEvents('input-hours', 'span-hours', 'mouseover');
+const btnHoursModalOut = new ModalEvents('input-hours', 'span-hours', 'mouseout');
+
+taskModel.init();
+iconCheck.init();
+eventListeners.init();
+taskModalEffect.init();
+btnImportantModalOver.init();
+btnImportantModalOut.init();
+btnReminderModalOver.init();
+btnReminderModalOut.init();
+btnRepeatModalOver.init();
+btnRepeatModalOut.init();
+btnConclusionModalOver.init();
+btnConclusionModalOut.init();
+btnHoursModalOver.init();
+btnHoursModalOut.init();

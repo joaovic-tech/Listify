@@ -1,9 +1,12 @@
 import Message from '../utils/Message.js';
+import CreateTasks from '../components/TaskCreate.js';
 
 export default class TaskModel {
   constructor() {
     this.form = document.getElementById('task-form');
     this.task = document.getElementById('task');
+    this.tasks = document.getElementById('tasks');
+    this.createTasks = new CreateTasks();
   }
 
   validate() {
@@ -18,6 +21,19 @@ export default class TaskModel {
     }
 
     return true;
+  }
+
+  async getAllTasks() {
+    try {
+      const response = await fetch('/tasks');
+      const data = await response.json();
+      this.tasks.innerHTML = '';
+      
+      data.forEach((obj) => {
+        this.createTasks.init(obj);
+      });
+
+    } catch (e) { console.error(e) }
   }
 
   async create() {
@@ -43,10 +59,31 @@ export default class TaskModel {
       }
       const text = await response.text();
       if (text.includes('Errors')) {
-        console.log(text);
         Message.create('Formulário não enviado!');
       } else {
         Message.create('Tarefa criada com sucesso!');
+        this.getAllTasks();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async delete(id) {
+    try {
+      const response = await fetch(`/task/${id}`, {
+        method: 'DELETE'
+      });
+      
+      if (!response.ok) {
+        throw new Error('Ocorreu um erro ao deletar a tarefa!');
+      }
+      const text = await response.text();
+      if (text.includes('Errors')) {
+        Message.create('Tarefa não deletada ou não encontrada!');
+      } else {
+        Message.create('Tarefa deletada!');
+        this.getAllTasks();
       }
     } catch (error) {
       console.error(error);
@@ -55,6 +92,7 @@ export default class TaskModel {
 
   events() {
     if (!this.form) return;
+    this.getAllTasks();
 
     this.form.addEventListener('submit', (e) => {
       e.preventDefault();

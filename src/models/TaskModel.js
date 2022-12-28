@@ -14,32 +14,31 @@ module.exports = class TaskModel {
       },
       important: {
         type: String,
-        required: false,
         default: '',
       },
       hours: {
         type: String,
-        required: false,
         default: '',
       },
       repeat: {
         type: String,
-        required: false,
         default: '',
       },
       reminder: {
         type: String,
-        required: false,
         default: '',
       },
       conclusion: {
-        type: String,
-        required: false,
+        type: Object,
         default: '',
       },
-      createdAt: { 
+      created_at: { 
         type: Date,
         default: Date.now
+      },
+      updated_at: { 
+        type: Date,
+        default: ''
       }
     });
   }

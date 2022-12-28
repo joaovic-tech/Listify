@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const homeRoutes = require('./src/routes/homeRoutes');
 const taskRoutes = require('./src/routes/taskRoutes');
+const readmeMD = require('./src/routes/readmeMD');
 
 class App {
   constructor() {
@@ -24,6 +25,7 @@ class App {
   routes() {
     this.app.use('/', homeRoutes);
     this.app.use('/', taskRoutes);
+    this.app.use('/', readmeMD);
   }
 }
 

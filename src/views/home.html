@@ -4,36 +4,140 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Task Zone</title>
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <title>To do List with NodeJS</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://kit.fontawesome.com/673aed7dea.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
-    <body>
-      <form id="task-form" class="flex flex-col items-center justify-center p-4" method="post">
-        <label class="text-xl font-bold" for="task">Task:</label>
-        <input class="border rounded w-full py-2 px-3" type="text" id="task" name="task" required>
-
-        <div class="flex items-center mt-4">
-          <input type="checkbox" class="form-checkbox h-6 w-6 text-indigo-600" id="important" name="important">
-          <label class="ml-2 text-xl font-bold" for="important">Mark as important</label>
-        </div>
-
-        <label class="text-xl font-bold mt-4" for="hours">Hours:</label>
-        <input class="border rounded w-full py-2 px-3" type="number" id="hours" name="hours">
-
-        <div class="flex items-center mt-4">
-          <input type="checkbox" class="form-checkbox h-6 w-6 text-indigo-600" id="repeat" name="repeat">
-          <label class="ml-2 text-xl font-bold" for="repeat">Repeat</label>
-        </div>
-
-        <label class="text-xl font-bold mt-4" for="reminder">Reminder:</label>
-        <input class="border rounded w-full py-2 px-3" type="text" id="reminder" name="reminder">
-
-        <label class="text-xl font-bold mt-4" for="conclusion">Conclusion:</label>
-        <input class="border rounded w-full py-2 px-3" type="text" id="conclusion" name="conclusion">
-
-        <button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded mt-4" type="submit">Submit</button>
+  <body class="bg-gray-900">
+    <nav class="flex items-center justify-between w-full p-2 bg-gray-800">
+      <div class="flex items-center">
+        <i
+          class="fa-solid fa-list-ul fill-current rounded-md px-3 py-3 bg-gray-900 text-blue-500"
+        ></i>
+        <a
+          href="#"
+          class="ml-4 text-lg font-semibold text-white hover:text-gray-400"
+          >To do</a
+        >
+      </div>
+      <form
+        id="search-form"
+        class="relative flex items-center w-1/3 rounded-md"
+      >
+        <input
+          type="text"
+          id="search"
+          class="w-full h-full p-3 rounded-md bg-gray-700 border-2 border-solid border-gray-700 focus:border-blue-500 outline-0 text-white"
+          placeholder="Search"
+        />
+        <button
+          type="submit"
+          class="absolute right-0 top-0 mt-2 mr-4 rounded-md bg-gray-800 px-3 py-1 text-gray-500 hover:bg-gray-900 hover:text-blue-500"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
       </form>
-      <ul id="task-list" class="mt-8 list-none"></ul>
-      <script type="module" src="/main.js"></script>
-    </body>
+      <div class="relative">
+        <button
+          type="submit"
+          class="rounded-md bg-gray-700 px-3 py-2 text-gray-500 hover:bg-gray-900 hover:text-blue-500"
+        >
+          <i class="fa-solid fa-gear"></i>
+        </button>
+      </div>
+    </nav>
+    <main class="w-full h-full p-4 grid gap-8">
+      <header>
+        <h2 class="text-3xl text-white">
+          <i class="fa-solid fa-moon"></i>
+          Tarefas
+        </h2>
+        <p class="text-base text-zinc-400">Segunda-feira, 26 dezembro</p>
+      </header>
+      <form id="task-form" class="relative w-full bg-gray-700 rounded-lg">
+        <input
+          class="task outline-0 rounded w-full py-2 px-3 rounded-md bg-gray-700 text-white"
+          type="text"
+          id="task"
+          name="task"
+          placeholder="Exemplo: Comprar leite"
+        />
+        <hr class="border-blue-500" />
+        <div
+          class="task-modal opacity-0 pointer-events-none transition duration-500 ease-in-out absolute w-full grid sm:flex items-center sm:justify-between justify-center bg-gray-700 shadow-md shadow-gray-900/50 rounded-b-lg"
+        >
+          <ul class="w-full sm:flex grid grid-cols-2">
+            <li class="relative flex items-center justify-center">
+              <input
+                type="date"
+                name="conclusion"
+                class="input-conclusion outline-0 text-gray-900 rounded flex items-center justify-center w-full h-6 p-4 m-2 hover:text-blue-900 cursor-pointer bg-gray-300"
+              />
+              <span class="span-conclusion opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-0 w-60 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
+                Defina a data de conclusão
+              </span>
+            </li>
+            <li class="relative flex items-center justify-center">
+              <input
+                type="time"
+                name="hours"
+                class="input-hours outline-0 text-gray-900 rounded flex items-center justify-center w-full h-6 p-4 m-2 hover:text-blue-900 cursor-pointer bg-gray-300"
+              />
+              <span class="span-hours opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 -left-2.5 w-40 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
+                Defina as horas
+              </span>
+            </li>
+            <li class="relative flex items-center justify-center">
+              <input type="checkbox" name="important" id="important" hidden />
+              <label
+                for="important"
+                class="label-important text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700"
+              >
+                <i class="fa-solid fa-star"></i>
+              </label>
+              <span class="span-important opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 sm:-left-9 left-9 w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
+                Importante
+              </span>
+            </li>
+            <li class="relative flex items-center justify-center">
+              <input type="checkbox" name="reminder" id="reminder" hidden />
+              <label
+                for="reminder"
+                class="label-reminder text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700"
+              >
+                <i class="fa-solid fa-bell"></i>
+              </label>
+              <span class="span-reminder opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 sm:-left-9 left-9 w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
+                Lembre-me
+              </span>
+            </li>
+            <li class="relative flex items-center justify-center">
+              <input type="checkbox" name="repeat" id="repeat" hidden />
+              <label
+                for="repeat"
+                class="label-repeat text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700"
+              >
+                <i class="fa-solid fa-repeat"></i>
+              </label>
+              <span class="span-repeat opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 sm:-left-9 left-9 w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
+                Repetir
+              </span>
+            </li>
+          </ul>
+          <button
+            type="submit"
+            class="px-6 py-1 m-2 rounded bg-blue-700 text-white transition ease hover:rounded-md hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50"
+          >
+            Salvar
+          </button>
+        </div>
+      </form>
+      <ul id="tasks" class="grid gap-2 mt-8"></ul>
+    </main>
+    <script type="module" src="/main.js"></script>
+  </body>
 </html>
