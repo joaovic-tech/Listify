@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -51,7 +51,7 @@
       </div>
     </nav>
     <main class="w-full h-full p-4 grid gap-8">
-      <header>
+      <header id="header">
         <h2 class="text-3xl text-white">
           <i class="fa-solid fa-moon"></i>
           Tarefas
@@ -60,7 +60,7 @@
       </header>
       <form id="task-form" class="relative w-full bg-gray-700 rounded-lg">
         <input
-          class="task outline-0 rounded w-full py-2 px-3 rounded-md bg-gray-700 text-white"
+          class="outline-0 rounded w-full py-2 px-3 rounded-md bg-gray-700 text-white"
           type="text"
           id="task"
           name="task"
@@ -68,16 +68,20 @@
         />
         <hr class="border-blue-500" />
         <div
-          class="task-modal opacity-0 pointer-events-none transition duration-500 ease-in-out absolute w-full grid sm:flex items-center sm:justify-between justify-center bg-gray-700 shadow-md shadow-gray-900/50 rounded-b-lg"
+          id="task-modal"
+          class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute w-full grid sm:flex items-center sm:justify-between justify-center bg-gray-700 shadow-md shadow-gray-900/50 rounded-b-lg"
         >
-          <ul class="w-full sm:flex grid grid-cols-2">
+          <ul class="w-full sm:flex grid grid-cols-2 justify-end">
             <li class="relative flex items-center justify-center">
               <input
                 type="date"
                 name="conclusion"
-                class="input-conclusion outline-0 text-gray-900 rounded flex items-center justify-center w-full h-6 p-4 m-2 hover:text-blue-900 cursor-pointer bg-gray-300"
+                id="conclusion"
+                class="show-span outline-0 text-gray-900 rounded flex items-center justify-center w-full h-6 p-4 m-2 hover:text-blue-900 cursor-pointer bg-gray-300"
               />
-              <span class="span-conclusion opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-0 w-60 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
+              <span
+                class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 sm:-left-9 left-auto w-60 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md"
+              >
                 Defina a data de conclusão
               </span>
             </li>
@@ -85,9 +89,12 @@
               <input
                 type="time"
                 name="hours"
-                class="input-hours outline-0 text-gray-900 rounded flex items-center justify-center w-full h-6 p-4 m-2 hover:text-blue-900 cursor-pointer bg-gray-300"
+                id="hours"
+                class="show-span outline-0 text-gray-900 rounded flex items-center justify-center w-full h-6 p-4 m-2 hover:text-blue-900 cursor-pointer bg-gray-300"
               />
-              <span class="span-hours opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 -left-2.5 w-40 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
+              <span
+                class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-40 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md"
+              >
                 Defina as horas
               </span>
             </li>
@@ -95,37 +102,43 @@
               <input type="checkbox" name="important" id="important" hidden />
               <label
                 for="important"
-                class="label-important text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700"
+                class="label-important show-span text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700"
               >
-                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star pointer-events-none"></i>
+                <span
+                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md"
+                >
+                  Importante
+                </span>
               </label>
-              <span class="span-important opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 sm:-left-9 left-9 w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
-                Importante
-              </span>
             </li>
             <li class="relative flex items-center justify-center">
               <input type="checkbox" name="reminder" id="reminder" hidden />
               <label
                 for="reminder"
-                class="label-reminder text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700"
+                class="label-reminder show-span text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700"
               >
-                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-bell pointer-events-none"></i>
+                <span
+                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md"
+                >
+                  Lembre-me
+                </span>
               </label>
-              <span class="span-reminder opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 sm:-left-9 left-9 w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
-                Lembre-me
-              </span>
             </li>
             <li class="relative flex items-center justify-center">
               <input type="checkbox" name="repeat" id="repeat" hidden />
               <label
                 for="repeat"
-                class="label-repeat text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700"
+                class="label-repeat show-span text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700"
               >
-                <i class="fa-solid fa-repeat"></i>
+                <i class="fa-solid fa-repeat pointer-events-none"></i>
+                <span
+                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md"
+                >
+                  Repetir
+                </span>
               </label>
-              <span class="span-repeat opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 sm:-left-9 left-9 w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
-                Repetir
-              </span>
             </li>
           </ul>
           <button

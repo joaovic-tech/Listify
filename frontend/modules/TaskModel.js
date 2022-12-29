@@ -3,7 +3,6 @@ import CreateTasks from '../components/TaskCreate.js';
 
 export default class TaskModel {
   constructor() {
-    this.form = document.getElementById('task-form');
     this.task = document.getElementById('task');
     this.tasks = document.getElementById('tasks');
     this.createTasks = new CreateTasks();
@@ -36,8 +35,11 @@ export default class TaskModel {
     } catch (e) { console.error(e) }
   }
 
-  async create() {
-    const formData = new FormData(this.form);
+  async create(form) {
+    if (!this.validate()) return;
+    if (!form) return;
+    
+    const formData = new FormData(form);
     const data = {};
     
     formData.forEach((value, key) => {
@@ -89,19 +91,7 @@ export default class TaskModel {
       console.error(error);
     }
   }
-
-  events() {
-    if (!this.form) return;
-    this.getAllTasks();
-
-    this.form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.validate() ? this.create() : null;
-    });
-  }
-
-
-  init() {
-    this.events();
-  }
 }
+
+const taskModel = new TaskModel();
+taskModel.getAllTasks();

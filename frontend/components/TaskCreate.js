@@ -55,7 +55,7 @@ export default class CreateTasks {
     const button = document.createElement('button');
     button.setAttribute('type', 'submit');
     button.setAttribute('id', id);
-    button.classList.add('text-white', 'rounded', 'flex', 'items-center', 'justify-center', 'w-6', 'h-6', 'p-4', 'm-2', 'transition', 'ease', 'hover:bg-red-900', 'cursor-pointer', 'bg-red-500');
+    button.classList.add('btn-delete', 'text-white', 'rounded', 'flex', 'items-center', 'justify-center', 'w-6', 'h-6', 'p-4', 'm-2', 'transition', 'ease', 'hover:bg-red-900', 'cursor-pointer', 'bg-red-500');
     button.appendChild(this.createIconDelete());
     return button;
   }
@@ -63,7 +63,7 @@ export default class CreateTasks {
 
   createIconDelete() {
     const i = document.createElement('i');
-    i.classList.add('fa-solid', 'fa-trash');
+    i.classList.add('fa-solid', 'fa-trash', 'pointer-events-none');
     return i;
   }
 
