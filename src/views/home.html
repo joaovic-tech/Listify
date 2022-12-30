@@ -65,39 +65,14 @@
           id="task"
           name="task"
           placeholder="Exemplo: Comprar leite"
+          autocomplete="off"
         />
         <hr class="border-blue-500" />
         <div
           id="task-modal"
-          class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute w-full grid sm:flex items-center sm:justify-between justify-center bg-gray-700 shadow-md shadow-gray-900/50 rounded-b-lg"
+          class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute w-full grid sm:flex items-center sm:justify-between justify-center bg-gray-700 shadow-md shadow-gray-900/50 rounded-b-lg px-8 py-2"
         >
-          <ul class="w-full sm:flex grid grid-cols-2 justify-end">
-            <li class="relative flex items-center justify-center">
-              <input
-                type="date"
-                name="conclusion"
-                id="conclusion"
-                class="show-span outline-0 text-gray-900 rounded flex items-center justify-center w-full h-6 p-4 m-2 hover:text-blue-900 cursor-pointer bg-gray-300"
-              />
-              <span
-                class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 sm:-left-9 left-auto w-60 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md"
-              >
-                Defina a data de conclusão
-              </span>
-            </li>
-            <li class="relative flex items-center justify-center">
-              <input
-                type="time"
-                name="hours"
-                id="hours"
-                class="show-span outline-0 text-gray-900 rounded flex items-center justify-center w-full h-6 p-4 m-2 hover:text-blue-900 cursor-pointer bg-gray-300"
-              />
-              <span
-                class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-40 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md"
-              >
-                Defina as horas
-              </span>
-            </li>
+          <ul class="w-full sm:flex grid grid-cols-2 justify-start">
             <li class="relative flex items-center justify-center">
               <input type="checkbox" name="important" id="important" hidden />
               <label
@@ -134,22 +109,35 @@
               >
                 <i class="fa-solid fa-repeat pointer-events-none"></i>
                 <span
-                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md"
+                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center gap-4 text-center text-blue-500 bg-gray-800 rounded-lg shadow-md"
                 >
                   Repetir
                 </span>
               </label>
             </li>
+            <li id="time-li" class="opacity-0 pointer-events-none transition duration-500 ease relative flex items-center justify-center">
+              <input
+                type="time"
+                name="hours"
+                id="hours"
+                class="show-span outline-0 text-gray-900 rounded flex items-center justify-center w-full h-6 p-4 m-2 hover:text-blue-900 cursor-pointer bg-gray-300"
+              />
+              <span
+                class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-40 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md"
+              >
+                Defina as horas
+              </span>
+            </li>
           </ul>
           <button
-            type="submit"
-            class="px-6 py-1 m-2 rounded bg-blue-700 text-white transition ease hover:rounded-md hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50"
+          type="submit"
+          class="px-6 py-1 m-2 flex items-center justify-center rounded bg-blue-700 text-white transition ease hover:rounded-md hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50"
           >
             Salvar
           </button>
         </div>
       </form>
-      <ul id="tasks" class="grid gap-2 mt-8"></ul>
+      <ul id="tasks" class="grid gap-2 mt-10"></ul>
     </main>
     <script type="module" src="/main.js"></script>
   </body>

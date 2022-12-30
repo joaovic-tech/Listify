@@ -1,14 +1,9 @@
 import TaskModel from '../modules/TaskModel.js';
-import TaskEditForm from '../components/TaskEditForm.js';
-import Modal from '../components/Modal.js';
-import IconClose from '../components/IconClose.js';
 import ToggleStyles from './ToggleStyles.js';
 
 export default class EventListeners {
   constructor() {
     this.taskModel = new TaskModel();
-    this.taskEditForm = new TaskEditForm();
-    this.modal = new Modal();
     this.toggleStyles = new ToggleStyles();
     this.stylesIconCheck = [
       'text-white',
@@ -27,7 +22,7 @@ export default class EventListeners {
   closeModalForm() {
     const header = document.getElementById('header');
     const modal = document.getElementById('modal');
-    const form = this.taskEditForm.resetForm();
+    const form = this.formModal.resetForm();
 
     header.insertAdjacentElement('afterend', form);
     modal.remove();
@@ -66,20 +61,6 @@ export default class EventListeners {
       const el = e.target;
       if (el.classList.contains('btn-delete')) return this.taskDelete(el);
       if (el.classList.contains('fa-xmark')) return this.closeModalForm();
-      
-      if (el.closest('#tasks li')) {
-        const obj = { task: 'testes', id: 'asd54a6s5asd56' };
-        const form = this.taskEditForm.create(obj);
-        const modal = this.modal.create();
-        const body = document.body;
-        const iconClose = new IconClose().create();
-        const textHeader = this.textHeader(obj.id);
-
-        modal.appendChild(textHeader);
-        modal.appendChild(iconClose);
-        modal.appendChild(form);
-        body.appendChild(modal);
-      }
       
       if (el.id === 'task') {
         const taskModal = document.getElementById('task-modal');

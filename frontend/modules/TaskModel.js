@@ -45,6 +45,9 @@ export default class TaskModel {
     formData.forEach((value, key) => {
       data[key] = value;
     });
+
+    console.log(data);
+    return;
     
     const requestOptions = {
       method: 'POST',

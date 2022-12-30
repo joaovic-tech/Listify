@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .show {
@@ -10,17 +10,17 @@
   opacity: 1 !important;
 }
 
-.show-span:hover span{
+.show-span:hover span {
   pointer-events: auto !important;
   opacity: 1 !important;
 }
 
-.show-span:hover + span{
+.show-span:hover + span {
   pointer-events: auto !important;
   opacity: 1 !important;
 }
 
-.task-modal:hover {
+.show-ul:hover ul {
   pointer-events: auto !important;
   opacity: 1 !important;
 }
