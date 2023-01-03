@@ -1,5 +1,5 @@
 import Message from '../utils/Message.js';
-import CreateTasks from '../components/TaskCreate.js';
+import CreateTasks from '../components/Tasks.js';
 
 export default class TaskModel {
   constructor() {
@@ -38,6 +38,8 @@ export default class TaskModel {
   async create(form) {
     if (!this.validate()) return;
     if (!form) return;
+    form.submit();
+    return
     
     const formData = new FormData(form);
     const data = {};
@@ -45,9 +47,6 @@ export default class TaskModel {
     formData.forEach((value, key) => {
       data[key] = value;
     });
-
-    console.log(data);
-    return;
     
     const requestOptions = {
       method: 'POST',

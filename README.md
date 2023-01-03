@@ -2,21 +2,23 @@
 * Task management app
 
 ## Lista de afazeres:
-
 [x] ***Important***
-[ ] ***Reminder***
+[x] ***Reminder***
     * Definir `data/hora` do lembrete
-[ ] ***Repeat***
+[x] ***Repeat***
     * Definir `data/hora` da repetição por exemplo:
-        [ ] Dom
-        [ ] Seg
-        [ ] Ter
-        [ ] Qua
-        [ ] Qui
-        [ ] Sex
-        [ ] Sáb
+      [x] Diariamente
+      [x] Personalizado - Exemplo:
+        [x] Dom
+        [x] Seg
+        [x] Ter
+        [x] Qua
+        [x] Qui
+        [x] Sex
+        [x] Sáb
     **Nota: O usuário pode escolher qualquer dia da semana**
-[ ] Conclusion
+    __Quando clicar em algumas dessas opções abri outro modal para escolher o horário__
+[x] Conclusion
     * Definir `data/hora` da conclusão
     * A conclusão é ***Obrigatória*** se o usuário não tem data pata concluir:
         * Atribuir um valor padrão de `Sem data para conclusão`
@@ -33,16 +35,16 @@
 html:
 ```html
 <ul>
-    <li>
-        <form id="teste-form">
-            <input type="text" name="teste" id="teste">
-        </form>
-    </li>
-    <li>
-        <form id="teste-form">
-            <input type="text" name="teste" id="teste">
-        </form>
-    </li>
+  <li>
+    <form id="teste-form">
+      <input type="text" name="teste" id="teste">
+    </form>
+  </li>
+  <li>
+    <form id="teste-form">
+      <input type="text" name="teste" id="teste">
+    </form>
+  </li>
 </ul>
 ```
 

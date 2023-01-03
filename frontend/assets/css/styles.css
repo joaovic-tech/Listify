@@ -10,6 +10,12 @@
   opacity: 1 !important;
 }
 
+.show-time-modal {
+  pointer-events: auto !important;
+  opacity: 1 !important;
+  top: 10rem !important;
+}
+
 .show-span:hover span {
   pointer-events: auto !important;
   opacity: 1 !important;
@@ -20,7 +26,7 @@
   opacity: 1 !important;
 }
 
-.show-ul:hover ul {
+.span-ol:hover + ol {
   pointer-events: auto !important;
   opacity: 1 !important;
 }

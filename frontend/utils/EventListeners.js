@@ -5,14 +5,6 @@ export default class EventListeners {
   constructor() {
     this.taskModel = new TaskModel();
     this.toggleStyles = new ToggleStyles();
-    this.stylesIconCheck = [
-      'text-white',
-      'text-blue-500',
-      'bg-gray-900',
-      'bg-gray-800',
-      'border-gray-700',
-      'border-blue-500'
-    ];
   }
 
   taskDelete(button) {
@@ -63,20 +55,8 @@ export default class EventListeners {
       if (el.classList.contains('fa-xmark')) return this.closeModalForm();
       
       if (el.id === 'task') {
-        const taskModal = document.getElementById('task-modal');
+        const taskModal = document.getElementById('task-options');
         taskModal.classList.toggle('show');
-      }
-
-      if (el.classList.contains('label-important')) {
-        this.toggleStyles.init(el, this.stylesIconCheck);
-      }
-
-      if (el.classList.contains('label-reminder')) {
-        this.toggleStyles.init(el, this.stylesIconCheck);
-      }
-      
-      if (el.classList.contains('label-repeat')) {
-        this.toggleStyles.init(el, this.stylesIconCheck);
       }
     });
   }

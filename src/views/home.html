@@ -1,144 +1,207 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/assets/css/styles.css" />
-    <title>To do List with NodeJS</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script
-      src="https://kit.fontawesome.com/673aed7dea.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body class="bg-gray-900">
-    <nav class="flex items-center justify-between w-full p-2 bg-gray-800">
-      <div class="flex items-center">
-        <i
-          class="fa-solid fa-list-ul fill-current rounded-md px-3 py-3 bg-gray-900 text-blue-500"
-        ></i>
-        <a
-          href="#"
-          class="ml-4 text-lg font-semibold text-white hover:text-gray-400"
-          >To do</a
-        >
-      </div>
-      <form
-        id="search-form"
-        class="relative flex items-center w-1/3 rounded-md"
-      >
-        <input
-          type="text"
-          id="search"
-          class="w-full h-full p-3 rounded-md bg-gray-700 border-2 border-solid border-gray-700 focus:border-blue-500 outline-0 text-white"
-          placeholder="Search"
-        />
-        <button
-          type="submit"
-          class="absolute right-0 top-0 mt-2 mr-4 rounded-md bg-gray-800 px-3 py-1 text-gray-500 hover:bg-gray-900 hover:text-blue-500"
-        >
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-      </form>
-      <div class="relative">
-        <button
-          type="submit"
-          class="rounded-md bg-gray-700 px-3 py-2 text-gray-500 hover:bg-gray-900 hover:text-blue-500"
-        >
-          <i class="fa-solid fa-gear"></i>
-        </button>
-      </div>
-    </nav>
-    <main class="w-full h-full p-4 grid gap-8">
-      <header id="header">
-        <h2 class="text-3xl text-white">
-          <i class="fa-solid fa-moon"></i>
-          Tarefas
-        </h2>
-        <p class="text-base text-zinc-400">Segunda-feira, 26 dezembro</p>
-      </header>
-      <form id="task-form" class="relative w-full bg-gray-700 rounded-lg">
-        <input
-          class="outline-0 rounded w-full py-2 px-3 rounded-md bg-gray-700 text-white"
-          type="text"
-          id="task"
-          name="task"
-          placeholder="Exemplo: Comprar leite"
-          autocomplete="off"
-        />
-        <hr class="border-blue-500" />
-        <div
-          id="task-modal"
-          class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute w-full grid sm:flex items-center sm:justify-between justify-center bg-gray-700 shadow-md shadow-gray-900/50 rounded-b-lg px-8 py-2"
-        >
-          <ul class="w-full sm:flex grid grid-cols-2 justify-start">
-            <li class="relative flex items-center justify-center">
-              <input type="checkbox" name="important" id="important" hidden />
-              <label
-                for="important"
-                class="label-important show-span text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700"
-              >
-                <i class="fa-solid fa-star pointer-events-none"></i>
-                <span
-                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md"
-                >
-                  Importante
-                </span>
-              </label>
-            </li>
-            <li class="relative flex items-center justify-center">
-              <input type="checkbox" name="reminder" id="reminder" hidden />
-              <label
-                for="reminder"
-                class="label-reminder show-span text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700"
-              >
-                <i class="fa-solid fa-bell pointer-events-none"></i>
-                <span
-                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md"
-                >
-                  Lembre-me
-                </span>
-              </label>
-            </li>
-            <li class="relative flex items-center justify-center">
-              <input type="checkbox" name="repeat" id="repeat" hidden />
-              <label
-                for="repeat"
-                class="label-repeat show-span text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700"
-              >
-                <i class="fa-solid fa-repeat pointer-events-none"></i>
-                <span
-                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center gap-4 text-center text-blue-500 bg-gray-800 rounded-lg shadow-md"
-                >
-                  Repetir
-                </span>
-              </label>
-            </li>
-            <li id="time-li" class="opacity-0 pointer-events-none transition duration-500 ease relative flex items-center justify-center">
-              <input
-                type="time"
-                name="hours"
-                id="hours"
-                class="show-span outline-0 text-gray-900 rounded flex items-center justify-center w-full h-6 p-4 m-2 hover:text-blue-900 cursor-pointer bg-gray-300"
-              />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <title>To do List with NodeJS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/673aed7dea.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-900">
+  <nav class="flex items-center justify-between w-full p-2 bg-gray-800">
+    <div class="flex items-center">
+      <i class="fa-solid fa-list-ul fill-current rounded-md px-3 py-3 bg-gray-900 text-blue-500"></i>
+      <a href="#" class="ml-4 text-lg font-semibold text-white hover:text-gray-400">To do</a>
+    </div>
+    <form id="search-form" class="relative flex items-center w-1/3 rounded-md">
+      <input type="text" id="search"
+        class="w-full h-full p-3 rounded-md bg-gray-700 border-2 border-solid border-gray-700 focus:border-blue-500 outline-0 text-white"
+        placeholder="Search" />
+      <button type="submit"
+        class="absolute right-0 top-0 mt-2 mr-4 rounded-md bg-gray-800 px-3 py-1 text-gray-500 hover:bg-gray-900 hover:text-blue-500">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
+    <div class="relative">
+      <button type="submit"
+        class="rounded-md bg-gray-700 px-3 py-2 text-gray-500 hover:bg-gray-900 hover:text-blue-500">
+        <i class="fa-solid fa-gear"></i>
+      </button>
+    </div>
+  </nav>
+  <main class="w-full h-full p-4 grid gap-8">
+    <header id="header">
+      <h2 class="text-3xl text-white">
+        <i class="fa-solid fa-moon"></i>
+        Tarefas
+      </h2>
+      <p class="text-base text-zinc-400">Segunda-feira, 26 dezembro</p>
+    </header>
+    <form action="/task" method="post" id="task-form" class="relative w-full bg-gray-700 rounded-lg">
+      <input class="outline-0 rounded w-full py-2 px-3 rounded-md bg-gray-700 text-white" type="text" id="task"
+        name="task" placeholder="Exemplo: Comprar leite" autocomplete="off" />
+      <hr class="border-blue-500" />
+      <div id="task-options"
+        class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute w-full grid sm:flex items-center sm:justify-between justify-center bg-gray-700 shadow-md shadow-gray-900/50 rounded-b-lg px-8 py-2">
+        <ul class="w-full sm:flex grid grid-cols-2 justify-start gap-4">
+          <li class="relative flex items-center justify-center">
+            <input type="checkbox" name="conclusion" id="conclusion" hidden />
+            <label for="conclusion" id="label-conclusion"
+              class="show-span show-modal text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700">
+              <i class="fa-solid fa-calendar-days pointer-events-none"></i>
               <span
-                class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-40 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md"
-              >
-                Defina as horas
+                class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
+                Conclusão
               </span>
-            </li>
-          </ul>
-          <button
-          type="submit"
-          class="px-6 py-1 m-2 flex items-center justify-center rounded bg-blue-700 text-white transition ease hover:rounded-md hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50"
-          >
-            Salvar
-          </button>
-        </div>
-      </form>
-      <ul id="tasks" class="grid gap-2 mt-10"></ul>
-    </main>
-    <script type="module" src="/main.js"></script>
-  </body>
+            </label>
+            <div id="modal-conclusion"
+              class="modal-option opacity-0 pointer-events-none transition duration-500 ease absolute -left-8 -bottom-[17rem] bg-gray-700 rounded-md rounded-t-none min-h-[17rem] max-h-[20rem] min-w-[15rem] max-w-[18rem]">
+              <h1 class="text-center text-white text-base p-4">
+                Defina a conslusção da tarefa
+              </h1>
+              <hr class="border-blue-500 mb-8" />
+              <div class="grid gap-8">
+                <input type="date" name="date-conclusion" id="date-conclusion"
+                  class="outline-0 text-gray-900 rounded flex items-center justify-center hover:text-blue-900 cursor-pointer bg-gray-300 w-11/12 h-8 px-4 m-auto text-center" />
+                <input type="time" name="time-conclusion" id="time-conclusion"
+                  class="outline-0 text-gray-900 rounded flex items-center justify-center hover:text-blue-900 cursor-pointer bg-gray-300 w-11/12 h-8 px-4 m-auto text-center" />
+                <button id="btn-conclusion" type="button"
+                  class="w-2/4 h-8 px-4 m-auto flex items-center justify-center rounded bg-green-700 text-white transition ease hover:rounded-md hover:bg-green-500 hover:shadow-lg hover:shadow-green-500/50">
+                  Definir
+                </button>
+              </div>
+            </div>
+          </li>
+          <li class="relative flex items-center justify-center">
+            <input type="checkbox" name="important" id="important" hidden />
+            <label for="important" id="label-important"
+              class="show-span text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700">
+              <i class="fa-solid fa-star pointer-events-none"></i>
+              <span
+                class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
+                Importante
+              </span>
+            </label>
+          </li>
+          <li class="relative flex items-center justify-center">
+            <input type="checkbox" name="reminder" id="reminder" hidden />
+            <label for="reminder" id="label-reminder"
+              class="show-span show-modal text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700">
+              <i class="fa-solid fa-bell pointer-events-none"></i>
+              <span
+                class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
+                Lembre-me
+              </span>
+            </label>
+            <div id="modal-reminder"
+              class="modal-option opacity-0 pointer-events-none transition duration-500 ease absolute -left-[5.24rem] -bottom-[17rem] bg-gray-700 rounded-md rounded-t-none min-h-[17rem] max-h-[20rem] min-w-[15rem] max-w-[18rem]">
+              <h1 class="text-center text-white text-base p-4">
+                Escolher uma data e hora
+              </h1>
+              <hr class="border-blue-500 mb-8" />
+              <div class="grid gap-8">
+                <input type="date" name="date-reminder" id="date-reminder"
+                  class="outline-0 text-gray-900 rounded flex items-center justify-center hover:text-blue-900 cursor-pointer bg-gray-300 w-11/12 h-8 px-4 m-auto text-center" />
+                <input type="time" name="time-reminder" id="time-reminder"
+                  class="outline-0 text-gray-900 rounded flex items-center justify-center hover:text-blue-900 cursor-pointer bg-gray-300 w-11/12 h-8 px-4 m-auto text-center" />
+                <button id="btn-reminder" type="button"
+                  class="w-2/4 h-8 px-4 m-auto flex items-center justify-center rounded bg-green-700 text-white transition ease hover:rounded-md hover:bg-green-500 hover:shadow-lg hover:shadow-green-500/50">
+                  Definir
+                </button>
+              </div>
+            </div>
+          </li>
+          <li class="relative flex items-center justify-center">
+            <input type="checkbox" name="repeat" id="repeat" hidden />
+            <label for="repeat" id="label-repeat"
+              class="show-span text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700">
+              <i class="fa-solid fa-repeat pointer-events-none"></i>
+              <span
+                class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center gap-4 text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
+                Repetir
+              </span>
+            </label>
+            <div id="modal-repeat"
+              class="modal-option opacity-0 pointer-events-none transition duration-500 ease z-10 absolute -left-20 -bottom-48 bg-gray-700 rounded-md rounded-t-none min-w-[15rem] max-w-[18rem] pb-8">
+              <h1 class="text-center text-white text-base p-4">
+                Como deseja repetir?
+              </h1>
+              <hr class="border-blue-500 mb-8" />
+              <ul class="grid w-full gap-4">
+                <li>
+                  <input type="checkbox" name="daily" id="daily" hidden />
+                  <label for="daily" id="label-daily"
+                    class="flex justify-start items-center text-center gap-4 ml-4 text-white cursor-pointer hover:text-blue-500 focus:text-blue-500">
+                    <i class="fa-solid fa-calendar-week"></i>
+                    Diariamente
+                  </label>
+                </li>
+                <li class="relative">
+                  <label id="label-personality"
+                    class="relative flex justify-start items-center text-center gap-4 ml-4 text-white cursor-pointer hover:text-blue-500 focus:text-blue-500">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    Personalizado
+                    <i class="fa-solid fa-angle-right absolute right-8"></i>
+                  </label>
+                  <ol id="repeat-days"
+                    class="opacity-0 pointer-events-none transition duration-500 ease absolute flex justify-center items-center text-center gap-2 p-4 -top-7 -right-96 bg-gray-700 rounded-lg">
+                    <li>
+                      <input type="checkbox" hidden name="day-sun" id="day-sun" />
+                      <label for="day-sun"
+                        class="checkbox-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">Dom</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" hidden name="day-mon" id="day-mon" />
+                      <label for="day-mon"
+                        class="checkbox-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">Seg</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" hidden name="day-tue" id="day-tue" />
+                      <label for="day-tue"
+                        class="checkbox-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">Ter</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" hidden name="day-wed" id="day-wed" />
+                      <label for="day-wed"
+                        class="checkbox-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">Qua</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" hidden name="day-thu" id="day-thu" />
+                      <label for="day-thu"
+                        class="checkbox-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">Qui</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" hidden name="day-fri" id="day-fri" />
+                      <label for="day-fri"
+                        class="checkbox-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">Sex</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" hidden name="day-sat" id="day-sat" />
+                      <label for="day-sat"
+                        class="checkbox-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">Sáb</label>
+                    </li>
+                  </ol>
+                </li>
+              </ul>
+              <div id="time-modal"
+                class="opacity-0 pointer-events-none transition duration-500 ease absolute z-0 w-full left-0 top-0 p-4 bg-gray-700 border-t-4 border-blue-500">
+                <h2 class="text-base text-center text-white">Escolha um horário</h2>
+                <input type="time" name="time-repeat" id="time-repeat"
+                  class="outline-0 text-gray-900 rounded flex items-center justify-center hover:text-blue-900 cursor-pointer bg-gray-300 w-11/12 h-8 px-4 m-auto text-center" />
+              </div>
+            </div>
+          </li>
+        </ul>
+        <button type="submit"
+          class="px-6 py-1 m-2 flex items-center justify-center rounded bg-blue-700 text-white transition ease hover:rounded-md hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50">
+          Salvar
+        </button>
+      </div>
+    </form>
+    <ul id="tasks" class="grid gap-2 mt-10"></ul>
+  </main>
+  <script type="module" src="/main.js"></script>
+</body>
 </html>
