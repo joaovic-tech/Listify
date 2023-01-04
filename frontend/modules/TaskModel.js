@@ -35,22 +35,42 @@ export default class TaskModel {
     } catch (e) { console.error(e) }
   }
 
+  adjustFormValues(data) {
+    const repeat = [];
+    
+    Object.keys(data).forEach(key => {
+      if (key.startsWith('day-') || key === 'time-repeat') {
+        repeat.push(key === 'time-repeat' ? `time-repeat: ${data[key]}` : key);
+      }
+    });
+
+    delete data['day-sun'];
+    delete data['day-mon'];
+    delete data['day-tue'];
+    delete data['day-wed'];
+    delete data['day-thu'];
+    delete data['day-fri'];
+    delete data['day-sat'];
+    delete data['time-repeat'];
+    data.repeat = repeat;
+    return data;
+  }
+
   async create(form) {
     if (!this.validate()) return;
-    if (!form) return;
-    form.submit();
-    return
-    
+
     const formData = new FormData(form);
     const data = {};
-    
+
     formData.forEach((value, key) => {
       data[key] = value;
     });
+
+    const newData = this.adjustFormValues(data);
     
     const requestOptions = {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: JSON.stringify(newData),
       headers: {
         'Content-Type': 'application/json',
       },

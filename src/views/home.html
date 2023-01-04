@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -9,6 +10,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://kit.fontawesome.com/673aed7dea.js" crossorigin="anonymous"></script>
 </head>
+
 <body class="bg-gray-900">
   <nav class="flex items-center justify-between w-full p-2 bg-gray-800">
     <div class="flex items-center">
@@ -47,7 +49,6 @@
         class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute w-full grid sm:flex items-center sm:justify-between justify-center bg-gray-700 shadow-md shadow-gray-900/50 rounded-b-lg px-8 py-2">
         <ul class="w-full sm:flex grid grid-cols-2 justify-start gap-4">
           <li class="relative flex items-center justify-center">
-            <input type="checkbox" name="conclusion" id="conclusion" hidden />
             <label for="conclusion" id="label-conclusion"
               class="show-span show-modal text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700">
               <i class="fa-solid fa-calendar-days pointer-events-none"></i>
@@ -59,18 +60,12 @@
             <div id="modal-conclusion"
               class="modal-option opacity-0 pointer-events-none transition duration-500 ease absolute -left-8 -bottom-[17rem] bg-gray-700 rounded-md rounded-t-none min-h-[17rem] max-h-[20rem] min-w-[15rem] max-w-[18rem]">
               <h1 class="text-center text-white text-base p-4">
-                Defina a conslusção da tarefa
+                Defina a comclusão da tarefa
               </h1>
               <hr class="border-blue-500 mb-8" />
               <div class="grid gap-8">
-                <input type="date" name="date-conclusion" id="date-conclusion"
+                <input type="datetime-local" name="conclusion" id="conclusion"
                   class="outline-0 text-gray-900 rounded flex items-center justify-center hover:text-blue-900 cursor-pointer bg-gray-300 w-11/12 h-8 px-4 m-auto text-center" />
-                <input type="time" name="time-conclusion" id="time-conclusion"
-                  class="outline-0 text-gray-900 rounded flex items-center justify-center hover:text-blue-900 cursor-pointer bg-gray-300 w-11/12 h-8 px-4 m-auto text-center" />
-                <button id="btn-conclusion" type="button"
-                  class="w-2/4 h-8 px-4 m-auto flex items-center justify-center rounded bg-green-700 text-white transition ease hover:rounded-md hover:bg-green-500 hover:shadow-lg hover:shadow-green-500/50">
-                  Definir
-                </button>
               </div>
             </div>
           </li>
@@ -86,7 +81,6 @@
             </label>
           </li>
           <li class="relative flex items-center justify-center">
-            <input type="checkbox" name="reminder" id="reminder" hidden />
             <label for="reminder" id="label-reminder"
               class="show-span show-modal text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700">
               <i class="fa-solid fa-bell pointer-events-none"></i>
@@ -102,19 +96,12 @@
               </h1>
               <hr class="border-blue-500 mb-8" />
               <div class="grid gap-8">
-                <input type="date" name="date-reminder" id="date-reminder"
+                <input type="datetime-local" name="reminder" id="reminder"
                   class="outline-0 text-gray-900 rounded flex items-center justify-center hover:text-blue-900 cursor-pointer bg-gray-300 w-11/12 h-8 px-4 m-auto text-center" />
-                <input type="time" name="time-reminder" id="time-reminder"
-                  class="outline-0 text-gray-900 rounded flex items-center justify-center hover:text-blue-900 cursor-pointer bg-gray-300 w-11/12 h-8 px-4 m-auto text-center" />
-                <button id="btn-reminder" type="button"
-                  class="w-2/4 h-8 px-4 m-auto flex items-center justify-center rounded bg-green-700 text-white transition ease hover:rounded-md hover:bg-green-500 hover:shadow-lg hover:shadow-green-500/50">
-                  Definir
-                </button>
               </div>
             </div>
           </li>
           <li class="relative flex items-center justify-center">
-            <input type="checkbox" name="repeat" id="repeat" hidden />
             <label for="repeat" id="label-repeat"
               class="show-span text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700">
               <i class="fa-solid fa-repeat pointer-events-none"></i>
@@ -124,69 +111,65 @@
               </span>
             </label>
             <div id="modal-repeat"
-              class="modal-option opacity-0 pointer-events-none transition duration-500 ease z-10 absolute -left-20 -bottom-48 bg-gray-700 rounded-md rounded-t-none min-w-[15rem] max-w-[18rem] pb-8">
+              class="modal-option opacity-0 pointer-events-none transition duration-500 ease z-10 absolute -left-20 -bottom-80 bg-gray-700 rounded-md rounded-t-none min-w-[15rem] max-w-[18rem] pb-2">
               <h1 class="text-center text-white text-base p-4">
-                Como deseja repetir?
+                Que dia deseja repetir?
               </h1>
               <hr class="border-blue-500 mb-8" />
-              <ul class="grid w-full gap-4">
+              <ol id="repeat-days"
+                class="grid grid-cols-3 justify-center items-center text-center gap-4">
                 <li>
-                  <input type="checkbox" name="daily" id="daily" hidden />
-                  <label for="daily" id="label-daily"
-                    class="flex justify-start items-center text-center gap-4 ml-4 text-white cursor-pointer hover:text-blue-500 focus:text-blue-500">
-                    <i class="fa-solid fa-calendar-week"></i>
-                    Diariamente
+                  <label for="day-sun"
+                    class="label-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
+                    Dom
+                    <input type="checkbox" hidden class="checkbox-day" name="day-sun" id="day-sun" />
                   </label>
                 </li>
-                <li class="relative">
-                  <label id="label-personality"
-                    class="relative flex justify-start items-center text-center gap-4 ml-4 text-white cursor-pointer hover:text-blue-500 focus:text-blue-500">
-                    <i class="fa-solid fa-calendar-days"></i>
-                    Personalizado
-                    <i class="fa-solid fa-angle-right absolute right-8"></i>
+                <li>
+                  <label for="day-mon"
+                    class="label-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
+                    Seg
+                    <input type="checkbox" hidden class="checkbox-day" name="day-mon" id="day-mon" />
                   </label>
-                  <ol id="repeat-days"
-                    class="opacity-0 pointer-events-none transition duration-500 ease absolute flex justify-center items-center text-center gap-2 p-4 -top-7 -right-96 bg-gray-700 rounded-lg">
-                    <li>
-                      <input type="checkbox" hidden name="day-sun" id="day-sun" />
-                      <label for="day-sun"
-                        class="checkbox-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">Dom</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" hidden name="day-mon" id="day-mon" />
-                      <label for="day-mon"
-                        class="checkbox-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">Seg</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" hidden name="day-tue" id="day-tue" />
-                      <label for="day-tue"
-                        class="checkbox-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">Ter</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" hidden name="day-wed" id="day-wed" />
-                      <label for="day-wed"
-                        class="checkbox-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">Qua</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" hidden name="day-thu" id="day-thu" />
-                      <label for="day-thu"
-                        class="checkbox-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">Qui</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" hidden name="day-fri" id="day-fri" />
-                      <label for="day-fri"
-                        class="checkbox-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">Sex</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" hidden name="day-sat" id="day-sat" />
-                      <label for="day-sat"
-                        class="checkbox-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">Sáb</label>
-                    </li>
-                  </ol>
                 </li>
-              </ul>
+                <li>
+                  <label for="day-tue"
+                    class="label-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
+                    Ter
+                    <input type="checkbox" hidden class="checkbox-day" name="day-tue" id="day-tue" />
+                  </label>
+                </li>
+                <li>
+                  <label for="day-wed"
+                    class="label-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
+                    Qua
+                    <input type="checkbox" hidden class="checkbox-day" name="day-wed" id="day-wed" />
+                  </label>
+                </li>
+                <li>
+                  <label for="day-thu"
+                    class="label-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
+                    Qui
+                    <input type="checkbox" hidden class="checkbox-day" name="day-thu" id="day-thu" />
+                  </label>
+                </li>
+                <li>
+                  <label for="day-fri"
+                    class="label-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
+                    Sex
+                    <input type="checkbox" hidden class="checkbox-day" name="day-fri" id="day-fri" />
+                  </label>
+                </li>
+                <li>
+                  <label for="day-sat"
+                    class="label-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
+                    Sáb
+                    <input type="checkbox" hidden class="checkbox-day" name="day-sat" id="day-sat" />
+                  </label>
+                </li>
+              </ol>
               <div id="time-modal"
-                class="opacity-0 pointer-events-none transition duration-500 ease absolute z-0 w-full left-0 top-0 p-4 bg-gray-700 border-t-4 border-blue-500">
+                class="w-full grid gap-4 mt-4 p-4 bg-gray-700 border-t-2 border-blue-500">
                 <h2 class="text-base text-center text-white">Escolha um horário</h2>
                 <input type="time" name="time-repeat" id="time-repeat"
                   class="outline-0 text-gray-900 rounded flex items-center justify-center hover:text-blue-900 cursor-pointer bg-gray-300 w-11/12 h-8 px-4 m-auto text-center" />
@@ -204,4 +187,5 @@
   </main>
   <script type="module" src="/main.js"></script>
 </body>
+
 </html>

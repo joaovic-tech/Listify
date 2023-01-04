@@ -2,35 +2,17 @@
 * Task management app
 
 ## Lista de afazeres:
-[x] ***Important***
-[x] ***Reminder***
-    * Definir `data/hora` do lembrete
-[x] ***Repeat***
-    * Definir `data/hora` da repetição por exemplo:
-      [x] Diariamente
-      [x] Personalizado - Exemplo:
-        [x] Dom
-        [x] Seg
-        [x] Ter
-        [x] Qua
-        [x] Qui
-        [x] Sex
-        [x] Sáb
-    **Nota: O usuário pode escolher qualquer dia da semana**
-    __Quando clicar em algumas dessas opções abri outro modal para escolher o horário__
-[x] Conclusion
-    * Definir `data/hora` da conclusão
-    * A conclusão é ***Obrigatória*** se o usuário não tem data pata concluir:
-        * Atribuir um valor padrão de `Sem data para conclusão`
----
 
-#### Mostrar as tarefas
-* Quando for mostrar as tarefas criar algo parecido como:
-    [ ] uma `ul>li` para listar todas as tarefas
-    [ ] Dentro desses `li's` um form parecido com o de criar uma task
-        * Esse form precisar ser criado dinamicamente sem usar o método clone()
-        * Fiz um exemplo logo abaixo de como fazer submit de cada form com o mesmo id
-        * Lembrando que para pegar os elementos do form utilizar o `this.form`
+[x] Criar as colunas da tarefa no banco de dados
+
+#### Quando for mostrar as tarefas criar algo parecido como:
+[ ] uma `ul>li` para listar todas as tarefas
+[ ] Dentro desses `li's` um form parecido com o de criar uma task
+    * Esse form precisar ser criado dinamicamente sem usar o método clone()
+    * Fiz um exemplo logo abaixo de como fazer submit de cada form com o mesmo id
+    * Lembrando que para pegar os elementos do form utilizar o `this.form`
+    * criar uma rota `/edit/:id` isso é o action
+    * Quando for criar os dias de repetição da quela task mostrar com o opacidade aquele que está marcado
 
 html:
 ```html

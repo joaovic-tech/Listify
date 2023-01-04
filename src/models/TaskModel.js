@@ -16,20 +16,16 @@ module.exports = class TaskModel {
         type: String,
         default: '',
       },
-      hours: {
-        type: String,
-        default: '',
-      },
       repeat: {
-        type: String,
-        default: '',
+        type: Array,
+        default: [],
       },
       reminder: {
-        type: String,
+        type: Date,
         default: '',
       },
       conclusion: {
-        type: Object,
+        type: Date,
         default: '',
       },
       created_at: { 
