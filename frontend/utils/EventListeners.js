@@ -53,8 +53,7 @@ export default class EventListeners {
       const el = e.target;
       if (el.classList.contains('btn-delete')) return this.taskDelete(el);
       if (el.classList.contains('fa-xmark')) return this.closeModalForm();
-      
-      if (el.id === 'task') {
+      if (el.classList.contains('input-task-create')) {
         const taskModal = document.getElementById('task-options');
         taskModal.classList.toggle('show');
       }

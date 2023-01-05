@@ -3,12 +3,10 @@
 
 ## Lista de afazeres:
 
-[x] Criar as colunas da tarefa no banco de dados
-
-#### Quando for mostrar as tarefas criar algo parecido como:
-[ ] uma `ul>li` para listar todas as tarefas
+[ ] Criar uma `ul>li` para listar todas as tarefas
 [ ] Dentro desses `li's` um form parecido com o de criar uma task
     * Esse form precisar ser criado dinamicamente sem usar o método clone()
+    * precisar possuir um ver-mais para ver os detalhes da quela task
     * Fiz um exemplo logo abaixo de como fazer submit de cada form com o mesmo id
     * Lembrando que para pegar os elementos do form utilizar o `this.form`
     * criar uma rota `/edit/:id` isso é o action

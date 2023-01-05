@@ -1,11 +1,11 @@
 import Message from '../utils/Message.js';
-import CreateTasks from '../components/Tasks.js';
+import Tasks from '../components/Tasks.js';
 
 export default class TaskModel {
   constructor() {
     this.task = document.getElementById('task');
-    this.tasks = document.getElementById('tasks');
-    this.createTasks = new CreateTasks();
+    this.ulTasks = document.getElementById('tasks');
+    this.tasks = new Tasks();
   }
 
   validate() {
@@ -26,10 +26,10 @@ export default class TaskModel {
     try {
       const response = await fetch('/tasks');
       const data = await response.json();
-      this.tasks.innerHTML = '';
+      this.ulTasks.innerHTML = '';
       
       data.forEach((obj) => {
-        this.createTasks.init(obj);
+        this.tasks.init(obj);
       });
 
     } catch (e) { console.error(e) }
