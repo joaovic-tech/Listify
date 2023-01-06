@@ -26,13 +26,17 @@ export default class TaskModel {
     try {
       const response = await fetch('/tasks');
       const data = await response.json();
-      this.ulTasks.innerHTML = '';
-      
-      data.forEach((obj) => {
-        this.tasks.init(obj);
-      });
-
+      return data;
     } catch (e) { console.error(e) }
+  }
+
+  async showTasks() {
+    const data = await this.getAllTasks();
+    this.ulTasks.innerHTML = '';
+
+    data.forEach((obj) => {
+      this.tasks.createTask(obj);
+    });
   }
 
   adjustFormValues(data) {
@@ -86,7 +90,7 @@ export default class TaskModel {
         Message.create('Formulário não enviado!');
       } else {
         Message.create('Tarefa criada com sucesso!');
-        this.getAllTasks();
+        this.showTasks();
       }
     } catch (error) {
       console.error(error);
@@ -107,7 +111,7 @@ export default class TaskModel {
         Message.create('Tarefa não deletada ou não encontrada!');
       } else {
         Message.create('Tarefa deletada!');
-        this.getAllTasks();
+        this.showTasks();
       }
     } catch (error) {
       console.error(error);
@@ -116,4 +120,4 @@ export default class TaskModel {
 }
 
 const taskModel = new TaskModel();
-taskModel.getAllTasks();
+taskModel.showTasks();
