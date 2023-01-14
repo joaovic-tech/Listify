@@ -34,6 +34,26 @@ class TaskController {
     }
   }
 
+  async update(req, res) {
+    console.log(req.params.id);
+    try {
+      await task.update(req.params.id, req.body);
+
+      if (task.errors.length > 0) {
+        console.log({
+          Errors: task.errors
+        });
+        return res.json({
+          Errors: task.errors
+        });
+      }
+
+      return res.json('Tarefa editada com sucesso!');
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   async delete(req, res) {
     const { id } = req.params;
 

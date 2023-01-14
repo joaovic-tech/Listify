@@ -1,11 +1,10 @@
 import ToggleStyles from "../utils/ToggleStyles.js";
+import Message from '../utils/Message.js';
 
 class TaskOptions {
   constructor() {
     this.toggleStyles = new ToggleStyles();
     this.stylesIconCheck = ['text-white', 'text-blue-500', 'bg-gray-900', 'bg-gray-800', 'border-gray-700', 'border-blue-500'];
-    this.stylesIconCheckRemoved = ['text-white', 'bg-gray-800', 'border-gray-700'];
-    this.stylesIconCheckAdded = ['text-blue-500', 'bg-gray-900', 'border-blue-500'];
   }
 
   changePositionRepeatModal(modalTime) {
@@ -21,8 +20,8 @@ class TaskOptions {
     document.getElementById('repeat-days').classList.toggle('show');
   }
 
-  verifyDate(elId) {
-    return document.getElementById(elId).value.length <= 0;
+  verifyDate(el) {
+    return el.value.length <= 0;
   }
 
   importantEvents() {
@@ -44,20 +43,15 @@ class TaskOptions {
     const labelRepeat = document.getElementById('label-repeat');
     const inputTime = document.getElementById('time-repeat');
     const modalRepeat = document.getElementById('modal-repeat');
+    const btnRepeat = document.getElementById('btn-repeat');
+    const checkboxes = document.querySelectorAll('.checkbox-day');
+    const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
     
     labelRepeat.addEventListener('click', () => this.showModalOptions(modalRepeat));
 
-    inputTime.addEventListener('change', () => {
-      const checkboxes = document.querySelectorAll('.checkbox-day');
-      const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
-
-      if (inputTime.value !== '' && atLeastOneChecked) {
-        this.toggleStyles.add(labelRepeat, this.stylesIconCheckAdded);
-        this.toggleStyles.remove(labelRepeat, this.stylesIconCheckRemoved);
-      } else {
-        this.toggleStyles.remove(labelRepeat, this.stylesIconCheckAdded);
-        this.toggleStyles.add(labelRepeat, this.stylesIconCheckRemoved);
-      }
+    btnRepeat.addEventListener('click', () => {
+      if (!inputTime.value || atLeastOneChecked) return Message.create('Defina uma data e hora da repetição');
+      this.toggleStyles.toggle(labelRepeat, this.stylesIconCheck);
     });
 
     document.addEventListener('click', (e) => {
@@ -70,37 +64,29 @@ class TaskOptions {
 
   reminderEvents() {
     const modalReminder = document.getElementById('modal-reminder');
-    const reminder = document.getElementById('reminder');
+    const reminder = document.querySelector('#task-form #reminder');
     const labelReminder = document.getElementById('label-reminder');
+    const btnReminder = document.getElementById('btn-reminder');
 
     labelReminder.addEventListener('click', () => { this.showModalOptions(modalReminder) });
 
-    reminder.addEventListener('change', () => {
-      if (this.verifyDate('reminder')) {
-      this.toggleStyles.add(labelReminder, this.stylesIconCheckAdded);
-      this.toggleStyles.remove(labelReminder, this.stylesIconCheckRemoved);
-    } else {
-      this.toggleStyles.remove(labelReminder, this.stylesIconCheckAdded);
-      this.toggleStyles.add(labelReminder, this.stylesIconCheckRemoved);
-    }
+    btnReminder.addEventListener('click', () => {
+      if (!reminder.value) return Message.create('Defina uma data e hora do lembrete');
+      this.toggleStyles.toggle(labelReminder, this.stylesIconCheck);
     });
   }
 
   conclusionEvents() {
     const modalConclusion = document.getElementById('modal-conclusion');
-    const conclusion = document.getElementById('conclusion');
+    const conclusion = document.querySelector('#task-form #conclusion');
     const labelConclusion = document.getElementById('label-conclusion');
+    const btnConclusion = document.getElementById('btn-conclusion');
 
     labelConclusion.addEventListener('click', () => { this.showModalOptions(modalConclusion) });
 
-    conclusion.addEventListener('change', () => {
-      if (this.verifyDate('conclusion')) {
-      this.toggleStyles.add(labelConclusion, this.stylesIconCheckAdded);
-      this.toggleStyles.remove(labelConclusion, this.stylesIconCheckRemoved);
-    } else {
-      this.toggleStyles.remove(labelConclusion, this.stylesIconCheckAdded);
-      this.toggleStyles.add(labelConclusion, this.stylesIconCheckRemoved);
-    }
+    btnConclusion.addEventListener('click', () => {
+      if (!conclusion.value) return Message.create('Defina uma data e hora da conclusão');
+      this.toggleStyles.toggle(conclusion, this.stylesIconCheck);
     });
   }
 

@@ -21,11 +21,11 @@ module.exports = class TaskModel {
         default: [],
       },
       reminder: {
-        type: Date,
+        type: String,
         default: '',
       },
       conclusion: {
-        type: Date,
+        type: String,
         default: '',
       },
       created_at: { 
@@ -60,6 +60,21 @@ module.exports = class TaskModel {
     try {
       const task = new this.taskModel(taskData);
       await task.save();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async update(id, taskData) {
+    this.validate(taskData);
+
+    if (this.errors.length > 0) {
+      return this.errors.join(', ');
+    }
+
+    try {
+      const task = new this.taskModel(taskData);
+      await task.findByIdAndUpdate(id, taskData, { new: true });
     } catch (error) {
       console.error(error);
     }

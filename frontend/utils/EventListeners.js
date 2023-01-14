@@ -7,16 +7,13 @@ export default class EventListeners {
     this.toggleStyles = new ToggleStyles();
   }
 
-  taskDelete(button) {
-    this.taskModel.delete(button.id);
+  async taskDelete(button) {
+    await this.taskModel.delete(button.id);
+    this.closeTaskEditForm();
   }
 
-  closeModalForm() {
-    const header = document.getElementById('header');
-    const modal = document.getElementById('modal');
-    const form = this.formModal.resetForm();
-
-    header.insertAdjacentElement('afterend', form);
+  closeTaskEditForm() {
+    const modal = document.querySelector('aside');
     modal.remove();
   }
 
@@ -52,7 +49,7 @@ export default class EventListeners {
     document.addEventListener('click', (e) => {
       const el = e.target;
       if (el.classList.contains('btn-delete')) return this.taskDelete(el);
-      if (el.classList.contains('fa-xmark')) return this.closeModalForm();
+      if (el.classList.contains('btn-close')) return this.closeTaskEditForm();
       if (el.classList.contains('input-task-create')) {
         const taskModal = document.getElementById('task-options');
         taskModal.classList.toggle('show');
@@ -64,9 +61,8 @@ export default class EventListeners {
     document.addEventListener('submit', (e) => {
       e.preventDefault();
       const el = e.target;
-      if (el.id === 'task-form' || el.id === 'task-form-edit') {
-        this.taskModel.create(el);
-      }
+      if (el.id === 'task-form') this.taskModel.create(el);
+      if (el.id === 'form-edit-task') this.taskModel.update(el);
     });
   }
 

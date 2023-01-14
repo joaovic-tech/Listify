@@ -66,29 +66,6 @@ export default class Tasks {
     return i;
   }
 
-  createButtonDelete() {
-    const icon = this.createIcon('fa-solid', 'fa-trash');
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.id = _id;
-    button.classList.add(
-      'btn-delete',
-      'flex',
-      'justify-center',
-      'items-center',
-      'text-center',
-      'py-2',
-      'px-3',
-      'rounded',
-      'bg-rose-600',
-      'text-white',
-      'hover:bg-rose-700',
-      'focus:bg-rose-700'
-    );
-    button.appendChild(icon);
-    return button;
-  }
-
   getImportantIcon(important) {
     const icon = this.createIcon('fa-solid', 'fa-star');
     icon.classList.add(

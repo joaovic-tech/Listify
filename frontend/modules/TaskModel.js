@@ -3,18 +3,17 @@ import Tasks from '../components/Tasks.js';
 
 export default class TaskModel {
   constructor() {
-    this.task = document.getElementById('task');
     this.ulTasks = document.getElementById('tasks');
     this.tasks = new Tasks();
   }
 
-  validate() {
-    if (!this.task.value) {
+  validate(inputTask) {
+    if (!inputTask.value) {
       Message.create('Este campo é obrigatório!');
       return false;
     }
 
-    if (this.task.value.length <= 1) {
+    if (inputTask.value.length <= 1) {
       Message.create('A tarefa deve ter mais de um carácter.');
       return false;
     }
@@ -57,11 +56,26 @@ export default class TaskModel {
     delete data['day-sat'];
     delete data['time-repeat'];
     data.repeat = repeat;
+    data.conclusion ? data.conclusion = this.formatDates(data.conclusion) : null;
+    data.reminder ? data.reminder = this.formatDates(data.reminder) : null;
     return data;
   }
 
+  formatDates(dateString) {
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleDateString('pt-BR', {
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    });
+    return formattedDate;
+  }
+
   async create(form) {
-    if (!this.validate()) return;
+    const inputTask = form.querySelector('#task');
+    if (!this.validate(inputTask)) return;
 
     const formData = new FormData(form);
     const data = {};
@@ -69,9 +83,8 @@ export default class TaskModel {
     formData.forEach((value, key) => {
       data[key] = value;
     });
-
-    const newData = this.adjustFormValues(data);
     
+    const newData = this.adjustFormValues(data);
     const requestOptions = {
       method: 'POST',
       body: JSON.stringify(newData),
@@ -82,6 +95,46 @@ export default class TaskModel {
 
     try {
       const response = await fetch('/task', requestOptions);
+      if (!response.ok) {
+        throw new Error('Ocorreu um erro ao enviar o formulário');
+      }
+      const text = await response.text();
+      if (text.includes('Errors')) {
+        Message.create('Formulário não enviado!');
+      } else {
+        Message.create('Tarefa criada com sucesso!');
+        this.showTasks();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async update(form) {
+    const inputTask = form.querySelector('#task');
+    if (!this.validate(inputTask)) return;
+
+    const formData = new FormData(form);
+    const data = {};
+
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+    data.task = inputTask.value
+    
+    const taskId = form.querySelector('#task-id').innerText.replace('id: ', '');
+
+    const newData = this.adjustFormValues(data);
+    const requestOptions = {
+      method: 'POST',
+      body: JSON.stringify(newData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    
+    try {
+      const response = await fetch(`/task/edit/${taskId}`, requestOptions);
       if (!response.ok) {
         throw new Error('Ocorreu um erro ao enviar o formulário');
       }
