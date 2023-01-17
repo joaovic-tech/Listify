@@ -30,3 +30,18 @@
   pointer-events: auto !important;
   opacity: 1 !important;
 }
+
+.line-animate {
+  animation: line-animate 5s linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes line-animate {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0%;
+  }
+}

@@ -50,7 +50,7 @@ class TaskOptions {
     labelRepeat.addEventListener('click', () => this.showModalOptions(modalRepeat));
 
     btnRepeat.addEventListener('click', () => {
-      if (!inputTime.value || atLeastOneChecked) return Message.create('Defina uma data e hora da repetição');
+      if (!inputTime.value || atLeastOneChecked) return Message.create('Defina uma data e hora da repetição', 'amber');
       this.toggleStyles.toggle(labelRepeat, this.stylesIconCheck);
     });
 
@@ -71,7 +71,7 @@ class TaskOptions {
     labelReminder.addEventListener('click', () => { this.showModalOptions(modalReminder) });
 
     btnReminder.addEventListener('click', () => {
-      if (!reminder.value) return Message.create('Defina uma data e hora do lembrete');
+      if (!reminder.value) return Message.create('Defina uma data e hora do lembrete', 'amber');
       this.toggleStyles.toggle(labelReminder, this.stylesIconCheck);
     });
   }
@@ -85,8 +85,8 @@ class TaskOptions {
     labelConclusion.addEventListener('click', () => { this.showModalOptions(modalConclusion) });
 
     btnConclusion.addEventListener('click', () => {
-      if (!conclusion.value) return Message.create('Defina uma data e hora da conclusão');
-      this.toggleStyles.toggle(conclusion, this.stylesIconCheck);
+      if (!conclusion.value) return Message.create('Defina uma data e hora da conclusão', 'amber');
+      this.toggleStyles.toggle(labelConclusion, this.stylesIconCheck);
     });
   }
 

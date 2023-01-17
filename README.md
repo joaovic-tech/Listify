@@ -12,5 +12,6 @@
 [x] Criar o li de repeat no formulário de edição
   [x] Colocar o valor no input time
   [x] Fazer e checked nos dias do ol
-[ ] Conserta o checked do conclusion
-[ ] Quando o usuário criar a tarefa limpa todos os campos
+[x] Conserta o checked do conclusion
+[x] Quando o usuário criar a tarefa limpa todos os campos
+[x] Criar modelo da mensagem

@@ -9,12 +9,12 @@ export default class TaskModel {
 
   validate(inputTask) {
     if (!inputTask.value) {
-      Message.create('Este campo é obrigatório!');
+      Message.create('Descreva a sua tarefa!', 'amber');
       return false;
     }
 
     if (inputTask.value.length <= 1) {
-      Message.create('A tarefa deve ter mais de um carácter.');
+      Message.create('A tarefa deve ter mais de um carácter.', 'amber');
       return false;
     }
 
@@ -36,6 +36,14 @@ export default class TaskModel {
     data.forEach((obj) => {
       this.tasks.createTask(obj);
     });
+  }
+
+  clearInputs() {
+    const checkboxes = document.querySelectorAll('checkbox');
+    const inputs = document.querySelectorAll('input');
+
+    inputs.forEach(input => input.value = '');
+    checkboxes.forEach(checkbox => checkbox.checked = false);
   }
 
   adjustFormValues(data) {
@@ -100,9 +108,11 @@ export default class TaskModel {
       }
       const text = await response.text();
       if (text.includes('Errors')) {
-        Message.create('Formulário não enviado!');
+        Message.create('Formulário não enviado!', 'red');
       } else {
-        Message.create('Tarefa criada com sucesso!');
+        Message.create('Tarefa criada com sucesso!', 'green');
+        
+        this.clearInputs();
         this.showTasks();
       }
     } catch (error) {
@@ -135,14 +145,17 @@ export default class TaskModel {
     
     try {
       const response = await fetch(`/task/edit/${taskId}`, requestOptions);
+      
       if (!response.ok) {
         throw new Error('Ocorreu um erro ao enviar o formulário');
       }
+
       const text = await response.text();
+
       if (text.includes('Errors')) {
-        Message.create('Formulário não enviado!');
+        Message.create('Formulário não enviado!', 'red');
       } else {
-        Message.create('Tarefa criada com sucesso!');
+        Message.create('Tarefa atualizada!', 'green');
         this.showTasks();
       }
     } catch (error) {
@@ -161,9 +174,9 @@ export default class TaskModel {
       }
       const text = await response.text();
       if (text.includes('Errors')) {
-        Message.create('Tarefa não deletada ou não encontrada!');
+        Message.create('Tarefa não deletada ou não encontrada!', 'red');
       } else {
-        Message.create('Tarefa deletada!');
+        Message.create('Tarefa deletada!', 'green');
         this.showTasks();
       }
     } catch (error) {

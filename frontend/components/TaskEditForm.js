@@ -299,7 +299,6 @@ class TaskEditForm {
   }
 
   createRepeatContent(repeat) {
-    if (!String(repeat).includes('day')) return;
     const li = this.createLi();
     const labelRepeat = this.createLabel('Repetir');
     const ol = this.createDaysRepeat(repeat);
