@@ -134,7 +134,7 @@ class TaskEditForm {
 
   createButton(id, className, color, icon, text) {
     const button = document.createElement('button');
-    id === 'btn-save' ? button.type = 'submit' : button.type = 'button';
+    className === 'btn-save' ? button.type = 'submit' : button.type = 'button';
     button.id = id;
     button.classList.add(
       className,
@@ -263,7 +263,7 @@ class TaskEditForm {
       if (day === 'Sáb') label.setAttribute('for', `day-sat`);
 
       const getAttributeFor = label.getAttribute('for');
-      for (let val of repeat) {
+      for (const val of repeat) {
         if (val === getAttributeFor) {
           this.toggleStyles.toggle(label, this.stylesIconCheck);
         }

@@ -35,7 +35,6 @@ class TaskController {
   }
 
   async update(req, res) {
-    console.log(req.params.id);
     try {
       await task.update(req.params.id, req.body);
 

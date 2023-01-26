@@ -73,10 +73,11 @@ module.exports = class TaskModel {
     }
 
     try {
-      const task = new this.taskModel(taskData);
-      await task.findByIdAndUpdate(id, taskData, { new: true });
+      const task = await this.taskModel.findOneAndUpdate({ _id: id }, taskData, { new: true });
+      return task;
     } catch (error) {
       console.error(error);
+      throw error;
     }
   }
 

@@ -55,6 +55,7 @@ export default class TaskModel {
       }
     });
 
+
     delete data['day-sun'];
     delete data['day-mon'];
     delete data['day-tue'];
@@ -63,9 +64,11 @@ export default class TaskModel {
     delete data['day-fri'];
     delete data['day-sat'];
     delete data['time-repeat'];
+
     data.repeat = repeat;
     data.conclusion ? data.conclusion = this.formatDates(data.conclusion) : null;
     data.reminder ? data.reminder = this.formatDates(data.reminder) : null;
+    
     return data;
   }
 
@@ -133,7 +136,7 @@ export default class TaskModel {
     data.task = inputTask.value
     
     const taskId = form.querySelector('#task-id').innerText.replace('id: ', '');
-
+    
     const newData = this.adjustFormValues(data);
     const requestOptions = {
       method: 'POST',
@@ -151,7 +154,6 @@ export default class TaskModel {
       }
 
       const text = await response.text();
-
       if (text.includes('Errors')) {
         Message.create('Formulário não enviado!', 'red');
       } else {
