@@ -79,9 +79,7 @@ export default class Tasks {
       'bg-gray-900',
       'text-blue-500'
     );
-    return important
-      ? icon
-      : '';
+    return important ? icon : '';
   }
 
   createTask(obj) {

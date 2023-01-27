@@ -33,6 +33,7 @@ class TaskEditForm {
   createInput(text) {
     const input = document.createElement('input');
     input.setAttribute('type', 'text');
+    input.setAttribute('name', 'task');
     input.setAttribute('id', 'task');
     input.classList.add(
       'w-full',
@@ -48,7 +49,7 @@ class TaskEditForm {
       'text-white'
     );
     input.value = text;
-    return input
+    return input;
   }
 
   createForm() {
@@ -94,7 +95,7 @@ class TaskEditForm {
     const input = document.createElement('input');
     input.setAttribute('type', 'checkbox');
     input.setAttribute('name', 'important');
-    input.setAttribute('id', 'important');
+    input.setAttribute('id', 'important-edit');
     input.setAttribute('hidden', true);
     important === 'on' ? input.setAttribute('checked', true) : null;
     return input;
@@ -102,7 +103,7 @@ class TaskEditForm {
 
   createLabelImportant(important) {
     const label = document.createElement('label');
-    label.setAttribute('for', 'important');
+    label.setAttribute('for', 'important-edit');
     label.setAttribute('id', 'label-important');
     label.classList.add(
       'label-important-edit',
@@ -254,27 +255,55 @@ class TaskEditForm {
       );      
       label.innerText = day;
 
-      if (day === 'Dom') label.setAttribute('for', `day-sun`);
-      if (day === 'Seg') label.setAttribute('for', `day-mon`);
-      if (day === 'Ter') label.setAttribute('for', `day-tue`);
-      if (day === 'Qua') label.setAttribute('for', `day-wed`);
-      if (day === 'Qui') label.setAttribute('for', `day-thu`);
-      if (day === 'Sex') label.setAttribute('for', `day-fri`);
-      if (day === 'Sáb') label.setAttribute('for', `day-sat`);
-
-      const getAttributeFor = label.getAttribute('for');
-      for (const val of repeat) {
-        if (val === getAttributeFor) {
-          this.toggleStyles.toggle(label, this.stylesIconCheck);
-        }
-      }
-
       const input = document.createElement('input');
       input.setAttribute('type', 'checkbox');
       input.setAttribute('hidden', true);
       input.classList.add('checkbox-day');
-      input.setAttribute('name', `day-${day}.toLowerCase()}`);
-      input.setAttribute('id', `day-${day}.toLowerCase()}`);
+      
+      if (day === 'Dom') {
+        label.setAttribute('for', `day-sun-edit`);
+        input.setAttribute('id', `day-sun-edit`);
+        input.setAttribute('name', `day-sun-edit`);
+      }
+      if (day === 'Seg') {
+        label.setAttribute('for', `day-mon-edit`);
+        input.setAttribute('id', `day-mon-edit`);
+        input.setAttribute('name', `day-mon-edit`);
+      }
+      if (day === 'Ter') {
+        label.setAttribute('for', `day-tue-edit`);
+        input.setAttribute('id', `day-tue-edit`);
+        input.setAttribute('name', `day-tue-edit`);
+      }
+      if (day === 'Qua') {
+        label.setAttribute('for', `day-wed-edit`);
+        input.setAttribute('id', `day-wed-edit`);
+        input.setAttribute('name', `day-wed-edit`);
+      }
+      if (day === 'Qui') {
+        label.setAttribute('for', `day-thu-edit`);
+        input.setAttribute('id', `day-thu-edit`);
+        input.setAttribute('name', `day-thu-edit`);
+      }
+      if (day === 'Sex') {
+        label.setAttribute('for', `day-fri-edit`);
+        input.setAttribute('id', `day-fri-edit`);
+        input.setAttribute('name', `day-fri-edit`);
+      }
+      if (day === 'Sáb') {
+        label.setAttribute('for', `day-sat-edit`);
+        input.setAttribute('id', `day-sat-edit`);
+        input.setAttribute('name', `day-sat-edit`);
+      }
+
+      const getAttributeFor = label.getAttribute('for');
+      for (let val of repeat) {
+        if (val.startsWith('day-')) val = `${val}-edit`;
+        if (val === getAttributeFor) {
+          input.checked = true;
+          this.toggleStyles.toggle(label, this.stylesIconCheck);
+        }
+      }
 
       label.appendChild(input);
       li.appendChild(label);

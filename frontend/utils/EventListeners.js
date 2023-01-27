@@ -52,7 +52,7 @@ export default class EventListeners {
       if (el.classList.contains('btn-close')) return this.closeTaskEditForm();
       if (el.classList.contains('input-task-create')) {
         const taskModal = document.getElementById('task-options');
-        taskModal.classList.toggle('show');
+        taskModal.classList.add('show');
       }
     });
   }

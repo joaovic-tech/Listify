@@ -1,10 +1,12 @@
 import Message from '../utils/Message.js';
 import Tasks from '../components/Tasks.js';
+import ToggleStyles from '../utils/ToggleStyles.js';
 
 export default class TaskModel {
   constructor() {
     this.ulTasks = document.getElementById('tasks');
     this.tasks = new Tasks();
+    this.toggleStyles = new ToggleStyles();
   }
 
   validate(inputTask) {
@@ -39,11 +41,27 @@ export default class TaskModel {
   }
 
   clearInputs() {
-    const checkboxes = document.querySelectorAll('checkbox');
     const inputs = document.querySelectorAll('input');
+    const labels = document.querySelectorAll('#task-form label');
+    const labelStyles = [
+      'text-white',
+      'text-blue-500',
+      'bg-gray-900',
+      'bg-gray-800',
+      'border-gray-700',
+      'border-blue-500'
+    ];
 
-    inputs.forEach(input => input.value = '');
-    checkboxes.forEach(checkbox => checkbox.checked = false);
+    for (const label of labels) {
+      if (label.classList.contains('border-blue-500')) {
+        this.toggleStyles.toggle(label, labelStyles);
+      }
+    }
+
+    inputs.forEach((input) => {
+      if (input.type === 'checkbox') return input.checked = false;
+      input.value = '';
+    });
   }
 
   adjustFormValues(data) {
@@ -51,19 +69,11 @@ export default class TaskModel {
     
     Object.keys(data).forEach(key => {
       if (key.startsWith('day-') || key === 'time-repeat') {
+        delete data[key];
+        key = key.replace('-edit', '');
         repeat.push(key === 'time-repeat' ? `time-repeat: ${data[key]}` : key);
       }
     });
-
-
-    delete data['day-sun'];
-    delete data['day-mon'];
-    delete data['day-tue'];
-    delete data['day-wed'];
-    delete data['day-thu'];
-    delete data['day-fri'];
-    delete data['day-sat'];
-    delete data['time-repeat'];
 
     data.repeat = repeat;
     data.conclusion ? data.conclusion = this.formatDates(data.conclusion) : null;
@@ -104,6 +114,23 @@ export default class TaskModel {
       },
     };
 
+    console.log(newData);
+
+    this.clearInputs();
+    console.log('Formulário limpo!');
+
+    const formData2 = new FormData(form);
+    const data2 = {};
+
+    formData2.forEach((value, key) => {
+      data2[key] = value;
+    });
+
+    console.log(`dados limpos:`);
+    console.log(data2);
+
+    return;
+
     try {
       const response = await fetch('/task', requestOptions);
       if (!response.ok) {
@@ -133,10 +160,8 @@ export default class TaskModel {
     formData.forEach((value, key) => {
       data[key] = value;
     });
-    data.task = inputTask.value
-    
+
     const taskId = form.querySelector('#task-id').innerText.replace('id: ', '');
-    
     const newData = this.adjustFormValues(data);
     const requestOptions = {
       method: 'POST',
