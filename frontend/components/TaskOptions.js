@@ -43,14 +43,16 @@ class TaskOptions {
     const labelRepeat = document.getElementById('label-repeat');
     const inputTime = document.getElementById('time-repeat');
     const modalRepeat = document.getElementById('modal-repeat');
-    const btnRepeat = document.getElementById('btn-repeat');
     const checkboxes = document.querySelectorAll('.checkbox-day');
     const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
     
     labelRepeat.addEventListener('click', () => this.showModalOptions(modalRepeat));
 
-    btnRepeat.addEventListener('click', () => {
-      if (!inputTime.value || atLeastOneChecked) return Message.create('Defina uma data e hora da repetição', 'amber');
+    inputTime.addEventListener('change', () => {
+      if (!inputTime.value || atLeastOneChecked) {
+        this.toggleStyles.toggle(labelRepeat, this.stylesIconCheck);
+        return;
+      }
       this.toggleStyles.toggle(labelRepeat, this.stylesIconCheck);
     });
 
@@ -66,12 +68,14 @@ class TaskOptions {
     const modalReminder = document.getElementById('modal-reminder');
     const reminder = document.querySelector('#task-form #reminder');
     const labelReminder = document.getElementById('label-reminder');
-    const btnReminder = document.getElementById('btn-reminder');
 
     labelReminder.addEventListener('click', () => { this.showModalOptions(modalReminder) });
 
-    btnReminder.addEventListener('click', () => {
-      if (!reminder.value) return Message.create('Defina uma data e hora do lembrete', 'amber');
+    reminder.addEventListener('change', () => {
+      if (!reminder.value) {
+        this.toggleStyles.toggle(labelReminder, this.stylesIconCheck);
+        return;
+      }
       this.toggleStyles.toggle(labelReminder, this.stylesIconCheck);
     });
   }
@@ -80,12 +84,14 @@ class TaskOptions {
     const modalConclusion = document.getElementById('modal-conclusion');
     const conclusion = document.querySelector('#task-form #conclusion');
     const labelConclusion = document.getElementById('label-conclusion');
-    const btnConclusion = document.getElementById('btn-conclusion');
 
     labelConclusion.addEventListener('click', () => { this.showModalOptions(modalConclusion) });
 
-    btnConclusion.addEventListener('click', () => {
-      if (!conclusion.value) return Message.create('Defina uma data e hora da conclusão', 'amber');
+    conclusion.addEventListener('change', () => {
+      if (!conclusion.value) {
+        this.toggleStyles.toggle(labelConclusion, this.stylesIconCheck);
+        return;
+      }
       this.toggleStyles.toggle(labelConclusion, this.stylesIconCheck);
     });
   }

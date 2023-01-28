@@ -9,7 +9,12 @@ export default class TaskModel {
     this.toggleStyles = new ToggleStyles();
   }
 
-  validate(inputTask) {
+  validate(form) {
+    const inputTask = form.querySelector('#task');
+    const labelsDays = form.querySelectorAll('#repeat-days input');
+    const timeRepeat = form.querySelector('#time-repeat');
+    const atLeastOneChecked = Array.from(labelsDays).some(checkbox => checkbox.checked);
+
     if (!inputTask.value) {
       Message.create('Descreva a sua tarefa!', 'amber');
       return false;
@@ -20,6 +25,16 @@ export default class TaskModel {
       return false;
     }
 
+    if (atLeastOneChecked && timeRepeat.value === '') {
+      Message.create('Defina uma data e hora da repetição', 'amber');
+      return false;
+    }
+
+    if (!atLeastOneChecked && timeRepeat.value) {
+      Message.create('Defina os dias da repetição', 'amber');
+      return false;
+    }
+    
     return true;
   }
 
@@ -95,8 +110,7 @@ export default class TaskModel {
   }
 
   async create(form) {
-    const inputTask = form.querySelector('#task');
-    if (!this.validate(inputTask)) return;
+    if (!this.validate(form)) return;
 
     const formData = new FormData(form);
     const data = {};
@@ -113,23 +127,6 @@ export default class TaskModel {
         'Content-Type': 'application/json',
       },
     };
-
-    console.log(newData);
-
-    this.clearInputs();
-    console.log('Formulário limpo!');
-
-    const formData2 = new FormData(form);
-    const data2 = {};
-
-    formData2.forEach((value, key) => {
-      data2[key] = value;
-    });
-
-    console.log(`dados limpos:`);
-    console.log(data2);
-
-    return;
 
     try {
       const response = await fetch('/task', requestOptions);
@@ -151,8 +148,7 @@ export default class TaskModel {
   }
 
   async update(form) {
-    const inputTask = form.querySelector('#task');
-    if (!this.validate(inputTask)) return;
+    if (!this.validate(form)) return;
 
     const formData = new FormData(form);
     const data = {};

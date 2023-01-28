@@ -19,7 +19,7 @@ export default class Tasks {
   }
 
   getRepeatIcon(repeat) {
-    return repeat[0] !== 'time-repeat: ' ? `<i class="fa-solid fa-repeat text-blue-500"></i>` : '';
+    return repeat[0] !== 'time-repeat: undefined' ? `<i class="fa-solid fa-repeat text-blue-500"></i>` : '';
   }
 
   getTextOptions(conclusion, reminder, repeat) {

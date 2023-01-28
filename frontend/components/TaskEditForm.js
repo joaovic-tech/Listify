@@ -317,6 +317,7 @@ class TaskEditForm {
     const input = document.createElement('input');
     input.type = 'time';
     input.id = 'time-repeat';
+    input.name = 'time-repeat';
     this.toggleStyles.add(input, this.inputStyles);
     for (let val of repeat) {
       if (String(repeat).includes('time-repeat:')) {
