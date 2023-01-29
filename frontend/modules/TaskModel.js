@@ -34,7 +34,7 @@ export default class TaskModel {
       Message.create('Defina os dias da repetição', 'amber');
       return false;
     }
-    
+
     return true;
   }
 
@@ -81,19 +81,20 @@ export default class TaskModel {
 
   adjustFormValues(data) {
     const repeat = [];
-    
-    Object.keys(data).forEach(key => {
+
+    Object.keys(data).forEach((key) => {
       if (key.startsWith('day-') || key === 'time-repeat') {
-        delete data[key];
         key = key.replace('-edit', '');
         repeat.push(key === 'time-repeat' ? `time-repeat: ${data[key]}` : key);
+        delete data[key];
       }
     });
 
     data.repeat = repeat;
     data.conclusion ? data.conclusion = this.formatDates(data.conclusion) : null;
     data.reminder ? data.reminder = this.formatDates(data.reminder) : null;
-    
+    !data.important ? data.important = 'off' : null;
+
     return data;
   }
 
@@ -118,7 +119,7 @@ export default class TaskModel {
     formData.forEach((value, key) => {
       data[key] = value;
     });
-    
+
     const newData = this.adjustFormValues(data);
     const requestOptions = {
       method: 'POST',
@@ -127,7 +128,7 @@ export default class TaskModel {
         'Content-Type': 'application/json',
       },
     };
-
+    
     try {
       const response = await fetch('/task', requestOptions);
       if (!response.ok) {
@@ -138,7 +139,7 @@ export default class TaskModel {
         Message.create('Formulário não enviado!', 'red');
       } else {
         Message.create('Tarefa criada com sucesso!', 'green');
-        
+
         this.clearInputs();
         this.showTasks();
       }
@@ -166,10 +167,10 @@ export default class TaskModel {
         'Content-Type': 'application/json',
       },
     };
-    
+
     try {
       const response = await fetch(`/task/edit/${taskId}`, requestOptions);
-      
+
       if (!response.ok) {
         throw new Error('Ocorreu um erro ao enviar o formulário');
       }
@@ -191,7 +192,7 @@ export default class TaskModel {
       const response = await fetch(`/task/${id}`, {
         method: 'DELETE'
       });
-      
+
       if (!response.ok) {
         throw new Error('Ocorreu um erro ao deletar a tarefa!');
       }

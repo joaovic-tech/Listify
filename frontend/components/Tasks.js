@@ -19,7 +19,7 @@ export default class Tasks {
   }
 
   getRepeatIcon(repeat) {
-    return repeat[0] !== 'time-repeat: undefined' ? `<i class="fa-solid fa-repeat text-blue-500"></i>` : '';
+    return repeat[0] !== 'time-repeat: ' ? `<i class="fa-solid fa-repeat text-blue-500"></i>` : '';
   }
 
   getTextOptions(conclusion, reminder, repeat) {
@@ -79,7 +79,7 @@ export default class Tasks {
       'bg-gray-900',
       'text-blue-500'
     );
-    return important ? icon : '';
+    return important === 'on' ? icon : '';
   }
 
   createTask(obj) {
@@ -92,7 +92,7 @@ export default class Tasks {
 
     const taskContent = this.createTitle(task);
     div.appendChild(taskContent);
-    
+
     const iconImportant = this.getImportantIcon(important);
     iconImportant ? div.appendChild(iconImportant) : null;
 

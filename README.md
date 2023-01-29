@@ -3,12 +3,13 @@
 
 ## Lista de afazeres:
 
-* [x] Fazer o submit de alterações
-* [x] ***Corrigir erro*** de alteração dos dias de repetição
-  * Quando faz o submit os dados de repetição não são enviados 
-  * Provavelmente porque os checkbox estão com od Id's parecidos com o formulário de criação de tarefas
-* [x] Melhorar o `cleanInput()`
-* [x] Melhorar a validação
-  * [x] Criar um método que valida tudo e retorna `true` ou `false`;
-  * [x] O input time-repeat não pode ser enviado, ele ainda está sendo enviado sem valor para o banco;
-* [x] Ícone de repetição aparece depois de retirar a repetição no formulário de edição
+* [ ] Ajustar o dia da semana na home
+* [ ] Criar o menu de config que irar conter as seguintes configurações
+  * [ ] Troca de tema dark/light
+  * [ ] Logout para o usuário sair da conta 
+* [ ] O `lembrete` em que aparece quando o usuário colocar os dias de `repetição` dai ele vai servir para **notificar** quando estiver na hora
+* [ ] Criar um login com Google e Github
+* [ ] Criar as seguintes rotas:
+  * [ ] `/` Rota home - onde será criado e editado as tasks
+  * [ ] `/contact` Rota de contato - para entrar em contato com desenvolvedor
+  * [ ] `/login` Rota de login - para entrar e cadastrar no site 
