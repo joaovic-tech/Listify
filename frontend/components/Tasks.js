@@ -9,24 +9,14 @@ export default class Tasks {
     ` : '';
   }
 
-  getReminderText(reminder) {
-    return reminder ? `
-      <span class="flex justify-center items-center text-center gap-2">
-        <i class="fa-solid fa-bell text-blue-500"></i>
-        ${reminder}
-      </span>
-    ` : '';
-  }
-
   getRepeatIcon(repeat) {
     return repeat[0] !== 'time-repeat: ' ? `<i class="fa-solid fa-repeat text-blue-500"></i>` : '';
   }
 
-  getTextOptions(conclusion, reminder, repeat) {
+  getTextOptions(conclusion, repeat) {
     const textOptions = [];
 
     this.getConclusionText(conclusion) ? textOptions.push(this.getConclusionText(conclusion)) : null;
-    this.getReminderText(reminder) ? textOptions.push(this.getReminderText(reminder)) : null;
     this.getRepeatIcon(repeat) ? textOptions.push(this.getRepeatIcon(repeat)) : null;
 
     return textOptions.length > 0
@@ -82,8 +72,24 @@ export default class Tasks {
     return important === 'on' ? icon : '';
   }
 
+  getNotifyIcon(notify) {
+    const icon = this.createIcon('fa-solid', 'fa-bell');
+    icon.classList.add(
+      'flex',
+      'justify-center',
+      'items-center',
+      'text-center',
+      'py-2',
+      'px-3',
+      'rounded',
+      'bg-gray-900',
+      'text-blue-500'
+    );
+    return notify === 'on' ? icon : '';
+  }
+
   createTask(obj) {
-    const { _id, task, conclusion, important, reminder, repeat } = obj;
+    const { _id, task, conclusion, important, notify, repeat } = obj;
     const ul = document.getElementById('tasks');
     const li = this.createLi(_id);
 
@@ -96,9 +102,12 @@ export default class Tasks {
     const iconImportant = this.getImportantIcon(important);
     iconImportant ? div.appendChild(iconImportant) : null;
 
+    const iconNotify = this.getNotifyIcon(notify);
+    iconNotify ? div.appendChild(iconNotify) : null;
+    
     li.appendChild(div);
 
-    const textOptions = this.getTextOptions(conclusion, reminder, repeat);
+    const textOptions = this.getTextOptions(conclusion, repeat);
     textOptions ? li.innerHTML += textOptions : null;
 
     ul.appendChild(li);

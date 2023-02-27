@@ -20,7 +20,7 @@ module.exports = class TaskModel {
         type: Array,
         default: [],
       },
-      reminder: {
+      notify: {
         type: String,
         default: '',
       },

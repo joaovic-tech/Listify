@@ -79,7 +79,7 @@ class TaskEditForm {
     return ul;
   }
 
-  createLiImportant() {
+  createLiImportantAndNotify() {
     const li = document.createElement('li');
     li.classList.add('relative', 'flex', 'items-center', 'justify-center');
     return li;
@@ -91,20 +91,16 @@ class TaskEditForm {
     return li;
   }
 
-  createInputImportant(important) {
+  createInputImportantAndNotify(text) {
     const input = document.createElement('input');
     input.setAttribute('type', 'checkbox');
-    input.setAttribute('name', 'important');
-    input.setAttribute('id', 'important-edit');
     input.setAttribute('hidden', true);
-    important === 'on' ? input.setAttribute('checked', true) : null;
+    text === 'on' ? input.setAttribute('checked', true) : null;
     return input;
   }
 
-  createLabelImportant(important) {
+  createLabelImportantAndNotify(text) {
     const label = document.createElement('label');
-    label.setAttribute('for', 'important-edit');
-    label.setAttribute('id', 'label-important');
     label.classList.add(
       'label-important-edit',
       'show-span',
@@ -123,7 +119,7 @@ class TaskEditForm {
       'border-2',
       'border-gray-700'
     );
-    important === 'on' ? this.toggleStyles.toggle(label, this.stylesIconCheck) : null;
+    text === 'on' ? this.toggleStyles.toggle(label, this.stylesIconCheck) : null;
     return label;
   }
 
@@ -157,12 +153,11 @@ class TaskEditForm {
     return button;
   }
 
-  createSpanImportant() {
+  createSpanImportantAndNotify() {
     const span = document.createElement('span');
     span.classList.add(
       'opacity-0', 'pointer-events-none', 'transition', 'duration-500', 'ease', 'absolute', '-top-6', 'left-auto', 'w-28', 'h-8', 'p-2', 'flex', 'items-center', 'justify-center', 'text-center', 'text-blue-500', 'bg-gray-800', 'rounded-lg', 'shadow-md'
     );
-    span.textContent = 'Importante';
     return span;
   }
 
@@ -192,16 +187,53 @@ class TaskEditForm {
   }
 
   createImportantContent(important) {
-    const li = this.createLiImportant();
-    const inputImportant = this.createInputImportant(important);
-    const labelImportant = this.createLabelImportant(important);
+    const li = this.createLiImportantAndNotify();
+    const inputImportant = this.createInputImportantAndNotify(important);
+
+
+    inputImportant.setAttribute('name', 'important');
+    inputImportant.setAttribute('id', 'important-edit');
+
+    const labelImportant = this.createLabelImportantAndNotify(important);
+
+    labelImportant.setAttribute('for', 'important-edit');
+    labelImportant.setAttribute('id', 'label-important');
+
     const iconImportant = this.createIcon('fa-solid', 'fa-star');
-    const spanImportant = this.createSpanImportant();
+
+    const spanImportant = this.createSpanImportantAndNotify();
+    spanImportant.textContent = 'Importante';
 
     li.appendChild(inputImportant);
     labelImportant.appendChild(iconImportant);
     labelImportant.appendChild(spanImportant);
     li.appendChild(labelImportant);
+    return li;
+  }
+
+  createNotifyContent(notify) {
+    const li = this.createLiImportantAndNotify();
+    const inputNotify = this.createInputImportantAndNotify(notify);
+
+
+    inputNotify.setAttribute('name', 'notify');
+    inputNotify.setAttribute('id', 'notify-edit');
+
+    const labelNotify = this.createLabelImportantAndNotify(notify);
+
+
+    labelNotify.setAttribute('for', 'notify-edit');
+    labelNotify.setAttribute('id', 'label-notify');
+
+    const iconNotify = this.createIcon('fa-solid', 'fa-bell');
+
+    const spanNotify = this.createSpanImportantAndNotify();
+    spanNotify.textContent = 'Notificar';
+
+    li.appendChild(inputNotify);
+    labelNotify.appendChild(iconNotify);
+    labelNotify.appendChild(spanNotify);
+    li.appendChild(labelNotify);
     return li;
   }
 
@@ -212,16 +244,6 @@ class TaskEditForm {
     const li = this.createLi();
     li.appendChild(labelConclusion);
     li.appendChild(inputConclusion);
-    return li;
-  }
-
-  createReminderContent(reminder) {
-    const li = this.createLi();
-    const inputReminder = this.createInputDateLocal('reminder', reminder);
-    const labelReminder = this.createLabel('Lembrete');
-
-    li.appendChild(labelReminder);
-    li.appendChild(inputReminder);
     return li;
   }
 
@@ -345,7 +367,7 @@ class TaskEditForm {
   }
 
   createElementsModal(obj) {
-    const { _id, task, important, conclusion, reminder, repeat, created_at } = obj;
+    const { _id, task, important, conclusion, notify, repeat, created_at } = obj;
     const form = this.createForm();
     const textId = this.createP('task-id', `id: ${_id}`);
     const textCreateAt = this.createP('created_at', `Tarefa criada em: ${created_at}`);
@@ -353,16 +375,16 @@ class TaskEditForm {
     const hr = this.createHr();
     const ul = this.createUl();
     const liImportant = this.createImportantContent(important);
+    const liNotify = this.createNotifyContent(notify);
     const liConclusion = this.createConclusionContent(conclusion);
-    const liReminder = this.createReminderContent(reminder);
     const liRepeat = this.createRepeatContent(repeat);
 
     const iconClose = this.createIcon('fa-solid', 'fa-right-from-bracket');
     const btnClose = this.createButton('btn-close', 'btn-close', 'gray', iconClose, 'Fechar');
     const iconDelete = this.createIcon('fa-solid', 'fa-trash');
     const btnDelete = this.createButton(_id, 'btn-delete', 'rose', iconDelete, 'Deletar');
-    const iconSabe = this.createIcon('fa-solid', 'fa-floppy-disk');
-    const btnSave = this.createButton(_id, 'btn-save', 'blue', iconSabe, 'Salvar');
+    const iconSave = this.createIcon('fa-solid', 'fa-floppy-disk');
+    const btnSave = this.createButton(_id, 'btn-save', 'blue', iconSave, 'Salvar');
 
     form.appendChild(textId);
     form.appendChild(textCreateAt);
@@ -371,8 +393,8 @@ class TaskEditForm {
     form.appendChild(hr);
 
     ul.appendChild(liImportant);
+    ul.appendChild(liNotify);
     ul.appendChild(liConclusion);
-    ul.appendChild(liReminder);
     ul.appendChild(liRepeat);
 
     form.appendChild(ul);

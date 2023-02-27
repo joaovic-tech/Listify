@@ -29,6 +29,11 @@ class TaskOptions {
     labelImportant.addEventListener('click', () => this.toggleStyles.toggle(labelImportant, this.stylesIconCheck));
   }
 
+  notifyEvents() {
+    const labelNotify = document.getElementById('label-notify');
+    labelNotify.addEventListener('click', () => this.toggleStyles.toggle(labelNotify, this.stylesIconCheck));
+  }
+
   showModalOptions(modalOption) {
     const modals = document.querySelectorAll('.modal-option');
     for (const modal of modals) {
@@ -45,15 +50,19 @@ class TaskOptions {
     const modalRepeat = document.getElementById('modal-repeat');
     const checkboxes = document.querySelectorAll('.checkbox-day');
     const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+    const liNotify = document.getElementById('li-notify');
     
     labelRepeat.addEventListener('click', () => this.showModalOptions(modalRepeat));
 
     inputTime.addEventListener('change', () => {
       if (!inputTime.value || atLeastOneChecked) {
         this.toggleStyles.toggle(labelRepeat, this.stylesIconCheck);
+        liNotify.classList.remove('show');
         return;
       }
+
       this.toggleStyles.toggle(labelRepeat, this.stylesIconCheck);
+      liNotify.classList.add('show');
     });
 
     document.addEventListener('click', (e) => {
@@ -61,22 +70,6 @@ class TaskOptions {
       if (el.classList.contains('label-day')) {
         this.toggleStyles.toggle(el, this.stylesIconCheck);
       }
-    });
-  }
-
-  reminderEvents() {
-    const modalReminder = document.getElementById('modal-reminder');
-    const reminder = document.querySelector('#task-form #reminder');
-    const labelReminder = document.getElementById('label-reminder');
-
-    labelReminder.addEventListener('click', () => { this.showModalOptions(modalReminder) });
-
-    reminder.addEventListener('change', () => {
-      if (!reminder.value) {
-        this.toggleStyles.toggle(labelReminder, this.stylesIconCheck);
-        return;
-      }
-      this.toggleStyles.toggle(labelReminder, this.stylesIconCheck);
     });
   }
 
@@ -99,8 +92,8 @@ class TaskOptions {
   init() {
     this.conclusionEvents();
     this.importantEvents();
+    this.notifyEvents();
     this.repeatEvents();
-    this.reminderEvents();
   }
 }
 

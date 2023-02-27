@@ -1,3 +1,6 @@
+import './settings/DateInfo.js';
+import './settings/DarkMode.js';
+import './settings/MenuSettings.js';
 import './modules/TaskModel.js';
 import './utils/EventListeners.js';
 import './components/TaskOptions.js';

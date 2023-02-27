@@ -77,6 +77,10 @@ export default class TaskModel {
       if (input.type === 'checkbox') return input.checked = false;
       input.value = '';
     });
+
+
+    const liNotify = document.getElementById('li-notify');
+    liNotify.classList.remove('show');
   }
 
   adjustFormValues(data) {
@@ -89,10 +93,10 @@ export default class TaskModel {
         delete data[key];
       }
     });
-
+    
     data.repeat = repeat;
     data.conclusion ? data.conclusion = this.formatDates(data.conclusion) : null;
-    data.reminder ? data.reminder = this.formatDates(data.reminder) : null;
+    !data.notify ? data.notify = 'off' : null;
     !data.important ? data.important = 'off' : null;
 
     return data;
