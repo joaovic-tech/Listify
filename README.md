@@ -8,8 +8,10 @@
   * [x] Botão dark/light mode
   * [x] Botão log-out para o usuário sair da conta
 * [x] O `lembrete` em que aparece quando o usuário colocar os dias de `repetição` dai ele vai servir para **notificar** quando estiver na hora
-* [ ] Criar um login com Google e Github
+* [ ] Criar um cadastro e login para poder acessar o `dashboard`
 * [ ] Criar as seguintes rotas:
-  * [ ] `/dashboard` Rota home - onde será criado e editado as tasks
+  * [x] `/dashboard` Rota dashboard - onde será criado e editado as tasks **Rota privada para usuários logadas**
   * [ ] `/contact` Rota de contato - para entrar em contato com desenvolvedor
-  * [ ] `/login` Rota de login - para entrar e cadastrar no site
+  * [ ] `/login` Rota de login - para entrar no site
+  * [ ] `/register` Rota de register - para cadastrar no site
+  * [ ] `/home` Rota home - onde será apresentado o site

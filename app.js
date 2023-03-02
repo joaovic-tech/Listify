@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const homeRoutes = require('./src/routes/homeRoutes');
 const loginRoutes = require('./src/routes/loginRoutes');
+const registerRoutes = require('./src/routes/registerRoutes');
 const taskRoutes = require('./src/routes/taskRoutes');
 const readmeMD = require('./src/routes/readmeMD');
 
@@ -25,6 +26,7 @@ class App {
 
   routes() {
     this.app.use('/', loginRoutes);
+    this.app.use('/', registerRoutes);
     this.app.use('/', homeRoutes);
     this.app.use('/', taskRoutes);
     this.app.use('/', readmeMD);
