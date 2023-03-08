@@ -90,6 +90,8 @@ class TaskOptions {
   }
 
   init() {
+    if (document.title !== 'To do List with NodeJS') return;
+
     this.conclusionEvents();
     this.importantEvents();
     this.notifyEvents();

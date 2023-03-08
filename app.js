@@ -1,4 +1,6 @@
 const express = require('express');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const bodyParser = require('body-parser');
 const homeRoutes = require('./src/routes/homeRoutes');
 const loginRoutes = require('./src/routes/loginRoutes');
@@ -22,6 +24,17 @@ class App {
     this.app.use(express.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(bodyParser.json());
+    this.sessionOptions = session({
+      secret: 'akasdfj0út23453456+54qt23qv  qwf qwer qwer qewr asdasdasda a6()',
+      store: MongoStore.create({ mongoUrl: process.env.CONNECTIONSTRING }),
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+        httpOnly: true
+      }
+    });
+    this.app.use(this.sessionOptions);
   }
 
   routes() {

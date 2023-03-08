@@ -37,7 +37,26 @@
             >
               Cadastre-se
             </h1>
-            <form class="space-y-4 md:space-y-6" action="/register" method="get">
+            <form
+              id="form-register"
+              class="space-y-4 md:space-y-6"
+              action="/auth/register"
+              method="post"
+            >
+              <div>
+                <label
+                  for="username"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Seu username</label
+                >
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Digite o nome de usuário"
+                />
+              </div>
               <div>
                 <label
                   for="email"
@@ -50,7 +69,6 @@
                   id="email"
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="exemplo@dominio.com"
-                  required=""
                 />
               </div>
               <div>
@@ -65,7 +83,20 @@
                   id="password"
                   placeholder="••••••••"
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required=""
+                />
+              </div>
+              <div>
+                <label
+                  for="confirm-password"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Confirme sua senha</label
+                >
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  id="confirm-password"
+                  placeholder="••••••••"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
               </div>
               <button
@@ -74,22 +105,21 @@
               >
                 Cadastrar
               </button>
-              <h1
-                class="text-lg text-center font-medium leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
-              >
-                já tem um conta?
-              </h1>
-              <a
-                href="/login"
-                class="flex justify-center items-center text-center gap-2 m-auto outline-0 text-xl font-bold rounded text-white bg-gray-900 w-full px-5 py-2.5 transition ease hover:opacity-75 focus:text-blue-500 focus:ring-4 focus:ring-blue-800"
-              >
-                <i class="fa-solid fa-user-plus"></i>
-                Login
-              </a>
+              <p class="text-lg text-zinc-300">
+                Já possui uma conta?
+                <a
+                  class="outline-0 text-blue-500 transition ease hover:text-blue-700 transition ease focus:text-blue-700"
+                  href="/login"
+                  >login.</a
+                >
+              </p>
             </form>
           </div>
         </div>
       </div>
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.9.0/validator.js" integrity="sha512-rOMALLrxlgIcEeMdX0O7A+pysTPb/201n7g04dPGvgJFB+f0CKvL8qljuIU/lDfG8IBi3o5R921G2013ihGuWg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.js" integrity="sha512-xuJa2iaoUiQzj8b9ENT7vyJkaWrPeg5OooeqTgE47QlOCdh10rrthb9g74yk3eIXYgUXUQc1vNvldedWxb2eSA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module" src="/main.js"></script>
   </body>
 </html>

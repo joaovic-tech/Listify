@@ -37,7 +37,7 @@
             >
               Login
             </h1>
-            <form class="space-y-4 md:space-y-6" action="#">
+            <form class="space-y-4 md:space-y-6" action="/auth/login" method="post">
               <div>
                 <label
                   for="email"
@@ -99,18 +99,7 @@
               >
                 Entrar
               </button>
-              <h1
-                class="text-lg text-center font-medium leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
-              >
-                Não tem conta?
-              </h1>
-              <a
-                href="/register"
-                class="flex justify-center items-center text-center gap-2 m-auto outline-0 text-xl font-bold rounded text-white bg-gray-900 w-full px-5 py-2.5 transition ease hover:opacity-75 focus:text-blue-600 focus:ring-4 focus:ring-blue-800"
-              >
-                <i class="fa-solid fa-user-plus"></i>
-                Cadastro
-              </a>
+              <p class="text-lg text-zinc-300">Não possui uma conta? <a class="outline-0 text-blue-500 transition ease hover:text-blue-700 transition ease focus:text-blue-700" href="/register">Cadastre-se.</a></p>
             </form>
           </div>
         </div>

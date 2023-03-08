@@ -3,8 +3,10 @@ const task = new TaskModel();
 
 class TaskController {
   async index(req, res) {
+    const user = req.session.user;
+
     try {
-      const tasks = await task.index();
+      const tasks = await task.userTasks(user.id);
       return res.json(tasks);
     } catch (e) {
       console.error(e);

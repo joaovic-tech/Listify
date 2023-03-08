@@ -2,7 +2,11 @@ class ThemeToggler {
   constructor(themeToggleId) {
     this.themeToggle = document.getElementById(themeToggleId);
     this.body = document.body;
+    this.init();
+  }
 
+  init() {
+    if (!this.themeToggle) return;
     this.themeToggle.addEventListener('click', () => {
       this.toggleTheme();
     });

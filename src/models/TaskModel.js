@@ -8,6 +8,10 @@ module.exports = class TaskModel {
 
   get taskSchema() {
     return new mongoose.Schema({
+      user: {
+        type: String,
+        required: true,
+      },
       task: {
         type: String,
         required: true,
@@ -88,9 +92,9 @@ module.exports = class TaskModel {
     return task;
   }
 
-  async index() {
+  async userTasks(id) {
     try {
-      const tasks = await this.taskModel.find().sort({ createdAt: -1 });
+      const tasks = await this.taskModel.findById(id);
       return tasks;
     } catch (error) {
       console.error(error);

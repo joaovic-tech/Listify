@@ -18,13 +18,17 @@ class RegisterController {
 
   async login(req, res) {
     try {
-      const token = await userModel.login(req.body);
+      const user = await userModel.login(req.body);
 
       if (userModel.errors.length > 0) {
         return res.status(404).json({ Errors: userModel.errors });
       }
 
-      return res.status(200).json({ msg: 'Autenticação realizada com sucesso!', token });
+      console.log('usuário logado!', user)
+      req.session.user = user;
+      req.session.save(() => {
+        return res.redirect(`/tasks`);
+      });
     } catch (e) {
       console.error(e);
     }

@@ -47,6 +47,8 @@ export default class TaskModel {
   }
 
   async showTasks() {
+    if (document.title !== 'To do List with NodeJS') return;
+    
     const data = await this.getAllTasks();
     this.ulTasks.innerHTML = '';
 

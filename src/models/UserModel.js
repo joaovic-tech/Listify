@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports = class UserModel {
   constructor() {
-    this.userModel = mongoose.models.TodoList || mongoose.model('User', this.userSchema);
+    this.userModel = mongoose.models.TodoList || mongoose.model('User', this.userSchema);;
     this.errors = [];
     this.userData = {};
   }
@@ -136,7 +136,12 @@ module.exports = class UserModel {
         id: user._id,
       }, secret);
 
-      return token;
+      return {
+        token,
+        id: user._id,
+        username: user.username,
+        email: user.email
+      }
     } catch (error) {
       console.error(error);
     }

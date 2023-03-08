@@ -5,6 +5,7 @@ class DateInfo {
     }
   
     update() {
+      if (!this.element) return;
       const now = new Date();
       const daysOfWeek = [
         "Domingo",
