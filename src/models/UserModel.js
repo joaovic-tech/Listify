@@ -103,18 +103,23 @@ module.exports = class UserModel {
 
   async validateLogin(email, password) {
     this.errors = [];
-    const user = await this.emailExists(email);
-    const checkPassword = await bcrypt.compare(password, user.password);
 
-    if (!email || !validator.isEmail(email)) {
-      this.errors.push('E-mail inválido!');
-    }
+    const user = await this.emailExists(email);
+
     if (!user) {
       this.errors.push('Conta não encontrada');
+      return
+    }
+    if (!email || !validator.isEmail(email)) {
+      this.errors.push('E-mail inválido!');
+      return
     }
     if (!password) {
       this.errors.push('Senha é obrigatório!');
+      return
     }
+
+    const checkPassword = await bcrypt.compare(password, user.password);
     if (!checkPassword) {
       this.errors.push('Senha inválida!');
     }
@@ -130,11 +135,9 @@ module.exports = class UserModel {
     }
 
     try {
-      const secret = process.env.SECRET;
-      
       const token = jwt.sign({
         id: user._id,
-      }, secret);
+      }, process.env.TOKEN_SECRET);
 
       return {
         token,
@@ -142,8 +145,9 @@ module.exports = class UserModel {
         username: user.username,
         email: user.email
       }
-    } catch (error) {
-      console.error(error);
+    } catch (e) {
+      this.errors.push('Token expirado ou inválido');
+      return res.status(404).res.send('Falta criar a pág 404.');
     }
   }
 }

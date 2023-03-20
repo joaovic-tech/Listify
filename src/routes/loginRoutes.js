@@ -7,5 +7,6 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/auth/login', UserController.login);
+router.get('/login/logout', UserController.logout);
 
 module.exports = router;

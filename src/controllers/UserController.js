@@ -24,7 +24,7 @@ class RegisterController {
         return res.status(404).json({ Errors: userModel.errors });
       }
 
-      console.log('usuário logado!', user)
+      console.log('usuário logado!', user);
       req.session.user = user;
       req.session.save(() => {
         return res.redirect(`/tasks`);
@@ -32,6 +32,11 @@ class RegisterController {
     } catch (e) {
       console.error(e);
     }
+  }
+
+  logout(req, res) {
+    req.session.destroy();
+    res.redirect('/');
   }
 }
 
