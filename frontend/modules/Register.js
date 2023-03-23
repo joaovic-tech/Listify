@@ -8,26 +8,6 @@ class Register {
     this.password = document.getElementById('password');
     this.confirmPassword = document.getElementById('confirm-password');
     this.form.addEventListener('submit', this.submitHandler.bind(this));
-    this.emails = [];
-  }
-
-  async getAllUsers() {
-    try {
-      const response = await fetch('/api/users');
-
-      const data = await response.json();
-      data.forEach(({ email }) => {
-        this.emails.push(email);
-      });
-    } catch (e) { console.log(e) }
-  }
-
-  userExist() {
-    for (let email of this.emails) {
-      console.log(email);
-      if (email === this.email.value) return true;
-    }
-    return false;
   }
 
   validate() {
@@ -49,10 +29,6 @@ class Register {
     }
     if (!validator.isEmail(emailValue)) {
       Message.create('Email inválido', 'red');
-      return false;
-    }
-    if (this.userExist()) {
-      Message.create('Email já cadastrado!', 'red');
       return false;
     }
 
@@ -88,4 +64,3 @@ class Register {
 }
 
 const register = new Register();
-register.getAllUsers();

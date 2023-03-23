@@ -173,11 +173,6 @@ class UserModel {
       return res.status(404).res.send('Falta criar a pág 404.');
     }
   }
-
-  async getAllUsers() {
-    const users = await this.userModel.find().select(['email', '-_id']);
-    return users;
-  }
 }
 
 module.exports = UserModel;

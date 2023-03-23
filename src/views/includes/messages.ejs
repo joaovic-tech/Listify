@@ -1,0 +1,25 @@
+<% if (errors.length > 0) { %>
+  <div id="msg-server" role="alert" class="absolute z-50 top-0 right-0 w-full p-2 backdrop-blur-md bg-red-600/50 rounded-b">
+    <div class="px-4 py-3 text-red-700">
+      <p class="text-zinc-100 font-semibold">
+        <% errors.forEach(msg => { %>
+          <%- msg %><br />
+        <% }); %>
+      </p>
+    </div>
+    <div class="absolute bottom-0 left-0 w-full h-1 bg-red-500 line-animate"></div>
+  </div>
+<% } %>
+
+<% if (success.length > 0) { %>
+  <div id="msg-server" role="alert" class="absolute z-50 top-0 right-0 w-full p-2 backdrop-blur-md bg-green-600/50 rounded-b">
+    <div class="px-4 py-3 text-green-700">
+      <p class="text-zinc-100 font-semibold">
+        <% success.forEach(msg => { %>
+          <%- msg %><br />
+        <% }); %>
+      </p>
+    </div>
+    <div class="absolute bottom-0 left-0 w-full h-1 bg-green-500 line-animate"></div>
+  </div>
+<% } %>

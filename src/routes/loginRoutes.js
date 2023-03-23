@@ -3,7 +3,10 @@ const router = new Route();
 const UserController = require('../controllers/UserController');
 
 router.get('/login', (req, res) => {
-  res.render('login');
+  return res.render('login', {
+    errors: req.flash('errors'),
+    success: req.flash('success'),
+  });
 });
 
 router.post('/auth/login', UserController.login);

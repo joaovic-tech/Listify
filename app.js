@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const flash = require('connect-flash');
 const bodyParser = require('body-parser');
 const homeRoutes = require('./src/routes/homeRoutes');
 const loginRoutes = require('./src/routes/loginRoutes');
@@ -17,15 +18,15 @@ class App {
   }
 
   middlewares() {
-    this.app.engine('html', require('ejs').renderFile);
-    this.app.set('view engine', 'html');
     this.app.use(express.static(__dirname + '/frontend'));
     this.app.set('views', this.path.join(__dirname, '/src/views'));
+    this.app.set('view engine', 'ejs');
     this.app.use(express.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
+    
     this.app.use(bodyParser.json());
-    this.sessionOptions = session({
-      secret: 'akasdfj0út23453456+54qt23qv  qwf qwer qwer qewr asdasdasda a6()',
+      this.sessionOptions = session({
+      secret: process.env.SECRETSESSION,
       store: MongoStore.create({ mongoUrl: process.env.CONNECTIONSTRING }),
       resave: false,
       saveUninitialized: false,
@@ -34,7 +35,9 @@ class App {
         httpOnly: true
       }
     });
+
     this.app.use(this.sessionOptions);
+    this.app.use(flash());
   }
 
   routes() {

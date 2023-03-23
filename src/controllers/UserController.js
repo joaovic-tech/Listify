@@ -1,16 +1,25 @@
 const UserModel = require('../models/UserModel');
 const userModel = new UserModel();
 
-class RegisterController {
+class UserController {
   async create(req, res) {
     try {
       await userModel.create(req.body);
 
       if (userModel.errors.length > 0) {
-        return res.status(422).json({ Errors: userModel.errors });
+        req.flash("errors", userModel.errors);
+        req.session.save(() => {
+          return res.redirect('/register');
+        });
+        return;
       }
 
-      return res.json('usuário criado com sucesso!');
+      
+      req.flash("success", 'Usuário criado com sucesso! - Faça login para continuar');
+      req.session.save(() => {
+        return res.redirect('/login');
+      });
+      return;
     } catch (e) {
       console.error(e);
     }
@@ -21,14 +30,19 @@ class RegisterController {
       const user = await userModel.login(req.body);
 
       if (userModel.errors.length > 0) {
-        return res.status(404).json({ Errors: userModel.errors });
+        req.flash("errors", userModel.errors);
+        req.session.save(() => {
+          return res.redirect('/login');
+        });
+        return;
       }
 
-      console.log('usuário logado!', user);
       req.session.user = user;
+      req.flash("success", `Seja bem-vindo(a) - ${req.session.user.username}`);
       req.session.save(() => {
-        return res.redirect(`/tasks`);
+        return res.redirect('/tasks');
       });
+      return;
     } catch (e) {
       console.error(e);
     }
@@ -38,11 +52,6 @@ class RegisterController {
     req.session.destroy();
     res.redirect('/');
   }
-
-  async getAllUsers(req, res) {
-    const users = await userModel.getAllUsers();
-    return res.status(200).json(users);
-  }
 }
 
-module.exports = new RegisterController();
+module.exports = new UserController();

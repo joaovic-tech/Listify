@@ -7,6 +7,11 @@ router.post('/task', TaskController.create);
 router.post('/task/edit/:id', TaskController.update);
 router.delete('/task/:id', TaskController.delete);
 router.get('/todoList', TaskController.index);
-router.get('/tasks', loginRequired, async (req, res, next) => res.render('tasks'));
+router.get('/tasks', loginRequired, async (req, res, next) => {
+  return res.render('tasks', {
+    errors: req.flash('errors'),
+    success: req.flash('success'),
+  });
+});
 
 module.exports = router;

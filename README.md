@@ -27,3 +27,7 @@
 ### ***Home***
 * [ ] Trocar o nome da aplicação
 * [ ] Criar rota para apresentação da aplicação
+
+### ***Organizar os códigos***
+* [ ] ejs
+* [ ] js

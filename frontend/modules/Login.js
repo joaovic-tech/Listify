@@ -6,26 +6,6 @@ class Login {
     this.email = document.getElementById('email');
     this.password = document.getElementById('password');
     this.form.addEventListener('submit', this.submitHandler.bind(this));
-    this.emails = [];
-  }
-
-  async getAllUsers() {
-    try {
-      const response = await fetch('/api/users');
-
-      const data = await response.json();
-
-      data.forEach(({ email }) => {
-        this.emails.push(email);
-      });
-    } catch (e) { console.log(e) }
-  }
-
-  userExist() {
-    for (let email of this.emails) {
-      if (email === this.email.value) return true;
-    }
-    return false;
   }
 
   validate() {
@@ -41,10 +21,6 @@ class Login {
       Message.create('Email inválido', 'red');
       return false;
     }
-    if (!this.userExist()) {
-      Message.create('Email não existe', 'red');
-      return false;
-    }
 
     // Validar a senha
     if (validator.isEmpty(passwordValue)) {
@@ -57,7 +33,6 @@ class Login {
 
   submitHandler(event) {
     event.preventDefault();
-    
     if (!this.validate()) return;
 
     // Se tudo estiver válido, enviar o formulário
@@ -66,4 +41,3 @@ class Login {
 }
 
 const login = new Login();
-login.getAllUsers();
