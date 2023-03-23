@@ -23,9 +23,11 @@ class TaskController {
 
       if (task.errors.length > 0) {
         console.log({
+          success: false, 
           Errors: task.errors
         });
         return res.json({
+          success: false,
           Errors: task.errors
         });
       }
@@ -42,9 +44,11 @@ class TaskController {
 
       if (task.errors.length > 0) {
         console.log({
+          success: false, 
           Errors: task.errors
         });
         return res.json({
+          success: false, 
           Errors: task.errors
         });
       }

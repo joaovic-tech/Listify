@@ -4,13 +4,13 @@ const validator = require('validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-module.exports = class UserModel {
+class UserModel {
   constructor() {
     this.userModel = mongoose.models.TodoList || mongoose.model('User', this.userSchema);;
     this.errors = [];
     this.userData = {};
   }
-
+  
   get userSchema() {
     return new mongoose.Schema({
       username: {
@@ -25,11 +25,11 @@ module.exports = class UserModel {
         type: String,
         required: true,
       },
-      created_at: { 
+      created_at: {
         type: Date,
         default: Date.now
       },
-      updated_at: { 
+      updated_at: {
         type: Date,
         default: ''
       }
@@ -39,14 +39,17 @@ module.exports = class UserModel {
   async validateUsername(username) {
     if (!username) {
       this.errors.push('Nome de usuário é obrigatório');
+      return
     }
     if (username.length <= 2 || username.length >= 22) {
       this.errors.push('Nome de usuário precisa ter entre 2 até 22 carácteres');
     }
   }
 
-  async emailExists(email) {
-    return await this.userModel.findOne({ email: email });
+  async emailExists(value) {
+    return await this.userModel.findOne({
+      email: value
+    });
   }
 
   async validateEmail(email) {
@@ -54,10 +57,12 @@ module.exports = class UserModel {
 
     if (userExists) {
       this.errors.push('E-mail já existente!');
+      return
     }
 
     if (!email || !validator.isEmail(email)) {
       this.errors.push('E-mail inválido!');
+      return
     }
   }
 
@@ -65,20 +70,27 @@ module.exports = class UserModel {
     const salt = await bcrypt.genSalt(12); // adiciona caracteres à mais na senha do usuário
     const passwordHash = await bcrypt.hash(password, salt);
 
-    if (!password) {
-      this.errors.push('Senha é obrigatório!');
-    } 
+    if (!password) return this.errors.push('Senha é obrigatório!');
+
     if (!confirmPassword) {
       this.errors.push('Senha de confirmação vazia!');
+      return
     }
+
     if (password !== confirmPassword) {
-      this.errors.push('A senha de confirmação incorreta');
+      this.errors.push('As senhas não conferem');
+      return
     }
 
     this.userData.password = passwordHash;
   }
 
-  async validate({ username, email, password, confirmPassword }) {
+  async validate({
+    username,
+    email,
+    password,
+    confirmPassword
+  }) {
     this.errors = [];
     await this.validateUsername(username);
     await this.validateEmail(email);
@@ -92,7 +104,7 @@ module.exports = class UserModel {
     if (this.errors.length > 0) {
       return this.errors.join(', ');
     }
-    
+
     try {
       const task = new this.userModel(this.userData);
       await task.save();
@@ -106,14 +118,22 @@ module.exports = class UserModel {
 
     const user = await this.emailExists(email);
 
+
+    if (!email) {
+      this.errors.push('E-mail vazio!');
+      return
+    }
+
+    if (!validator.isEmail(email)) {
+      this.errors.push('E-mail vazio!');
+      return
+    }
+
     if (!user) {
       this.errors.push('Conta não encontrada');
       return
     }
-    if (!email || !validator.isEmail(email)) {
-      this.errors.push('E-mail inválido!');
-      return
-    }
+    
     if (!password) {
       this.errors.push('Senha é obrigatório!');
       return
@@ -126,7 +146,10 @@ module.exports = class UserModel {
 
   }
 
-  async login({ email, password }) {
+  async login({
+    email,
+    password
+  }) {
     const user = await this.emailExists(email);
     await this.validateLogin(email, password);
 
@@ -150,4 +173,11 @@ module.exports = class UserModel {
       return res.status(404).res.send('Falta criar a pág 404.');
     }
   }
+
+  async getAllUsers() {
+    const users = await this.userModel.find().select(['email', '-_id']);
+    return users;
+  }
 }
+
+module.exports = UserModel;

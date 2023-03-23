@@ -38,6 +38,11 @@ class RegisterController {
     req.session.destroy();
     res.redirect('/');
   }
+
+  async getAllUsers(req, res) {
+    const users = await userModel.getAllUsers();
+    return res.status(200).json(users);
+  }
 }
 
 module.exports = new RegisterController();

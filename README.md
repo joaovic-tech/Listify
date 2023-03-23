@@ -7,14 +7,16 @@
 * [x] Insomnia
 * [x] Front-end
   * [x] Criar campo username
-  * [x] Validar campos
+  * [ ] Validar campos
+    * [ ] Validar se o e-mail já existe ou não
+    * [x] campo senha e confirma senha
 * [x] Quando o usuário for cadastrado `redirect('/login')`
 * [ ] Usar o express-flash para mandar mensagens
 ---
 ### **LOGIN**
 * [x] Insomnia
 * [x] Token e session
-* [x] Front-end
+* [ ] Validar os campos
 ---
 ### ***TASKS***
 * [x] Rota `/tasks` irar listar as tarefas para o CRUD

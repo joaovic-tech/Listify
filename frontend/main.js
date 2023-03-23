@@ -6,4 +6,3 @@ import './utils/EventListeners.js';
 import './components/TaskOptions.js';
 import './components/Tasks.js';
 import './components/TaskEditForm.js';
-import './modules/Register.js';

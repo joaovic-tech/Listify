@@ -7,5 +7,6 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/auth/register', UserController.create);
+router.get('/api/users', UserController.getAllUsers);
 
 module.exports = router;
