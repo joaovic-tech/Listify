@@ -6,7 +6,7 @@ class TaskController {
     const user = req.session.user;
 
     try {
-      const tasks = await task.userTasks(user.id);
+      const tasks = await task.userTasks(user.username);
       return res.json(tasks);
     } catch (e) {
       console.error(e);
@@ -17,7 +17,6 @@ class TaskController {
   }
 
   async create(req, res) {
-    console.log(req.body);
     try {
       await task.create(req.body);
 
@@ -32,6 +31,7 @@ class TaskController {
         });
       }
 
+      console.log(`Usuário ${req.session.user.username} criou uma task!`);
       return res.json('Criado com sucesso!');
     } catch (e) {
       console.error(e);
@@ -53,6 +53,7 @@ class TaskController {
         });
       }
 
+      console.log(`Usuário ${req.session.user.username} editou uma task!`);
       return res.json('Tarefa editada com sucesso!');
     } catch (e) {
       console.error(e);
@@ -75,6 +76,8 @@ class TaskController {
           Error: 'Tarefa não encontrada'
         });
       }
+
+      console.log(`Usuário ${req.session.user.username} deletou uma task!`);
       return res.json({
         Message: 'Tarefa deletada com sucesso!'
       });

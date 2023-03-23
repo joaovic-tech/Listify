@@ -3,6 +3,8 @@ const Route = require('express').Router;
 const router = new Route();
 
 router.get('/register', (req, res) => {
+  if (req.session.user) return res.redirect('/dashboard');
+
   return res.render('register', {
     errors: req.flash('errors'),
     success: req.flash('success'),

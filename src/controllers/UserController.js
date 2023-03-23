@@ -14,7 +14,7 @@ class UserController {
         return;
       }
 
-      
+      console.log(`Usuário ${req.body.username} criado`);
       req.flash("success", 'Usuário criado com sucesso! - Faça login para continuar');
       req.session.save(() => {
         return res.redirect('/login');
@@ -36,11 +36,12 @@ class UserController {
         });
         return;
       }
-
+      
       req.session.user = user;
+      console.log(`Usuário ${req.session.user.username} online`);
       req.flash("success", `Seja bem-vindo(a) - ${req.session.user.username}`);
       req.session.save(() => {
-        return res.redirect('/tasks');
+        return res.redirect('/dashboard');
       });
       return;
     } catch (e) {
@@ -49,8 +50,9 @@ class UserController {
   }
 
   logout(req, res) {
+    console.log(`Usuário ${req.session.user.username} offline`);
     req.session.destroy();
-    res.redirect('/');
+    res.redirect('/login');
   }
 }
 

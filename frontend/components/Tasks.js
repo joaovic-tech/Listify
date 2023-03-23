@@ -1,5 +1,4 @@
 export default class Tasks {
-
   getConclusionText(conclusion) {
     return conclusion ? `
       <span class="flex justify-center items-center text-center gap-2">

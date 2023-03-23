@@ -41,21 +41,36 @@ class UserModel {
       this.errors.push('Nome de usuário é obrigatório');
       return
     }
+
+    const usernameExist = await this.usernameExists(username);
+
+    if (usernameExist) {
+      this.errors.push('Esse nome de usuário já existente!');
+      return;
+    }
+
     if (username.length <= 2 || username.length >= 22) {
       this.errors.push('Nome de usuário precisa ter entre 2 até 22 carácteres');
+      return;
     }
   }
 
-  async emailExists(value) {
+  async emailExists(email) {
     return await this.userModel.findOne({
-      email: value
+      email: email
+    });
+  }
+
+  async usernameExists(username) {
+    return await this.userModel.findOne({
+      username: username
     });
   }
 
   async validateEmail(email) {
-    const userExists = await this.emailExists(email);
+    const emailExists = await this.emailExists(email);
 
-    if (userExists) {
+    if (emailExists) {
       this.errors.push('E-mail já existente!');
       return
     }
@@ -161,7 +176,7 @@ class UserModel {
       const token = jwt.sign({
         id: user._id,
       }, process.env.TOKEN_SECRET);
-
+      
       return {
         token,
         id: user._id,

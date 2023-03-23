@@ -43,12 +43,19 @@ export default class TaskModel {
       const response = await fetch('/tasks');
       const data = await response.json();
       return data;
-    } catch (e) { console.error(e) }
+    } catch (erro) {
+      console.log(erro);
+    }
   }
 
   async showTasks() {
     const data = await this.getAllTasks();
     this.ulTasks.innerHTML = '';
+    
+    if (!data) {
+      this.ulTasks.innerHTML = '<p class="text-sm text-zinc-300">Sem tarefas.</p>';
+      return;
+    }
 
     data.forEach((obj) => {
       this.tasks.createTask(obj);
@@ -68,12 +75,14 @@ export default class TaskModel {
     ];
 
     for (const label of labels) {
+
       if (label.classList.contains('border-blue-500')) {
         this.toggleStyles.toggle(label, labelStyles);
       }
     }
 
     inputs.forEach((input) => {
+      if (input.id === 'username') return;
       if (input.type === 'checkbox') return input.checked = false;
       input.value = '';
     });
@@ -171,7 +180,7 @@ export default class TaskModel {
         'Content-Type': 'application/json',
       },
     };
-
+    
     try {
       const response = await fetch(`/task/edit/${taskId}`, requestOptions);
 

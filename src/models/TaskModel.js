@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 
 module.exports = class TaskModel {
   constructor() {
-    this.taskModel = mongoose.models.TodoList || mongoose.model('TodoList', this.taskSchema);
+    this.taskModel = mongoose.models.TodoList || mongoose.model('Tasks', this.taskSchema);
     this.errors = [];
   }
 
   get taskSchema() {
     return new mongoose.Schema({
-      user: {
+      username: {
         type: String,
         required: true,
       },
@@ -92,9 +92,9 @@ module.exports = class TaskModel {
     return task;
   }
 
-  async userTasks(id) {
+  async userTasks(username) {
     try {
-      const tasks = await this.taskModel.findById(id);
+      const tasks = await this.taskModel.find({ username: username }).sort({ important: -1, created_at: -1 });
       return tasks;
     } catch (error) {
       console.error(error);
