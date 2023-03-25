@@ -60,6 +60,34 @@ class TaskController {
     }
   }
 
+  async updateTaskComplete(req, res) {
+    const { checked_task } = req.body;
+
+    try {
+      await task.updateTaskComplete(req.params.id, checked_task);
+
+      if (task.errors.length > 0) {
+        console.log({
+          success: false, 
+          Errors: task.errors
+        });
+        return res.json({
+          success: false, 
+          Errors: task.errors
+        });
+      }
+
+      if (checked_task === 'on') {
+        console.log(`Usuário ${req.session.user.username} completou a task!`);
+      } else {
+        console.log(`Usuário ${req.session.user.username} desmarcou a task!`);
+      }
+      return res.json('Tarefa editada com sucesso!');
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   async delete(req, res) {
     const { id } = req.params;
 

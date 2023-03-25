@@ -51,8 +51,8 @@ export default class TaskModel {
   async showTasks() {
     const data = await this.getAllTasks();
     this.ulTasks.innerHTML = '';
-    
-    if (!data) {
+
+    if (data.length <= 0) {
       this.ulTasks.innerHTML = '<p class="text-sm text-zinc-300">Sem tarefas.</p>';
       return;
     }
@@ -107,6 +107,7 @@ export default class TaskModel {
     data.conclusion ? data.conclusion = this.formatDates(data.conclusion) : null;
     !data.notify ? data.notify = 'off' : null;
     !data.important ? data.important = 'off' : null;
+    !data.checked_task ? data.checked_task = 'off' : null;
 
     return data;
   }
@@ -159,6 +160,47 @@ export default class TaskModel {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  markTaskCompleted() {
+    document.addEventListener('click', async (e) => {
+      const el = e.target;
+      if (!el.classList.contains('checkbox-task')) return;
+      const data = {};
+      data.checked_task = 'off';
+
+      if (el.classList.contains('checked_false')) {
+        this.toggleStyles.toggle(el, ['checked_false', 'checked_true']);
+
+        data.checked_task = 'on';
+      }
+
+      const requestOptions = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      
+      try {
+        const response = await fetch(`/task/update_checked_task/${el.id}`, requestOptions);
+  
+        if (!response.ok) {
+          throw new Error('Ocorreu um erro ao enviar o formulário');
+        }
+  
+        const text = await response.text();
+        if (text.includes('Errors')) {
+          Message.create('Formulário não enviado!', 'red');
+        } else {
+          Message.create('Tarefa atualizada!', 'green');
+          this.showTasks();
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    });
   }
 
   async update(form) {
@@ -224,3 +266,4 @@ export default class TaskModel {
 
 const taskModel = new TaskModel();
 taskModel.showTasks();
+taskModel.markTaskCompleted();

@@ -89,13 +89,27 @@ class TaskOptions {
     });
   }
 
-  init() {
-    if (document.title !== 'To do List with NodeJS') return;
+  checkboxTaskEvents() {
+    document.addEventListener('click', (e) => {
+      const el = e.target;
+      if (!el.classList.contains('checkbox-task')) return;
 
+      if (el.classList.contains('fa-square')) {
+        this.toggleStyles.remove(el, ['fa-square'])
+        this.toggleStyles.add(el, ['fa-square-check']);
+      } else {
+        this.toggleStyles.add(el, ['fa-square'])
+        this.toggleStyles.remove(el, ['fa-square-check']);
+      }
+    });
+  }
+
+  init() {
     this.conclusionEvents();
     this.importantEvents();
     this.notifyEvents();
     this.repeatEvents();
+    this.checkboxTaskEvents();
   }
 }
 

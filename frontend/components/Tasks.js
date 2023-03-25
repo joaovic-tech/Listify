@@ -1,4 +1,10 @@
+import ToggleStyles from "../utils/ToggleStyles.js";
+
 export default class Tasks {
+  constructor() {
+    this.toggleStyles = new ToggleStyles();
+  }
+
   getConclusionText(conclusion) {
     return conclusion ? `
       <span class="flex justify-center items-center text-center gap-2">
@@ -12,23 +18,28 @@ export default class Tasks {
     return repeat[0] !== 'time-repeat: ' ? `<i class="fa-solid fa-repeat text-blue-500"></i>` : '';
   }
 
-  getTextOptions(conclusion, repeat) {
+  getTextOptions(checked_task, conclusion, repeat) {
     const textOptions = [];
 
     this.getConclusionText(conclusion) ? textOptions.push(this.getConclusionText(conclusion)) : null;
     this.getRepeatIcon(repeat) ? textOptions.push(this.getRepeatIcon(repeat)) : null;
 
-    return textOptions.length > 0
+    if (checked_task === 'off') {
+      return textOptions.length > 0
       ? `<p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-zinc-400">${textOptions.join('')}</p>`
+      : ''
+    }
+
+    return textOptions.length > 0
+      ? `<p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-green-500">Completo: ${textOptions.join('')}</p>`
       : ''
   }
 
-  createLi(taskId) {
+  createLi(checked_task, taskId) {
     const li = document.createElement('li');
     li.setAttribute('id', taskId);
     li.classList.add(
       'li-task',
-      'bg-gray-700',
       'p-2',
       'grid',
       'rounded',
@@ -36,16 +47,33 @@ export default class Tasks {
       'transition',
       'ease',
       'cursor-pointer',
+    );
+
+    li.classList.add(
+      'bg-gray-700',
       'hover:bg-gray-800',
       'focus:bg-gray-800'
     );
+
+    if (checked_task === 'off') return li;
+    li.classList.add(
+      'bg-gray-800/50',
+      'hover:bg-gray-700/50',
+      'focus:bg-gray-700/50',
+      'backdrop-blur-sm',
+    );
+
     return li;
   }
 
-  createTitle(text) {
+  createTitle(checked_task, text) {
     const h2 = document.createElement('h2');
     h2.classList.add('text-base', 'text-white', 'text-bold');
     h2.textContent = text;
+
+    if (checked_task === 'off') return h2;
+    h2.classList.add('line-through', 'text-zinc-400')
+
     return h2;
   }
 
@@ -87,26 +115,62 @@ export default class Tasks {
     return notify === 'on' ? icon : '';
   }
 
+  createCheckboxTask(checked_task, id) {
+    let icon;
+
+    if (checked_task === 'on') {
+      icon = this.createIcon('fa-regular', 'fa-square-check');
+      icon.classList.add('checked_true');
+    } else {
+      icon = this.createIcon('fa-regular', 'fa-square');
+      icon.classList.add('checked_false');
+    }
+
+    icon.id = id;
+    icon.classList.add(
+      'checkbox-task',
+      'flex',
+      'justify-center',
+      'items-center',
+      'text-center',
+      'text-3xl',
+      'pointer-events-auto',
+      'text-blue-500',
+      'transition',
+      'ease',
+      'hover:text-blue-800',
+      'focus:text-blue-800',
+    );
+
+    return icon;
+  }
+
   createTask(obj) {
-    const { _id, task, conclusion, important, notify, repeat } = obj;
+    const { _id, task, conclusion, important, notify, repeat, checked_task } = obj;
     const ul = document.getElementById('tasks');
-    const li = this.createLi(_id);
-
+    const li = this.createLi(checked_task, _id);
     const div = document.createElement('div');
-    div.classList.add('flex', 'justify-between', 'gap-2', 'pointer-events-none');
-
-    const taskContent = this.createTitle(task);
-    div.appendChild(taskContent);
-
+    const divRight = document.createElement('div');
+    const divLeft = document.createElement('div');
+    const taskContent = this.createTitle(checked_task, task);
     const iconImportant = this.getImportantIcon(important);
-    iconImportant ? div.appendChild(iconImportant) : null;
-
     const iconNotify = this.getNotifyIcon(notify);
-    iconNotify ? div.appendChild(iconNotify) : null;
+    const checkboxTask = this.createCheckboxTask(checked_task, _id);
+    const classDiv = ['flex', 'justify-between', 'items-center', 'text-center', 'gap-2', 'pointer-events-none'];
     
+    this.toggleStyles.add(div, classDiv);
+    this.toggleStyles.add(divLeft, classDiv);
+    this.toggleStyles.add(divRight, classDiv);
+    
+    divLeft.appendChild(checkboxTask);
+    divLeft.appendChild(taskContent);
+    iconImportant ? divRight.appendChild(iconImportant) : null;
+    iconNotify ? divRight.appendChild(iconNotify) : null;
+    div.appendChild(divLeft);
+    div.appendChild(divRight);
     li.appendChild(div);
 
-    const textOptions = this.getTextOptions(conclusion, repeat);
+    const textOptions = this.getTextOptions(checked_task, conclusion, repeat);
     textOptions ? li.innerHTML += textOptions : null;
 
     ul.appendChild(li);

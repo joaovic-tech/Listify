@@ -67,14 +67,15 @@
         </div>
         <div class="right">
           <h2 class="text-3xl text-white">
-            Olá <span class="text-green-500"><%- user.username %></span> 
+            Seja bem-vindo!
+            <span class="text-green-500"><%- user.username %></span> 
           </h2>
         </div>
       </header>
       <form action="/task" method="post" id="task-form" class="relative w-full bg-gray-700 rounded-lg">
         <input type="text" name="username" id="username" value="<%- user.username %>" hidden/>
-        <input class="input-task-create outline-0 rounded w-full py-2 px-3 rounded-md bg-gray-700 text-white"
-          type="text" id="task" name="task" placeholder="Exemplo: Comprar leite" autocomplete="off" />
+        <input class="input-task-create outline-0 w-full py-2 px-3 bg-gray-700 text-white"
+          type="text" id="task" name="task" placeholder="Exemplo: Estudar para prova" autocomplete="off" />
         <hr class="border-blue-500" />
         <div id="task-options"
           class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute w-full grid sm:flex items-center sm:justify-between justify-center bg-gray-700 shadow-md shadow-gray-900/50 rounded-b-lg px-8 py-2">

@@ -28,6 +28,10 @@ module.exports = class TaskModel {
         type: String,
         default: '',
       },
+      checked_task: {
+        type: String,
+        default: '',
+      },
       conclusion: {
         type: String,
         default: '',
@@ -81,6 +85,16 @@ module.exports = class TaskModel {
       return task;
     } catch (error) {
       console.error(error);
+      throw error;
+    }
+  }
+
+  async updateTaskComplete(id, value) {
+    try {
+      const task = await this.taskModel.updateOne({ _id: id }, { checked_task: value });
+      return task;
+    } catch (error) {
+      this.errors.push('Não foi possível marca essa tarefa.');
       throw error;
     }
   }

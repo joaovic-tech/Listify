@@ -12,6 +12,7 @@ router.get('/dashboard', loginRequired, async (req, res, next) => {
 });
 router.post('/task', TaskController.create);
 router.post('/task/edit/:id', TaskController.update);
+router.post('/task/update_checked_task/:id', TaskController.updateTaskComplete);
 router.delete('/task/:id', TaskController.delete);
 router.get('/tasks', loginRequired, TaskController.index);
 
