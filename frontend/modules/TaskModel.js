@@ -194,7 +194,12 @@ export default class TaskModel {
         if (text.includes('Errors')) {
           Message.create('Formulário não enviado!', 'red');
         } else {
-          Message.create('Tarefa atualizada!', 'green');
+          if (data.checked_task === 'on') {
+            Message.create('Tarefa <span class="font-bold">marcada</span> como <span class="font-bold">concluída!</span>', 'green');
+          } else {
+            Message.create('Tarefa <span class="font-bold">desmarcada</span> como <span class="font-bold">concluída!</span>', 'amber');
+          }
+
           this.showTasks();
         }
       } catch (error) {
@@ -255,7 +260,7 @@ export default class TaskModel {
       if (text.includes('Errors')) {
         Message.create('Tarefa não deletada ou não encontrada!', 'red');
       } else {
-        Message.create('Tarefa deletada!', 'green');
+        Message.create('Tarefa deletada!', 'red');
         this.showTasks();
       }
     } catch (error) {

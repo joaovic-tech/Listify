@@ -108,7 +108,7 @@ module.exports = class TaskModel {
 
   async userTasks(username) {
     try {
-      const tasks = await this.taskModel.find({ username: username }).sort({ important: -1, created_at: -1 });
+      const tasks = await this.taskModel.find({ username: username }).sort({ checked_task: 1, important: -1, created_at: -1 });
       return tasks;
     } catch (error) {
       console.error(error);

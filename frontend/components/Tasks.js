@@ -31,7 +31,7 @@ export default class Tasks {
     }
 
     return textOptions.length > 0
-      ? `<p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-green-500">Completo: ${textOptions.join('')}</p>`
+      ? `<p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-green-600">Completo: ${textOptions.join('')}</p>`
       : ''
   }
 
@@ -47,20 +47,17 @@ export default class Tasks {
       'transition',
       'ease',
       'cursor-pointer',
-    );
-
-    li.classList.add(
-      'bg-gray-700',
+      'backdrop-blur-sm',
+      'bg-gray-700/50',
       'hover:bg-gray-800',
-      'focus:bg-gray-800'
+      'focus:bg-gray-800',
     );
 
     if (checked_task === 'off') return li;
     li.classList.add(
-      'bg-gray-800/50',
-      'hover:bg-gray-700/50',
-      'focus:bg-gray-700/50',
-      'backdrop-blur-sm',
+      'bg-gray-700/50',
+      'hover:bg-gray-600/80',
+      'focus:bg-gray-600/80',
     );
 
     return li;
@@ -72,7 +69,7 @@ export default class Tasks {
     h2.textContent = text;
 
     if (checked_task === 'off') return h2;
-    h2.classList.add('line-through', 'text-zinc-400')
+    h2.classList.add('line-through', 'text-green-600')
 
     return h2;
   }
@@ -120,7 +117,7 @@ export default class Tasks {
 
     if (checked_task === 'on') {
       icon = this.createIcon('fa-regular', 'fa-square-check');
-      icon.classList.add('checked_true');
+      icon.classList.add('checked_true', 'text-blue-700');
     } else {
       icon = this.createIcon('fa-regular', 'fa-square');
       icon.classList.add('checked_false');

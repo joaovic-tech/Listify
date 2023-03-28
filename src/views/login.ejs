@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/assets/styles/dashboard.css" />
-  <title>Login</title>
+  <link rel="stylesheet" href="/assets/styles/main.css" />
+  <title>Login - Listify</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -17,14 +17,15 @@
 </head>
 
 <body class="dark">
+  <div id="svg_background" class="pointer-events-none"></div>
   
-<%- include('includes/messages'); %>
-
+  <%- include('includes/messages'); %>
+  
   <section class="bg-gray-200 dark:bg-gray-900">
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
-      <a href="#" class="flex gap-4 items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0 relative">
+      <a href="/" class="flex gap-4 items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
         <i class="fa-solid fa-list text-blue-600"></i>
-        Node Todo List
+        Listify
       </a>
       <div
         class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">

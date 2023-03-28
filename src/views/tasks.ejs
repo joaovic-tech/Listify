@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/assets/styles/dashboard.css" />
-  <title>To do List with NodeJS</title>
+  <link rel="stylesheet" href="/assets/styles/main.css" />
+  <title>Dashboard - Listify</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -17,10 +17,11 @@
 </head>
 
 <body class="bg-gray-900 dark">
+  <div id="svg_background" class="pointer-events-none"></div>
   
   <%- include('includes/messages'); %>
 
-  <nav class="flex items-center justify-between w-full p-2 bg-gray-800">
+  <nav class="relative flex items-center justify-between w-full p-2 bg-gray-800">
     <div class="flex items-center">
       <i class="fa-solid fa-list-ul fill-current rounded-md px-3 py-3 bg-gray-900 text-blue-500"></i>
       <a href="#" class="ml-4 text-lg font-semibold text-white hover:text-gray-400">Minhas tarefas</a>
@@ -40,22 +41,22 @@
         <i class="fa-solid fa-gear pointer-events-none"></i>
       </button>
       <ul id="menu-settings" class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute z-50 top-12 right-0 w-56 h-auto grid gap-2 p-2 rounded justify-center items-center bg-gray-800 text-white text-base">
-        <li id="theme-toggle" class="px-5 py-2 transition ease hover:bg-gray-700 rounded-lg cursor-pointer">
-          <button class="flex justify-center items-center text-center gap-2">
+        <li>
+          <button id="theme-toggle" class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 transition ease hover:bg-gray-700 rounded-lg cursor-pointer">
             <i id="theme-icon" class="fas fa-moon pointer-events-none"></i>
             Dark mode
           </button>
         </li>
-        <li class="px-5 py-2 transition ease hover:bg-gray-700 rounded-lg cursor-pointer">
-          <a href="/login/logout" class="flex justify-center items-center text-center gap-2">
+        <li>
+          <a href="/login/logout" class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 transition ease hover:bg-gray-700 rounded-lg cursor-pointer">
             <i class="fas fa-sign-out-alt pointer-events-none"></i>
-            Log out
+            Sair
           </a>
         </li>
       </ul>
     </div>
   </nav>
-  <main class="relative flex">
+  <main class="flex">
     <section class="w-full h-full p-4 grid gap-8">
       <header id="header" class="flex justify-between">
         <div class="left">
@@ -66,8 +67,7 @@
           <p class="text-base text-zinc-400 date-info">Segunda-feira, 26 dezembro</p>
         </div>
         <div class="right">
-          <h2 class="text-3xl text-white">
-            Seja bem-vindo!
+          <h2 class="text-3xl">
             <span class="text-green-500"><%- user.username %></span> 
           </h2>
         </div>
@@ -206,7 +206,7 @@
           </button>
         </div>
       </form>
-      <ul id="tasks" class="grid gap-2 mt-12"></ul>
+      <ul id="tasks" class="grid gap-2 mt-12 relative"></ul>
     </section>
   </main>
   <script type="module" src="/main.js"></script>
