@@ -4,9 +4,41 @@ import ToggleStyles from '../utils/ToggleStyles.js';
 
 export default class TaskModel {
   constructor() {
-    this.ulTasks = document.getElementById('tasks');
+    this.searchInput = document.getElementById('search');
+    this.tasksContainer = document.querySelector('#tasks');
+    this.initEventsSearchTasks();
     this.tasks = new Tasks();
     this.toggleStyles = new ToggleStyles();
+  }
+
+  initEventsSearchTasks() {
+    this.searchInput.addEventListener('keyup', () => {
+      clearTimeout(this.typingTimeOut);
+      this.typingTimeOut = setTimeout(() => {
+        const val = this.searchInput.value;
+        if (val) {
+          this.searchTasks(val);
+        } else {
+          this.showTasks();
+        }
+      }, 500);
+    });
+  }
+
+  searchTasks(value) {
+    fetch('/tasks').then(res => res.json())
+    .then(data => {
+      data.forEach(task => {
+        if (task.task.includes(value)) {
+          if (!data.length) {
+            this.tasksContainer.innerHTML = '<p class="text-sm text-zinc-300">Sem tarefas.</p>';
+          } else {
+            this.tasksContainer.innerHTML = '';
+            this.tasks.createTask(task);
+          }
+        }
+      });
+    });
   }
 
   validate(form) {
@@ -50,10 +82,10 @@ export default class TaskModel {
 
   async showTasks() {
     const data = await this.getAllTasks();
-    this.ulTasks.innerHTML = '';
+    this.tasksContainer.innerHTML = '';
 
     if (data.length <= 0) {
-      this.ulTasks.innerHTML = '<p class="text-sm text-zinc-300">Sem tarefas.</p>';
+      this.tasksContainer.innerHTML = '<p class="text-sm text-zinc-300">Sem tarefas.</p>';
       return;
     }
 
@@ -145,10 +177,13 @@ export default class TaskModel {
     
     try {
       const response = await fetch('/task', requestOptions);
+      
       if (!response.ok) {
         throw new Error('Ocorreu um erro ao enviar o formulário');
       }
+      
       const text = await response.text();
+      
       if (text.includes('Errors')) {
         Message.create('Formulário não enviado!', 'red');
       } else {
