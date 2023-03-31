@@ -28,12 +28,12 @@ export default class TaskModel {
   searchTasks(value) {
     fetch('/tasks').then(res => res.json())
     .then(data => {
+      this.tasksContainer.innerHTML = '';
       data.forEach(task => {
         if (task.task.includes(value)) {
           if (!data.length) {
             this.tasksContainer.innerHTML = '<p class="text-sm text-zinc-300">Sem tarefas.</p>';
           } else {
-            this.tasksContainer.innerHTML = '';
             this.tasks.createTask(task);
           }
         }

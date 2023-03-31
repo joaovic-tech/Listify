@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/styles/main.css" />
+  <title>Edite seu perfil - Listify</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+  <script src="https://kit.fontawesome.com/673aed7dea.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="dark bg-gray-900 flex justify-center items-center h-screen">
+  <div id="svg_background" class="pointer-events-none h-auto sm:h-screen"></div>
+
+  <%- include('includes/messages'); %>
+
+  <nav class="absolute top-0 left-0 flex items-center justify-between w-full h-auto p-2 backdrop-blur-sm bg-gray-800">
+    <div class="flex items-center">
+      <i class="fa-solid fa-list-ul fill-current rounded-md px-3 py-3 bg-gray-900 text-blue-500"></i>
+      <p class="ml-4 text-lg font-semibold text-white">
+        Meu perfil</span>
+      </p>
+    </div>
+    <div class="relative">
+      <button type="submit" id="btn-settings"
+        class="rounded-md bg-gray-700 px-3 py-2 text-gray-500 hover:bg-gray-900 hover:text-blue-500">
+        <i class="fa-solid fa-gear pointer-events-none"></i>
+      </button>
+      <ul id="menu-settings"
+        class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute z-50 top-12 right-0 w-56 h-auto grid gap-2 p-2 rounded justify-center items-center bg-gray-800 text-white text-base">
+        <li>
+          <button id="theme-toggle"
+            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 transition ease hover:bg-gray-700 rounded-lg cursor-pointer">
+            <i id="theme-icon" class="fas fa-moon pointer-events-none"></i>
+            Dark mode
+          </button>
+        </li>
+        <li>
+          <a href="/dashboard"
+            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 transition ease hover:bg-gray-700 rounded-lg cursor-pointer">
+            <i class="fa-solid fa-arrow-left pointer-events-none"></i>
+            Voltar
+          </a>
+        </li>
+        <li>
+          <a href="/login/logout"
+            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 transition ease hover:bg-gray-700 rounded-lg cursor-pointer">
+            <i class="fas fa-sign-out-alt pointer-events-none"></i>
+            Sair
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <main
+    class="relative bg-red-600 grid justify-initial items-center text-cente m-auto bg-white dark:bg-gray-800 p-8 rounded-lg w-10/12 h-auto">
+    <div class="flex justify-between items-center text-center">
+      <div class="w-6/12 p-3 flex flex-col gap-4">
+        <div class="flex justify-start items-center text-center gap-2">
+          <img src="/assets/img/Fotos-para-homem-perfil-de-WhatsApp-04.jpg" id="image" alt="Profile Image"
+          class="w-24 h-24 rounded-full object-cover rounded-full border-2 border-blue-600 shadow-lg shadow-blue-600 animate-pulse shadow-md" />
+          <div class="relative px-8 py-1 grid">
+            <span class="text-2xl text-blue-600"><%- user.username %></span>
+            <div class="absolute bottom-0 left-0 w-full h-1 rounded-full border-b-2 border-blue-600 shadow-md shadow-blue-600"></div>
+          </div>
+        </div>
+        <div class="flex items-center justify-center w-full">
+          <label for="user_image"
+            class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+              <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+              </svg>
+              <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                <span class="font-semibold">Clique para fazer upload </span>
+                ou arraste e solte.
+              </p>
+              <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG ou GIF</p>
+            </div>
+            <input id="user_image" type="file" class="hidden" />
+          </label>
+        </div>
+      </div>
+      <form id="form-edit" class="space-y-4 md:space-y-6" action="/edit/user/<%- user.id %>" method="post">
+        <div>
+          <label for="username"
+            class="text-start block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
+          <input type="text" name="username" id="username"
+            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="exemplo@dominio.com" value="<%- user.username %>" />
+        </div>
+        <div>
+          <label for="email"
+            class="text-start block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
+          <input type="email" name="email" id="email"
+            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="exemplo@dominio.com" value="<%- user.email %>" />
+        </div>
+        <div class="relative">
+          <button type="button" id="show-password"
+            class="absolute bottom-2 right-2 text-base text-white transition hover:text-blue-600 focus:text-blue-600">
+            <i class="fa-solid fa-eye-slash"></i>
+          </button>
+          <label for="password" class="text-start block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nova
+            senha</label>
+          <input type="password" name="password" id="password" placeholder="••••••••"
+            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            autocomplete />
+        </div>
+        <div>
+          <label
+            for="confirm-password"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >Confirme sua senha</label
+          >
+          <input
+            type="password"
+            name="confirmPassword"
+            id="confirm-password"
+            placeholder="••••••••"
+            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          />
+        </div>
+        <button type="submit"
+          class="w-full text-white transition ease bg-gradient-to-r from-blue-800 to-blue-500 hover:from-blue-500 hover:to-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          Salvar
+        </button>
+      </form>
+    </div>
+    <div class="flex justify-between items-center text-center">
+      <h2 class="ml-3 px-8 py-1 bg-gray-50 dark:bg-gray-700 text-blue-500 font-bold border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-lg">
+        Id: <%- user.id %>
+      </h2>
+      <form action="/delete/user/<%- user.id %>" method="post">
+        <button type="submit" class="bg-red-600 text-white font-bold py-2 px-4 rounded transition hover:bg-red-800 focus:outline-none focus:shadow-outline">
+          <i class="fas fa-trash-alt"></i> Apagar conta
+        </button>
+      </form>
+    </div>
+  </main>
+  <script src="/settings/DarkMode.js"></script>
+  <script src="/settings/MenuSettings.js"></script>
+  <script type="module" src="/settings/ProfileImage.js"></script>
+  <script type="module" src="/utils/MessageServer.js"></script>
+</body>

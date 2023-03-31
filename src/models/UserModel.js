@@ -3,14 +3,16 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const GenerateRefreshToken = require('../provider/GenerateRefreshToken');
+const GenerateTokenProvider = require('../provider/GenerateTokenProvider');
 
 class UserModel {
   constructor() {
-    this.userModel = mongoose.models.TodoList || mongoose.model('User', this.userSchema);;
+    this.userModel = mongoose.models.users || mongoose.model('users', this.userSchema);;
     this.errors = [];
     this.userData = {};
   }
-  
+
   get userSchema() {
     return new mongoose.Schema({
       username: {
@@ -25,6 +27,9 @@ class UserModel {
         type: String,
         required: true,
       },
+      profile_picture: {
+        type: Buffer
+      },
       created_at: {
         type: Date,
         default: Date.now
@@ -32,7 +37,11 @@ class UserModel {
       updated_at: {
         type: Date,
         default: ''
-      }
+      },
+      refresh_token: {
+        type: String,
+        required: false,
+      },
     });
   }
 
@@ -121,10 +130,67 @@ class UserModel {
     }
 
     try {
-      const task = new this.userModel(this.userData);
-      await task.save();
+      const user = new this.userModel(this.userData);
+      await user.save();
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  async validateUpdate({
+    username,
+    email,
+    password,
+    confirmPassword
+  }) {
+    this.errors = [];
+
+    if (!username) {
+      this.errors.push('Nome de usuário é obrigatório');
+      return;
+    }
+
+    if (username.length <= 2 || username.length >= 22) {
+      this.errors.push('Nome de usuário precisa ter entre 2 até 22 carácteres');
+      return;
+    }
+
+    if (!email || !validator.isEmail(email)) {
+      this.errors.push('E-mail inválido!');
+      return;
+    }
+
+    if (!password) return {
+      username,
+      email
+    };
+
+    await this.validatePassword(password, confirmPassword);
+    return {
+      username,
+      email,
+      password,
+      confirmPassword
+    };
+  }
+
+  async update(id, userData) {
+    const newUserData = await this.validateUpdate(userData);
+
+    if (this.errors.length > 0) {
+      return this.errors.join(', ');
+    }
+
+    try {
+      const user = await this.userModel.findOneAndUpdate({
+        _id: id
+      }, newUserData, {
+        new: true
+      });
+      return user;
+    } catch (error) {
+      console.error(error);
+      throw error;
     }
   }
 
@@ -148,7 +214,7 @@ class UserModel {
       this.errors.push('Conta não encontrada');
       return
     }
-    
+
     if (!password) {
       this.errors.push('Senha é obrigatório!');
       return
@@ -173,19 +239,31 @@ class UserModel {
     }
 
     try {
-      const token = jwt.sign({
-        id: user._id,
-      }, process.env.TOKEN_SECRET);
+      const generateTokenProvider = new GenerateTokenProvider(); 
+      const token = await generateTokenProvider.execute(user._id.toString());
+
+      await mongoose.models.refresh_tokens.deleteMany({
+        userId: user._id
+      });
       
-      return {
+      const generateRefreshToken = new GenerateRefreshToken();
+      const refreshToken = await generateRefreshToken.execute(user.username, user._id.toString());
+
+
+      const userParams = {
         token,
+        refreshToken,
         id: user._id,
         username: user.username,
-        email: user.email
+        email: user.email,
       }
+
+      console.log(userParams);
+
+      return userParams;
     } catch (e) {
       this.errors.push('Token expirado ou inválido');
-      return res.status(404).res.send('Falta criar a pág 404.');
+      console.log(e)
     }
   }
 }

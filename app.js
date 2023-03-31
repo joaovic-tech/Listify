@@ -7,6 +7,8 @@ const homeRoutes = require('./src/routes/homeRoutes');
 const loginRoutes = require('./src/routes/loginRoutes');
 const registerRoutes = require('./src/routes/registerRoutes');
 const taskRoutes = require('./src/routes/taskRoutes');
+const editUserRoutes = require('./src/routes/editUserRoutes');
+const tokenRoutes = require('./src/routes/tokenRoutes');
 const readmeMD = require('./src/routes/readmeMD');
 
 class App {
@@ -45,6 +47,8 @@ class App {
     this.app.use('/', registerRoutes);
     this.app.use('/', homeRoutes);
     this.app.use('/', taskRoutes);
+    this.app.use('/', editUserRoutes);
+    this.app.use('/', tokenRoutes);
     this.app.use('/', readmeMD);
   }
 }

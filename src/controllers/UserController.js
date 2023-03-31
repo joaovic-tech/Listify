@@ -25,6 +25,35 @@ class UserController {
     }
   }
 
+  async update(req, res) {
+
+    try {
+      const newUserData = await userModel.validateUpdate(req.body);
+  
+      if (userModel.errors.length > 0) {
+        console.log({
+          success: false, 
+          Errors: userModel.errors
+        });
+        return res.json({
+          success: false, 
+          Errors: userModel.errors
+        });
+      }
+  
+      const updatedUser = await userModel.update(req.params.id, newUserData);
+      req.session.user = updatedUser;
+  
+      console.log(`Usuário ${req.session.user.username} editou seu perfil!`);
+      req.session.save(() => {
+        return res.redirect('/profile');
+      });
+      return;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   async login(req, res) {
     try {
       const user = await userModel.login(req.body);
