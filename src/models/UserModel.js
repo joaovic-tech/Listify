@@ -169,7 +169,7 @@ class UserModel {
     return {
       username,
       email,
-      password,
+      password: this.userData.password,
       confirmPassword
     };
   }
@@ -249,21 +249,16 @@ class UserModel {
       const generateRefreshToken = new GenerateRefreshToken();
       const refreshToken = await generateRefreshToken.execute(user.username, user._id.toString());
 
-
-      const userParams = {
+      return {
         token,
         refreshToken,
         id: user._id,
         username: user.username,
         email: user.email,
-      }
-
-      console.log(userParams);
-
-      return userParams;
+      };
     } catch (e) {
+      console.log(e);
       this.errors.push('Token expirado ou inválido');
-      console.log(e)
     }
   }
 }

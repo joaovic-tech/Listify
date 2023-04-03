@@ -14,7 +14,7 @@ class Middleware {
       
       return next();
     } catch (err) {
-      console.log(err)
+      console.log(err);
       return req.session.save(() => res.redirect('/login/logout'));
     }
   }

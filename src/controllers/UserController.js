@@ -1,5 +1,6 @@
 const UserModel = require('../models/UserModel');
 const userModel = new UserModel();
+const { sign } = require('jsonwebtoken');
 
 class UserController {
   async create(req, res) {
@@ -13,8 +14,7 @@ class UserController {
         });
         return;
       }
-
-      console.log(`Usuário ${req.body.username} criado`);
+      
       req.flash("success", 'Usuário criado com sucesso! - Faça login para continuar');
       req.session.save(() => {
         return res.redirect('/login');
@@ -26,29 +26,34 @@ class UserController {
   }
 
   async update(req, res) {
-
     try {
-      const newUserData = await userModel.validateUpdate(req.body);
   
       if (userModel.errors.length > 0) {
         console.log({
-          success: false, 
+          success: false,
           Errors: userModel.errors
         });
         return res.json({
-          success: false, 
+          success: false,
           Errors: userModel.errors
         });
       }
   
-      const updatedUser = await userModel.update(req.params.id, newUserData);
-      req.session.user = updatedUser;
+      const updatedUser = await userModel.update(req.params.id, req.body);
+      req.session.user = {
+        ...req.session.user,
+        username: updatedUser.username,
+        email: updatedUser.email
+      };
   
-      console.log(`Usuário ${req.session.user.username} editou seu perfil!`);
+      // gera novo token
+      const token = sign({ id: updatedUser._id }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+  
+      // atualiza token na sessão do usuário
+      req.session.user.token = token;
       req.session.save(() => {
         return res.redirect('/profile');
       });
-      return;
     } catch (e) {
       console.error(e);
     }
@@ -67,7 +72,6 @@ class UserController {
       }
       
       req.session.user = user;
-      console.log(`Usuário ${req.session.user.username} online`);
       req.flash("success", `Seja bem-vindo(a) - ${req.session.user.username}`);
       req.session.save(() => {
         return res.redirect('/dashboard');
@@ -79,7 +83,6 @@ class UserController {
   }
 
   logout(req, res) {
-    console.log(`Usuário ${req.session.user.username} offline`);
     req.session.destroy();
     res.redirect('/login');
   }

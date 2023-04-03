@@ -30,8 +30,7 @@ class TaskController {
           Errors: task.errors
         });
       }
-
-      console.log(`Usuário ${req.session.user.username} criou uma task!`);
+      
       return res.json('Criado com sucesso!');
     } catch (e) {
       console.error(e);
@@ -53,7 +52,6 @@ class TaskController {
         });
       }
 
-      console.log(`Usuário ${req.session.user.username} editou uma task!`);
       return res.json('Tarefa editada com sucesso!');
     } catch (e) {
       console.error(e);
@@ -76,12 +74,7 @@ class TaskController {
           Errors: task.errors
         });
       }
-
-      if (checked_task === 'on') {
-        console.log(`Usuário ${req.session.user.username} completou a task!`);
-      } else {
-        console.log(`Usuário ${req.session.user.username} desmarcou a task!`);
-      }
+      
       return res.json('Tarefa editada com sucesso!');
     } catch (e) {
       console.error(e);
@@ -105,7 +98,6 @@ class TaskController {
         });
       }
 
-      console.log(`Usuário ${req.session.user.username} deletou uma task!`);
       return res.json({
         Message: 'Tarefa deletada com sucesso!'
       });

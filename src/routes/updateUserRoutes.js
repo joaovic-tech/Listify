@@ -12,6 +12,6 @@ router.get('/profile', loginRequired, (req, res) => {
     user: req.session.user
   });
 });
-router.post('/edit/user/:id', loginRequired, UserController.update);
+router.post('/update/user/:id', loginRequired, UserController.update);
 
 module.exports = router;

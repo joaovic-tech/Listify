@@ -14,7 +14,7 @@ module.exports = class RefreshTokenUserUseCase {
     const refreshToken = await this.RefreshToken.findOne({ _id: refresh_token });
 
     if (!refreshToken) {
-      throw new Error('Refresh token invalid!');
+      return { Error: 'Refresh token invalid!' };
     }
 
     const generateTokenProvider = new GenerateTokenProvider();

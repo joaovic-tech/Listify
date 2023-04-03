@@ -16,7 +16,7 @@
 * [x] `Concluído`
 ---
 ### Recursos novos
-* [ ] Fazer uma página para usuário editar seu perfil como `nome, e-mail, senha e foto de perfil,`
+* [x] Fazer uma página para usuário editar seu perfil como `nome, e-mail, senha e foto de perfil,`
 * [ ] A foto uma foto de perfil padrão com um ? no meio e uma cor de fundo, tem que ser uma cor `aleatória`
 * [ ] Página 404 parecido com a do figma
 
