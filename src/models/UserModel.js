@@ -194,6 +194,17 @@ class UserModel {
     }
   }
 
+  async updateImage(id, userData) {
+    try {
+      const user = await this.userModel.findByIdAndUpdate(id, userData, { new: true });
+  
+      return user;
+    } catch (error) {
+      this.errors.push(error.message);
+      return;
+    }
+  }
+
   async validateLogin(email, password) {
     this.errors = [];
 
@@ -255,11 +266,20 @@ class UserModel {
         id: user._id,
         username: user.username,
         email: user.email,
+        profile_picture: user.profile_picture
       };
+
     } catch (e) {
       console.log(e);
       this.errors.push('Token expirado ou inválido');
     }
+  }
+
+  async delete(id) {
+    if (typeof id !== 'string') return;
+
+    const user = await this.userModel.findOneAndDelete({ _id: id });
+    return user;
   }
 }
 

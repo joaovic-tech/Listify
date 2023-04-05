@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 module.exports = class TaskModel {
   constructor() {
-    this.taskModel = mongoose.models.TodoList || mongoose.model('tasks', this.taskSchema);
+    this.taskModel = mongoose.models.tasks || mongoose.model('tasks', this.taskSchema);
     this.errors = [];
   }
 

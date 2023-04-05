@@ -3,7 +3,7 @@ const TokenModel = require('../models/TokenModel');
 
 class GenerateRefreshToken {
   constructor() {
-    this.RefreshToken = new TokenModel().taskModel;
+    this.RefreshToken = new TokenModel().tokenModel;
   }
 
   async execute(userId = String) {

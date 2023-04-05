@@ -1,6 +1,7 @@
 const UserModel = require('../models/UserModel');
 const userModel = new UserModel();
 const { sign } = require('jsonwebtoken');
+const fs = require('fs');
 
 class UserController {
   async create(req, res) {
@@ -26,6 +27,8 @@ class UserController {
   }
 
   async update(req, res) {
+    const { id } = req.params;
+
     try {
   
       if (userModel.errors.length > 0) {
@@ -39,7 +42,7 @@ class UserController {
         });
       }
   
-      const updatedUser = await userModel.update(req.params.id, req.body);
+      const updatedUser = await userModel.update(id, req.body);
       req.session.user = {
         ...req.session.user,
         username: updatedUser.username,
@@ -51,11 +54,77 @@ class UserController {
   
       // atualiza token na sessão do usuário
       req.session.user.token = token;
+      req.flash("success", `Perfil atualizado!`);
       req.session.save(() => {
         return res.redirect('/profile');
       });
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
+  async updateImage(req, res) {
+    const { id } = req.params;
+    const { username, email } = req.body;
+  
+    if (!req.file) {
+      return res.status(500).json({ error: 'Imagem não atualizada!' });
+    }
+  
+    const userData = {
+      username,
+      email,
+      profile_picture: req.file.filename,
+    };
+  
+    try {
+      const updatedUserImage = await userModel.updateImage(id, userData);
+
+      const imageData = fs.readFileSync(req.file.path);
+      const base64Image = imageData.toString('base64');
+
+      req.session.user = {
+        ...req.session.user,
+        username: updatedUserImage.username,
+        email: updatedUserImage.email,
+        profile_picture: base64Image,
+      };
+  
+      // gera novo token
+      const token = sign({ id: updatedUserImage._id }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+  
+      // atualiza token na sessão do usuário
+      req.session.user.token = token;
+      req.flash("success", `Foto de perfil atualizada!`);
+      req.session.save(() => {
+        return res.redirect('/profile');
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+  
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    if (!id) {
+      return req.flash("errors", 'ID do usuário Inválido!');
+    }
+
+    try {
+      const userDeleted = await userModel.delete(id);
+      if (!userDeleted) {
+        return req.flash("errors", 'Usuário não deletado!');
+      }
+      
+      req.session.destroy();
+      return res.redirect('/login');
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        Error: 'Internal server error'
+      });
     }
   }
 
@@ -70,7 +139,7 @@ class UserController {
         });
         return;
       }
-      
+
       req.session.user = user;
       req.flash("success", `Seja bem-vindo(a) - ${req.session.user.username}`);
       req.session.save(() => {

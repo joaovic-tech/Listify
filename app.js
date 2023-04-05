@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const homeRoutes = require('./src/routes/homeRoutes');
 const loginRoutes = require('./src/routes/loginRoutes');
 const registerRoutes = require('./src/routes/registerRoutes');
+const deleteRoutes = require('./src/routes/deleteRoutes');
 const taskRoutes = require('./src/routes/taskRoutes');
 const updateUserRoutes = require('./src/routes/updateUserRoutes');
 const tokenRoutes = require('./src/routes/tokenRoutes');
@@ -48,6 +49,7 @@ class App {
     this.app.use('/', homeRoutes);
     this.app.use('/', taskRoutes);
     this.app.use('/', updateUserRoutes);
+    this.app.use('/', deleteRoutes);
     this.app.use('/', tokenRoutes);
     this.app.use('/', readmeMD);
   }

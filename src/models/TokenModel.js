@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 module.exports = class TokenModel {
   constructor() {
-    this.taskModel = mongoose.models.refresh_tokens || mongoose.model('refresh_tokens', this.tokenSchema);
+    this.tokenModel = mongoose.models.refresh_tokens || mongoose.model('refresh_tokens', this.tokenSchema);
     this.errors = [];
   }
 
