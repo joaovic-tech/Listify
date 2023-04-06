@@ -74,9 +74,14 @@
             class="outline-0 text-3xl text-green-500 transition hover:text-green-700  focus:text-green-700">
             <%- user.username %>
           </a>
-          <a href="/profile"
-            class="outline-0 rounded-full bg-gray-700 text-3xl text-gray-500 w-12 h-12 flex items-center justify-center hover:bg-gray-600 focus:bg-gray-600 hover:text-green-600 focus:text-green-600">
-            <i class="fa fa-question fa-solid"></i>
+          <a href="/profile">
+            <% if(user.profile_picture) { %>
+              <img src="<%- user.profile_picture %>" id="image" alt="Profile Image"
+              class="w-16 h-16 rounded-full object-cover rounded-full shadow-md" />
+            <% } else { %>     
+              <img src="/assets/svg/userImage.svg" id="image" alt="Profile Image"
+              class="w-24 h-24 rounded-full object-cover rounded-full shadow-md" />
+            <% } %>
           </a>
         </div>
       </header>

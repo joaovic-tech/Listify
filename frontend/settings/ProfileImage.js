@@ -19,7 +19,7 @@ class ProfileImage {
     const fileNameSplit = imageURL.name.split('.');
     const correctType = types.includes(fileNameSplit[fileNameSplit.length - 1]);
     
-    !correctType ? Message.create('Por favor insira apenas <span class="font-bold">SVG, PNG, JPG ou GIF</span>', 'red') : null;
+    !correctType ? Message.create('Somente arquivos <span class="font-bold">SVG, PNG, JPG/JPEG ou GIF</span>', 'red') : null;
     return correctType;
   }
   

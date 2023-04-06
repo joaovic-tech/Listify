@@ -28,7 +28,7 @@ class UserModel {
         required: true,
       },
       profile_picture: {
-        type: Buffer
+        type: String
       },
       created_at: {
         type: Date,

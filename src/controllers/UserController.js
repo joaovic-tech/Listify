@@ -74,20 +74,17 @@ class UserController {
     const userData = {
       username,
       email,
-      profile_picture: req.file.filename,
+      profile_picture: req.file.path,
     };
   
     try {
       const updatedUserImage = await userModel.updateImage(id, userData);
 
-      const imageData = fs.readFileSync(req.file.path);
-      const base64Image = imageData.toString('base64');
-
       req.session.user = {
         ...req.session.user,
         username: updatedUserImage.username,
         email: updatedUserImage.email,
-        profile_picture: base64Image,
+        profile_picture: userData.profile_picture,
       };
   
       // gera novo token

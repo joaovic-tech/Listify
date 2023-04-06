@@ -68,7 +68,7 @@
         <div class="flex justify-start items-center text-center gap-2">
 
           <% if(user.profile_picture) { %>
-            <img src="data:image/jpeg;base64,<%- user.profile_picture %>" id="image" alt="Profile Image"
+            <img src="<%- user.profile_picture %>" id="image" alt="Profile Image"
             class="w-24 h-24 rounded-full object-cover rounded-full shadow-md" />
           <% } else { %>     
             <img src="/assets/svg/userImage.svg" id="image" alt="Profile Image"
@@ -102,17 +102,17 @@
       <form id="form-edit" class="space-y-4 md:space-y-6" action="/update/user/<%- user.id %>" method="post">
         <div>
           <label for="username"
-            class="text-start block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
+            class="text-start block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
           <input type="text" name="username" id="username"
             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="exemplo@dominio.com" value="<%- user.username %>" autocomplete/>
+             value="<%- user.username %>" autocomplete="true"/>
         </div>
         <div>
           <label for="email"
             class="text-start block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
           <input type="email" name="email" id="email"
             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="exemplo@dominio.com" value="<%- user.email %>" autocomplete />
+            placeholder="exemplo@dominio.com" value="<%- user.email %>" autocomplete="true" />
         </div>
         <div class="relative">
           <button type="button" id="show-password"
@@ -123,12 +123,12 @@
             senha</label>
           <input type="password" name="password" id="password" placeholder="••••••••"
             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            autocomplete />
+            autocomplete="true" />
         </div>
         <div>
           <label
             for="confirm-password"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            class="text-start block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >Confirme sua senha</label
           >
           <input
@@ -137,7 +137,7 @@
             id="confirm-password"
             placeholder="••••••••"
             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            autocomplete
+            autocomplete="true"
           />
         </div>
         <button type="submit"
@@ -158,8 +158,10 @@
       </form>
     </div>
   </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.9.0/validator.js" integrity="sha512-rOMALLrxlgIcEeMdX0O7A+pysTPb/201n7g04dPGvgJFB+f0CKvL8qljuIU/lDfG8IBi3o5R921G2013ihGuWg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="/settings/DarkMode.js"></script>
   <script src="/settings/MenuSettings.js"></script>
   <script type="module" src="/settings/ProfileImage.js"></script>
   <script type="module" src="/utils/MessageServer.js"></script>
+  <script type="module" src="/modules/User.js"></script>
 </body>

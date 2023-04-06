@@ -11,6 +11,7 @@ const taskRoutes = require('./src/routes/taskRoutes');
 const updateUserRoutes = require('./src/routes/updateUserRoutes');
 const tokenRoutes = require('./src/routes/tokenRoutes');
 const readmeMD = require('./src/routes/readmeMD');
+const serveStatic = require('serve-static');
 
 class App {
   constructor() {
@@ -21,6 +22,7 @@ class App {
   }
 
   middlewares() {
+    this.app.use('/uploads', serveStatic('uploads'));
     this.app.use(express.static(__dirname + '/frontend'));
     this.app.set('views', this.path.join(__dirname, '/src/views'));
     this.app.set('view engine', 'ejs');

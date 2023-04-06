@@ -17,8 +17,7 @@
 ---
 ### Recursos novos
 * [x] Fazer uma página para usuário editar seu perfil como `nome, e-mail, senha e foto de perfil,`
-* [ ] A foto uma foto de perfil padrão com um ? no meio e uma cor de fundo, tem que ser uma cor `aleatória`
-* [ ] Validar os campo e quando o site por carregado limpar os campo de senhas
+* [x] Validar os campo e quando o site for carregado limpar os campo de senhas
 * [ ] Página 404 parecido com a do figma
 
 ### ***Animação***
