@@ -2,15 +2,20 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const GenerateRefreshToken = require('../provider/GenerateRefreshToken');
 const GenerateTokenProvider = require('../provider/GenerateTokenProvider');
+const TaskModel = require('./TaskModel');
+const TokenModel = require('./TokenModel');
+const fs = require('fs');
+const path = require('path');
 
 class UserModel {
   constructor() {
     this.userModel = mongoose.models.users || mongoose.model('users', this.userSchema);;
     this.errors = [];
     this.userData = {};
+    this.taskModel = new TaskModel().taskModel;
+    this.refreshTokenModel = new TokenModel().tokenModel;
   }
 
   get userSchema() {
@@ -277,9 +282,20 @@ class UserModel {
 
   async delete(id) {
     if (typeof id !== 'string') return;
-
-    const user = await this.userModel.findOneAndDelete({ _id: id });
-    return user;
+    
+    const user = await this.userModel.findOne({ _id: id });
+    
+    if (!user) return;
+    
+    await this.taskModel.deleteMany({ username: user.username });
+    await this.refreshTokenModel.deleteMany({ username: user.username });
+  
+    if (user.profile_picture) {
+      const filePath = path.join(user.profile_picture);
+      fs.unlinkSync(filePath);
+    }
+  
+    return this.userModel.deleteMany({ username: user.username });
   }
 }
 

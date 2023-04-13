@@ -136,24 +136,12 @@ export default class TaskModel {
     });
     
     data.repeat = repeat;
-    data.conclusion ? data.conclusion = this.formatDates(data.conclusion) : null;
+    data.conclusion ? data.conclusion = data.conclusion : null;
     !data.notify ? data.notify = 'off' : null;
     !data.important ? data.important = 'off' : null;
     !data.checked_task ? data.checked_task = 'off' : null;
 
     return data;
-  }
-
-  formatDates(dateString) {
-    const date = new Date(dateString);
-    const formattedDate = date.toLocaleDateString('pt-BR', {
-      day: 'numeric',
-      month: 'numeric',
-      year: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric'
-    });
-    return formattedDate;
   }
 
   async create(form) {
@@ -262,6 +250,10 @@ export default class TaskModel {
         'Content-Type': 'application/json',
       },
     };
+
+    console.log(newData)
+
+    return;
     
     try {
       const response = await fetch(`/task/edit/${taskId}`, requestOptions);

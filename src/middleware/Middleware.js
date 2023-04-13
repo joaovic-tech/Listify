@@ -14,7 +14,7 @@ class Middleware {
       
       return next();
     } catch (err) {
-      console.log(err);
+      console.error(err);
       req.flash("errors", `Token inválido ou expirado`);
       return req.session.save(() => res.redirect('/login/logout'));
     }

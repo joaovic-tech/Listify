@@ -1,7 +1,7 @@
 const UserModel = require('../models/UserModel');
 const userModel = new UserModel();
 const { sign } = require('jsonwebtoken');
-const fs = require('fs');
+
 
 class UserController {
   async create(req, res) {

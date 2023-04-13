@@ -54,6 +54,9 @@ class App {
     this.app.use('/', deleteRoutes);
     this.app.use('/', tokenRoutes);
     this.app.use('/', readmeMD);
+    this.app.use(function (req, res) {
+      res.status(404).render('404');
+    })
   }
 }
 

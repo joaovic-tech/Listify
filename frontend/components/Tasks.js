@@ -6,13 +6,23 @@ export default class Tasks {
   }
 
   getConclusionText(conclusion) {
-    return conclusion ? `
-      <span class="flex justify-center items-center text-center gap-2">
-        <i class="fa-solid fa-calendar-days text-blue-500"></i>
-        ${conclusion}
-      </span>
-    ` : '';
-  }
+    if (conclusion) {
+      const parts = conclusion.split('-');
+      const day = parts[2];
+      const month = parts[1];
+      const year = parts[0];
+      const formattedDate = `${day}/${month}/${year}`;
+  
+      return `
+        <span class="flex justify-center items-center text-center gap-2">
+          <i class="fa-solid fa-calendar-days text-blue-500"></i>
+          ${formattedDate}
+        </span>
+      `;
+    } else {
+      return '';
+    }
+  }  
 
   getRepeatIcon(repeat) {
     return repeat[0] !== 'time-repeat: ' ? `<i class="fa-solid fa-repeat text-blue-500"></i>` : '';
@@ -25,14 +35,14 @@ export default class Tasks {
     this.getRepeatIcon(repeat) ? textOptions.push(this.getRepeatIcon(repeat)) : null;
 
     if (checked_task === 'off') {
-      return textOptions.length > 0
-      ? `<p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-zinc-400">${textOptions.join('')}</p>`
-      : ''
+      return textOptions.length > 0 ?
+        `<p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-zinc-400">${textOptions.join('')}</p>` :
+        ''
     }
 
-    return textOptions.length > 0
-      ? `<p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-green-600">Completo: ${textOptions.join('')}</p>`
-      : ''
+    return textOptions.length > 0 ?
+      `<p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-green-600">Completo: ${textOptions.join('')}</p>` :
+      ''
   }
 
   createLi(checked_task, taskId) {
@@ -143,7 +153,15 @@ export default class Tasks {
   }
 
   createTask(obj) {
-    const { _id, task, conclusion, important, notify, repeat, checked_task } = obj;
+    const {
+      _id,
+      task,
+      conclusion,
+      important,
+      notify,
+      repeat,
+      checked_task
+    } = obj;
     const ul = document.getElementById('tasks');
     const li = this.createLi(checked_task, _id);
     const div = document.createElement('div');
@@ -154,11 +172,11 @@ export default class Tasks {
     const iconNotify = this.getNotifyIcon(notify);
     const checkboxTask = this.createCheckboxTask(checked_task, _id);
     const classDiv = ['flex', 'justify-between', 'items-center', 'text-center', 'gap-2', 'pointer-events-none'];
-    
+
     this.toggleStyles.add(div, classDiv);
     this.toggleStyles.add(divLeft, classDiv);
     this.toggleStyles.add(divRight, classDiv);
-    
+
     divLeft.appendChild(checkboxTask);
     divLeft.appendChild(taskContent);
     iconImportant ? divRight.appendChild(iconImportant) : null;

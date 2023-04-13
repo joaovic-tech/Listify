@@ -1,5 +1,6 @@
 import TaskModel from '../modules/TaskModel.js';
 import ToggleStyles from '../utils/ToggleStyles.js';
+import Calendar from './Calendar.js';
 
 class TaskEditForm {
   constructor() {
@@ -20,6 +21,7 @@ class TaskEditForm {
       'h-8',
       'text-center'
     ];
+
   }
 
   createInputTaskId(id) {
@@ -168,21 +170,14 @@ class TaskEditForm {
     return label;
   }
 
-  createInputDateLocal(id, dateString) {
+  createInputConclusion(id, dateString) {
     const input = document.createElement('input');
-    input.setAttribute('type', 'datetime-local');
+    input.setAttribute('type', 'date');
     input.setAttribute('name', id);
     input.setAttribute('id', id);
-    this.toggleStyles.add(input, this.inputStyles)
+    // input.setAttribute('hidden', true);
 
-    dateString = dateString.replace(' ', 'T');
-    dateString = dateString.replace(/\//g, "-");
-    dateString = dateString.split('T');
-    const date = dateString[0];
-    const time = dateString[1];
-    const dateElements = date.split("-");
-    const formattedDate = dateElements.reverse().join("-");
-    input.value = `${formattedDate}T${time}`;
+    input.value = dateString;
     return input;
   }
 
@@ -237,13 +232,37 @@ class TaskEditForm {
     return li;
   }
 
+  createButtonConclusion() {
+    const btnConclusion = document.createElement('button');
+    btnConclusion.id = 'btn-conclusion-edit';
+    btnConclusion.type = 'button';
+    btnConclusion.className = 'px-6 py-1 m-2 flex items-center justify-center rounded bg-blue-700 text-white transition ease hover:rounded-md hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50';
+    btnConclusion.textContent = 'Confirmar';
+
+    return btnConclusion;
+  }
+
   createConclusionContent(conclusion) {
     const labelConclusion = this.createLabel('Data e hora da conclusão');
-    const inputConclusion = this.createInputDateLocal('conclusion', conclusion);
+    const inputConclusion = this.createInputConclusion('conclusion', conclusion);
 
     const li = this.createLi();
+    const btn = this.createButtonConclusion();
+
+    const calendarEl = document.createElement('div');
+    calendarEl.id = 'calendar-edit';
+
+    const calendar = new Calendar(calendarEl, conclusion);
+
     li.appendChild(labelConclusion);
     li.appendChild(inputConclusion);
+    li.appendChild(calendarEl);
+    li.appendChild(btn);
+
+    calendar.init();
+
+    btn.addEventListener('click', () => calendar.confirmCalendar('#form-edit-task'));
+
     return li;
   }
 
@@ -256,7 +275,7 @@ class TaskEditForm {
     for (const day of days) {
       const li = document.createElement('li');
 
-      const label = document.createElement('label');      
+      const label = document.createElement('label');
       label.classList.add(
         'label-day',
         'p-2',
@@ -274,14 +293,14 @@ class TaskEditForm {
         'focus:bg-gray-900',
         'hover:text-blue-500',
         'focus:text-blue-500'
-      );      
+      );
       label.innerText = day;
 
       const input = document.createElement('input');
       input.setAttribute('type', 'checkbox');
       input.setAttribute('hidden', true);
       input.classList.add('checkbox-day');
-      
+
       if (day === 'Dom') {
         label.setAttribute('for', `day-sun-edit`);
         input.setAttribute('id', `day-sun-edit`);
@@ -355,19 +374,27 @@ class TaskEditForm {
     const labelRepeat = this.createLabel('Repetir');
     const ol = this.createDaysRepeat(repeat);
     const input = this.createInputRepeat(repeat);
-    
+
     li.classList.remove('gap-2');
     li.classList.add('gap-4');
-    
+
     li.appendChild(labelRepeat);
     li.appendChild(ol);
     li.appendChild(input);
-    
+
     return li;
   }
 
   createElementsModal(obj) {
-    const { _id, task, important, conclusion, notify, repeat, created_at } = obj;
+    const {
+      _id,
+      task,
+      conclusion,
+      important,
+      notify,
+      repeat,
+      created_at
+    } = obj;
     const form = this.createForm();
     const textId = this.createP('task-id', `id: ${_id}`);
     const textCreateAt = this.createP('created_at', `Tarefa criada em: ${created_at}`);
@@ -378,6 +405,17 @@ class TaskEditForm {
     const liNotify = this.createNotifyContent(notify);
     const liConclusion = this.createConclusionContent(conclusion);
     const liRepeat = this.createRepeatContent(repeat);
+    const liImportantAndNotify = document.createElement('li');
+    liImportantAndNotify.classList.add(
+      'flex',
+      'justify-center',
+      'items-center',
+      'text-center',
+      'gap-2'
+    );
+
+    liImportantAndNotify.appendChild(liImportant);
+    liImportantAndNotify.appendChild(liNotify);
 
     const iconClose = this.createIcon('fa-solid', 'fa-right-from-bracket');
     const btnClose = this.createButton('btn-close', 'btn-close', 'gray', iconClose, 'Fechar');
@@ -392,8 +430,8 @@ class TaskEditForm {
 
     form.appendChild(hr);
 
-    ul.appendChild(liImportant);
-    ul.appendChild(liNotify);
+    
+    ul.appendChild(liImportantAndNotify);
     ul.appendChild(liConclusion);
     ul.appendChild(liRepeat);
 
@@ -410,11 +448,11 @@ class TaskEditForm {
     const obj = tasksArray.find(task => task._id === taskId);
     const content = this.createElementsModal(obj);
     const modalFormExist = document.getElementById('modal-edit');
-    
+
     modalFormExist ? modalFormExist.remove() : null;
-    
+
     const modalForm = document.createElement('aside');
-    
+
     modalForm.setAttribute('id', 'modal-edit');
     modalForm.classList.add(
       'w-96',

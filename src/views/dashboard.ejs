@@ -43,6 +43,12 @@
       <ul id="menu-settings"
         class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute z-50 top-12 right-0 w-56 h-auto grid gap-2 p-2 rounded justify-center items-center bg-gray-800 text-white text-base">
         <li>
+          <a href="/profile"
+            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 transition ease hover:bg-gray-700 rounded-lg cursor-pointer">
+            <i class="fa-solid fa-user pointer-events-none"></i>
+            Editar Perfil
+          </a>
+        <li>
           <button id="theme-toggle"
             class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 transition ease hover:bg-gray-700 rounded-lg cursor-pointer">
             <i id="theme-icon" class="fas fa-moon pointer-events-none"></i>
@@ -55,6 +61,7 @@
             <i class="fas fa-sign-out-alt pointer-events-none"></i>
             Sair
           </a>
+        </li>
         </li>
       </ul>
     </div>
@@ -76,10 +83,10 @@
           </a>
           <a href="/profile">
             <% if(user.profile_picture) { %>
-              <img src="<%- user.profile_picture %>" id="image" alt="Profile Image"
+            <img src="<%- user.profile_picture %>" id="image" alt="Profile Image"
               class="w-16 h-16 rounded-full object-cover rounded-full shadow-md" />
-            <% } else { %>     
-              <img src="/assets/svg/userImage.svg" id="image" alt="Profile Image"
+            <% } else { %>
+            <img src="/assets/svg/userImage.svg" id="image" alt="Profile Image"
               class="w-24 h-24 rounded-full object-cover rounded-full shadow-md" />
             <% } %>
           </a>
@@ -87,8 +94,8 @@
       </header>
       <form action="/task" method="post" id="task-form" class="relative w-full bg-gray-700 rounded-lg">
         <input type="text" name="username" id="username" value="<%- user.username %>" hidden />
-        <input class="input-task-create outline-0 w-full py-2 px-3 bg-gray-700 text-white appearance-none" type="text" id="task"
-          name="task" placeholder="Exemplo: Estudar para prova" autocomplete="off" />
+        <input class="input-task-create outline-0 w-full py-2 px-3 bg-gray-700 text-white appearance-none" type="text"
+          id="task" name="task" placeholder="Exemplo: Estudar para prova" autocomplete="off" />
         <hr class="border-blue-500" />
         <div id="task-options"
           class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute w-full grid sm:flex items-center sm:justify-between justify-center bg-gray-700 shadow-md shadow-gray-900/50 rounded-b-lg px-8 py-2">
@@ -103,15 +110,19 @@
                 </span>
               </label>
               <div id="modal-conclusion"
-                class="modal-option opacity-0 pointer-events-none transition duration-500 ease absolute -left-8 top-14 border-t-2 border-blue-500 backdrop-blur-sm bg-gray-900/30 shadow-xl shadow-gray-900 rounded min-w-[15rem] max-w-[18rem]">
+                class="modal-option opacity-0 pointer-events-none transition duration-500 ease absolute z-20 -left-8 top-14 border-t-2 border-blue-500 backdrop-blur-sm bg-gray-900/30 shadow-xl shadow-gray-900 rounded min-w-[25rem] max-w-[18rem]">
                 <i class="fa-solid fa-sort-up text-4xl text-blue-500 absolute -top-[1.1rem] left-10"></i>
                 <h1 class="text-center text-white text-base p-4">
                   Defina a conclusão da tarefa
                 </h1>
                 <hr class="border-blue-500 mb-8" />
                 <div class="grid gap-8 p-4">
-                  <input type="datetime-local" name="conclusion" id="conclusion"
-                    class="outline-0 text-white rounded flex items-center justify-center cursor-pointer w-11/12 h-8 px-4 m-auto text-center bg-gray-700 transition esae hover:bg-gray-800 focus:bg-gray-800" />
+                  <input type="date" name="conclusion" id="conclusion" />
+                  <div id="calendar"></div>
+                  <button id="btn-conclusion" type="button"
+                    class="px-6 py-1 m-2 flex items-center justify-center rounded bg-blue-700 text-white transition ease hover:rounded-md hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50">
+                    Confirmar
+                  </button>
                 </div>
               </div>
             </li>
@@ -225,6 +236,7 @@
   </main>
   <script type="module" src="/main.js"></script>
   <script type="module" src="/utils/MessageServer.js"></script>
+  <script type="module" src="/components/Calendar.js"></script>
 </body>
 
 </html>
