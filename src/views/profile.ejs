@@ -62,22 +62,25 @@
   <main
     class="relative bg-red-600 grid gap-8 justify-initial items-center text-cente m-auto bg-white dark:bg-gray-800 p-8 rounded-lg w-10/12 h-auto">
     <div class="flex justify-between items-center text-center">
-      <form id="form-user-image" action="/update/user/image/<%- user.id %>" method="post" enctype="multipart/form-data" class="w-6/12 p-3 flex flex-col gap-4">
+      <form id="form-user-image" action="/update/user/image/<%- user.id %>" method="post" enctype="multipart/form-data"
+        class="w-6/12 p-3 flex flex-col gap-4">
         <input type="text" name="username" id="username" value="<%- user.username %>" hidden />
         <input type="text" name="email" id="email" value="<%- user.email %>" hidden />
         <div class="flex justify-start items-center text-center gap-2">
 
           <% if(user.profile_picture) { %>
-            <img src="<%- user.profile_picture %>" id="image" alt="Profile Image"
+          <img src="<%- user.profile_picture %>" id="image" alt="Profile Image"
             class="w-24 h-24 rounded-full object-cover rounded-full shadow-md" />
-          <% } else { %>     
-            <img src="/assets/svg/userImage.svg" id="image" alt="Profile Image"
+          <% } else { %>
+          <img src="/assets/svg/userImage.svg" id="image" alt="Profile Image"
             class="w-24 h-24 rounded-full object-cover rounded-full shadow-md" />
           <% } %>
 
           <div class="relative px-8 py-1 grid">
             <span class="text-2xl text-blue-600"><%- user.username %></span>
-            <div class="absolute bottom-0 left-0 w-full h-1 rounded-full border-b-2 border-blue-600 shadow-md shadow-blue-600"></div>
+            <div
+              class="absolute bottom-0 left-0 w-full h-1 rounded-full border-b-2 border-blue-600 shadow-md shadow-blue-600">
+            </div>
           </div>
         </div>
         <div class="flex items-center justify-center w-full">
@@ -105,7 +108,7 @@
             class="text-start block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
           <input type="text" name="username" id="username"
             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-             value="<%- user.username %>" autocomplete="true"/>
+            value="<%- user.username %>" autocomplete="true" />
         </div>
         <div>
           <label for="email"
@@ -126,19 +129,11 @@
             autocomplete="true" />
         </div>
         <div>
-          <label
-            for="confirm-password"
-            class="text-start block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >Confirme sua senha</label
-          >
-          <input
-            type="password"
-            name="confirmPassword"
-            id="confirm-password"
-            placeholder="••••••••"
+          <label for="confirm-password"
+            class="text-start block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirme sua senha</label>
+          <input type="password" name="confirmPassword" id="confirm-password" placeholder="••••••••"
             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            autocomplete="true"
-          />
+            autocomplete="true" />
         </div>
         <button type="submit"
           class="w-full text-white transition ease bg-gradient-to-r from-blue-800 to-blue-500 hover:from-blue-500 hover:to-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -147,18 +142,78 @@
       </form>
     </div>
     <div class="flex justify-between items-center text-center">
-      <h2 class="ml-3 px-8 py-1 bg-gradient-to-l dark:from-gray-800 dark:to-gray-900 from-white to-gray-300 text-blue-500 font-bold rounded-lg">
+      <h2
+        class="ml-3 px-8 py-1 bg-gradient-to-l dark:from-gray-800 dark:to-gray-900 from-white to-gray-300 text-blue-500 font-bold rounded-lg">
         <span class="text-xl font-semibold">Id:</span>
         <span class="text-base font-bold"><%- user.id %></span>
-     </h2>     
-      <form action="/delete/user/<%- user.id %>" method="post">
-        <button type="submit" class="bg-red-600 text-white font-bold py-2 px-4 rounded transition hover:bg-red-800 focus:outline-none focus:shadow-outline">
-          <i class="fas fa-trash-alt"></i> Apagar conta
-        </button>
-      </form>
+      </h2>
+      <button
+        class="btn-modal bg-red-600 text-white font-bold py-2 px-4 rounded transition hover:bg-red-800 focus:outline-none focus:shadow-outline">
+        <i class="fas fa-trash-alt"></i> Apagar conta
+      </button>
+
+      <!-- Modal -->
+      <div id="modal-delete" class="opacity-0 pointer-events-none transition duration-500 ease-in-out fixed z-10 inset-0 overflow-y-auto">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <!-- Fundo do modal -->
+          <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+            <div class="absolute inset-0 bg-gray-800 opacity-75"></div>
+          </div>
+
+          <!-- Conteúdo do modal -->
+          <div
+            class="inline-block align-bottom bg-slate-100 dark:bg-gray-950 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+            role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+            <div class="bg-white dark:bg-gray-900 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div class="sm:flex sm:items-start">
+                <div
+                  class="flex text-center items-center justify-center h-12 w-12 rounded-full bg-slate-100 dark:bg-gray-700">
+                  <!-- Ícone do modal -->
+                  <i class="fas fa-exclamation-triangle text-red-600 text-2xl"></i>
+                </div>
+                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                  <h3 class="text-lg leading-6 font-medium text-red-600" id="modal-headline">Tem certeza que deseja
+                    apagar sua conta?</h3>
+                  <div class="mt-2">
+                    <p class="text-sm text-gray-500">Esta ação não pode ser desfeita.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-100 dark:bg-gray-700 px-4 py-3 gap-4 sm:px-6 sm:flex sm:flex-row-reverse">
+              <form action="/delete/user/<%- user.id %>" method="post">
+                <!-- Botão de submit do formulário -->
+                <button type="submit"
+                  class="bg-red-600 text-white font-bold py-2 px-4 rounded transition hover:bg-red-800 focus:outline-none focus:shadow-outline">
+                  <i class="fas fa-trash-alt"></i> Apagar conta
+                </button>
+              </form>
+              <!-- Botão de cancelar o modal -->
+              <button type="button"
+                class="btn-modal mt-3 w-full sm:w-auto bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded transition hover:bg-gray-400 focus:outline-none focus:shadow-outline sm:mt-0 sm:ml-3 sm:flex-shrink-0">
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.9.0/validator.js" integrity="sha512-rOMALLrxlgIcEeMdX0O7A+pysTPb/201n7g04dPGvgJFB+f0CKvL8qljuIU/lDfG8IBi3o5R921G2013ihGuWg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    document.addEventListener('click', (e) => {
+      const el = e.target;
+
+      if (el.classList.contains('btn-modal')) {
+        const modal = document.getElementById('modal-delete');
+        modal.classList.toggle('show');
+      }
+    });
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.9.0/validator.js"
+    integrity="sha512-rOMALLrxlgIcEeMdX0O7A+pysTPb/201n7g04dPGvgJFB+f0CKvL8qljuIU/lDfG8IBi3o5R921G2013ihGuWg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="/settings/DarkMode.js"></script>
   <script src="/settings/MenuSettings.js"></script>
   <script type="module" src="/settings/ProfileImage.js"></script>

@@ -9,7 +9,6 @@ class User {
     this.confirmPassword = this.formEdit.querySelector('#confirm-password');
     this.saveUsernameValue = this.username.value;
     this.saveEmailValue = this.email.value;
-    console.log(this.username.value);
   }
 
   init() {
@@ -47,7 +46,7 @@ class User {
     const usernameChanged = this.saveUsernameValue === this.username.value;
     const emailChanged = this.saveEmailValue === this.email.value;
 
-      if (usernameChanged && emailChanged) {
+      if (usernameChanged && emailChanged && !passwordValue) {
         Message.create('Nenhuma alteração detectada', 'red');
         return false;
       }

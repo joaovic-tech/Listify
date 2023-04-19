@@ -18,10 +18,11 @@
 * [x] `Concluído`
 ---
 ### **PROFILE**
-* [ ] Model para pergunta se quer realmente apagar a conta
+* [x] Model para pergunta se quer realmente apagar a conta
 ---
 ### Recursos novos
 * [x] Notificar o usuário da data de conclusão da tarefa quando entrar na aplicação
+* [ ] Ajustar o dark mode de todas as páginas
 
 ### ***Animação***
 * [ ] Fazer `animação` de quando a página for renderizada (cada página será diferente)

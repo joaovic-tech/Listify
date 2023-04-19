@@ -182,7 +182,6 @@ export default class Calendar {
     const day = document.getElementById('conclusion-day').innerText;
 
     const dateFormatted = `${year}-${month}-${day}`;
-    console.log(dateFormatted)
 
     inputConclusion.value = dateFormatted;
 
