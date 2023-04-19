@@ -106,22 +106,6 @@ export default class Tasks {
     return important === 'on' ? icon : '';
   }
 
-  getNotifyIcon(notify) {
-    const icon = this.createIcon('fa-solid', 'fa-bell');
-    icon.classList.add(
-      'flex',
-      'justify-center',
-      'items-center',
-      'text-center',
-      'py-2',
-      'px-3',
-      'rounded',
-      'bg-gray-900',
-      'text-blue-500'
-    );
-    return notify === 'on' ? icon : '';
-  }
-
   createCheckboxTask(checked_task, id) {
     let icon;
 
@@ -158,7 +142,6 @@ export default class Tasks {
       task,
       conclusion,
       important,
-      notify,
       repeat,
       checked_task
     } = obj;
@@ -169,7 +152,6 @@ export default class Tasks {
     const divLeft = document.createElement('div');
     const taskContent = this.createTitle(checked_task, task);
     const iconImportant = this.getImportantIcon(important);
-    const iconNotify = this.getNotifyIcon(notify);
     const checkboxTask = this.createCheckboxTask(checked_task, _id);
     const classDiv = ['flex', 'justify-between', 'items-center', 'text-center', 'gap-2', 'pointer-events-none'];
 
@@ -180,7 +162,6 @@ export default class Tasks {
     divLeft.appendChild(checkboxTask);
     divLeft.appendChild(taskContent);
     iconImportant ? divRight.appendChild(iconImportant) : null;
-    iconNotify ? divRight.appendChild(iconNotify) : null;
     div.appendChild(divLeft);
     div.appendChild(divRight);
     li.appendChild(div);

@@ -1,5 +1,7 @@
 const TaskModel = require('../models/TaskModel');
 const task = new TaskModel();
+const notifier = require('node-notifier');
+const path = require('path');
 
 class TaskController {
   async index(req, res) {
@@ -22,7 +24,7 @@ class TaskController {
 
       if (task.errors.length > 0) {
         console.log({
-          success: false, 
+          success: false,
           Errors: task.errors
         });
         return res.json({
@@ -30,7 +32,7 @@ class TaskController {
           Errors: task.errors
         });
       }
-      
+
       return res.json('Criado com sucesso!');
     } catch (e) {
       console.error(e);
@@ -43,11 +45,11 @@ class TaskController {
 
       if (task.errors.length > 0) {
         console.log({
-          success: false, 
+          success: false,
           Errors: task.errors
         });
         return res.json({
-          success: false, 
+          success: false,
           Errors: task.errors
         });
       }
@@ -66,15 +68,15 @@ class TaskController {
 
       if (task.errors.length > 0) {
         console.log({
-          success: false, 
+          success: false,
           Errors: task.errors
         });
         return res.json({
-          success: false, 
+          success: false,
           Errors: task.errors
         });
       }
-      
+
       return res.json('Tarefa editada com sucesso!');
     } catch (e) {
       console.error(e);
@@ -82,7 +84,9 @@ class TaskController {
   }
 
   async delete(req, res) {
-    const { id } = req.params;
+    const {
+      id
+    } = req.params;
 
     if (!id) {
       return res.status(400).json({
@@ -108,6 +112,30 @@ class TaskController {
       });
     }
   }
+
+  async createNotifications(req, res) {
+    const { username } = req.session.user;
+    const tasks = await task.taskModel.find({ username: username }).sort({ checked_task: 1, important: -1, created_at: -1 });
+    
+    tasks.forEach(task => {
+      const today = new Date();
+      const targetDate = new Date(task.conclusion);
+      const daysAhead = 1;
+      const difference = targetDate.getTime() - today.getTime();
+  
+      const daysDifference = Math.ceil(difference / (1000 * 60 * 60 * 24));
+      if (task.checked_task === 'off' && daysDifference <= daysAhead) {
+        notifier.notify({
+          title: 'Tarefa pendente',
+          message: `Existem tarefa(s) próxima(s) do prazo de conclusão!`,
+          sound: true,
+          wait: true,
+          timeout: 10000,
+          icon: path.join(__dirname, '..', '..', '/frontend/assets/img/Logo.png'),
+        });
+      }
+    });
+  }   
 }
 
 module.exports = new TaskController();

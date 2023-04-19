@@ -4,6 +4,7 @@ const TaskController = require('../controllers/TaskController');
 const { loginRequired } = require('../middleware/Middleware');
 
 router.get('/dashboard', loginRequired, async (req, res, next) => {
+  TaskController.createNotifications(req, res);
   return res.render('dashboard', {
     errors: req.flash('errors'),
     success: req.flash('success'),

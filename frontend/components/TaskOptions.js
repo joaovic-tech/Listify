@@ -29,11 +29,6 @@ class TaskOptions {
     labelImportant.addEventListener('click', () => this.toggleStyles.toggle(labelImportant, this.stylesIconCheck));
   }
 
-  notifyEvents() {
-    const labelNotify = document.getElementById('label-notify');
-    labelNotify.addEventListener('click', () => this.toggleStyles.toggle(labelNotify, this.stylesIconCheck));
-  }
-
   showModalOptions(modalOption) {
     const modals = document.querySelectorAll('.modal-option');
     for (const modal of modals) {
@@ -50,19 +45,16 @@ class TaskOptions {
     const modalRepeat = document.getElementById('modal-repeat');
     const checkboxes = document.querySelectorAll('.checkbox-day');
     const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
-    const liNotify = document.getElementById('li-notify');
     
     labelRepeat.addEventListener('click', () => this.showModalOptions(modalRepeat));
 
     inputTime.addEventListener('change', () => {
       if (!inputTime.value || atLeastOneChecked) {
         this.toggleStyles.toggle(labelRepeat, this.stylesIconCheck);
-        liNotify.classList.remove('show');
         return;
       }
 
       this.toggleStyles.toggle(labelRepeat, this.stylesIconCheck);
-      liNotify.classList.add('show');
     });
 
     document.addEventListener('click', (e) => {
@@ -107,7 +99,6 @@ class TaskOptions {
   init() {
     this.conclusionEvents();
     this.importantEvents();
-    this.notifyEvents();
     this.repeatEvents();
     this.checkboxTaskEvents();
   }

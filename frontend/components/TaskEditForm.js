@@ -81,7 +81,7 @@ class TaskEditForm {
     return ul;
   }
 
-  createLiImportantAndNotify() {
+  createLiImportant() {
     const li = document.createElement('li');
     li.classList.add('relative', 'flex', 'items-center', 'justify-center');
     return li;
@@ -93,7 +93,7 @@ class TaskEditForm {
     return li;
   }
 
-  createInputImportantAndNotify(text) {
+  createInputImportant(text) {
     const input = document.createElement('input');
     input.setAttribute('type', 'checkbox');
     input.setAttribute('hidden', true);
@@ -101,7 +101,7 @@ class TaskEditForm {
     return input;
   }
 
-  createLabelImportantAndNotify(text) {
+  createLabelImportant(text) {
     const label = document.createElement('label');
     label.classList.add(
       'label-important-edit',
@@ -155,7 +155,7 @@ class TaskEditForm {
     return button;
   }
 
-  createSpanImportantAndNotify() {
+  createSpanImportant() {
     const span = document.createElement('span');
     span.classList.add(
       'opacity-0', 'pointer-events-none', 'transition', 'duration-500', 'ease', 'absolute', '-top-6', 'left-auto', 'w-28', 'h-8', 'p-2', 'flex', 'items-center', 'justify-center', 'text-center', 'text-blue-500', 'bg-gray-800', 'rounded-lg', 'shadow-md'
@@ -182,53 +182,27 @@ class TaskEditForm {
   }
 
   createImportantContent(important) {
-    const li = this.createLiImportantAndNotify();
-    const inputImportant = this.createInputImportantAndNotify(important);
+    const li = this.createLiImportant();
+    const inputImportant = this.createInputImportant(important);
 
 
     inputImportant.setAttribute('name', 'important');
     inputImportant.setAttribute('id', 'important-edit');
 
-    const labelImportant = this.createLabelImportantAndNotify(important);
+    const labelImportant = this.createLabelImportant(important);
 
     labelImportant.setAttribute('for', 'important-edit');
     labelImportant.setAttribute('id', 'label-important');
 
     const iconImportant = this.createIcon('fa-solid', 'fa-star');
 
-    const spanImportant = this.createSpanImportantAndNotify();
+    const spanImportant = this.createSpanImportant();
     spanImportant.textContent = 'Importante';
 
     li.appendChild(inputImportant);
     labelImportant.appendChild(iconImportant);
     labelImportant.appendChild(spanImportant);
     li.appendChild(labelImportant);
-    return li;
-  }
-
-  createNotifyContent(notify) {
-    const li = this.createLiImportantAndNotify();
-    const inputNotify = this.createInputImportantAndNotify(notify);
-
-
-    inputNotify.setAttribute('name', 'notify');
-    inputNotify.setAttribute('id', 'notify-edit');
-
-    const labelNotify = this.createLabelImportantAndNotify(notify);
-
-
-    labelNotify.setAttribute('for', 'notify-edit');
-    labelNotify.setAttribute('id', 'label-notify');
-
-    const iconNotify = this.createIcon('fa-solid', 'fa-bell');
-
-    const spanNotify = this.createSpanImportantAndNotify();
-    spanNotify.textContent = 'Notificar';
-
-    li.appendChild(inputNotify);
-    labelNotify.appendChild(iconNotify);
-    labelNotify.appendChild(spanNotify);
-    li.appendChild(labelNotify);
     return li;
   }
 
@@ -391,7 +365,6 @@ class TaskEditForm {
       task,
       conclusion,
       important,
-      notify,
       repeat,
       created_at
     } = obj;
@@ -401,12 +374,11 @@ class TaskEditForm {
     const inputTask = this.createInput(task);
     const hr = this.createHr();
     const ul = this.createUl();
-    const liImportant = this.createImportantContent(important);
-    const liNotify = this.createNotifyContent(notify);
+    const liImportantContent = this.createImportantContent(important);
     const liConclusion = this.createConclusionContent(conclusion);
     const liRepeat = this.createRepeatContent(repeat);
-    const liImportantAndNotify = document.createElement('li');
-    liImportantAndNotify.classList.add(
+    const liImportant = document.createElement('li');
+    liImportant.classList.add(
       'flex',
       'justify-center',
       'items-center',
@@ -414,8 +386,7 @@ class TaskEditForm {
       'gap-2'
     );
 
-    liImportantAndNotify.appendChild(liImportant);
-    liImportantAndNotify.appendChild(liNotify);
+    liImportant.appendChild(liImportantContent);
 
     const iconClose = this.createIcon('fa-solid', 'fa-right-from-bracket');
     const btnClose = this.createButton('btn-close', 'btn-close', 'gray', iconClose, 'Fechar');
@@ -431,7 +402,7 @@ class TaskEditForm {
     form.appendChild(hr);
 
 
-    ul.appendChild(liImportantAndNotify);
+    ul.appendChild(liImportant);
     ul.appendChild(liConclusion);
     ul.appendChild(liRepeat);
 

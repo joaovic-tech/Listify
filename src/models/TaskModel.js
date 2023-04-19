@@ -24,10 +24,6 @@ module.exports = class TaskModel {
         type: Array,
         default: [],
       },
-      notify: {
-        type: String,
-        default: '',
-      },
       checked_task: {
         type: String,
         default: '',

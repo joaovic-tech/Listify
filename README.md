@@ -21,9 +21,7 @@
 * [ ] Model para pergunta se quer realmente apagar a conta
 ---
 ### Recursos novos
-* [x] Estilizando o Scroll da página
-* [x] Quando apagar a conta a foto do perfil do usuário também apaga
-* [x] Corrigido o problema de apagar a conta completa do usuário, `ele apagava porem as tasks da quele user não`
+* [x] Notificar o usuário da data de conclusão da tarefa quando entrar na aplicação
 
 ### ***Animação***
 * [ ] Fazer `animação` de quando a página for renderizada (cada página será diferente)

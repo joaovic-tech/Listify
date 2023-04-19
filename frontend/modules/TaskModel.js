@@ -118,10 +118,6 @@ export default class TaskModel {
       if (input.type === 'checkbox') return input.checked = false;
       input.value = '';
     });
-
-
-    const liNotify = document.getElementById('li-notify');
-    liNotify.classList.remove('show');
   }
 
   adjustFormValues(data) {
@@ -137,7 +133,6 @@ export default class TaskModel {
     
     data.repeat = repeat;
     data.conclusion ? data.conclusion = data.conclusion : null;
-    !data.notify ? data.notify = 'off' : null;
     !data.important ? data.important = 'off' : null;
     !data.checked_task ? data.checked_task = 'off' : null;
 
