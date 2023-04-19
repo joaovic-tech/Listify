@@ -12,7 +12,7 @@
 ### **DASHBOARD**
 * [x] Alterar estilização dos campos de definir data e hora
   * Sem alterar o valor que será enviado como está para o backend
-* [ ] Bug calendário de edição: Bug de passar e voltar o mês - código em `Calendar.js`
+* [x] Bug calendário de edição: Bug de passar e voltar o mês - código em `Calendar.js`
 ---
 ### **HOME**
 * [x] `Concluído`

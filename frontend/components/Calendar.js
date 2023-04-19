@@ -2,7 +2,8 @@ import ToggleStyles from "../utils/ToggleStyles.js";
 
 export default class Calendar {
   constructor(element, calendarValue) {
-    this.date = new Date();
+    const today = new Date();
+    this.date = calendarValue ? new Date(`${calendarValue}T00:00`) : today;
     this.currentMonth = this.date.getMonth();
     this.monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
     this.monthMapping = {
@@ -22,13 +23,12 @@ export default class Calendar {
     this.stylesIconCheck = ['text-white', 'text-blue-500', 'bg-gray-900', 'bg-gray-800', 'border-gray-700', 'border-blue-500'];
     this.toggleStyles = new ToggleStyles();
     this.calendar = element;
-    this.calendarValue = calendarValue;
   }
 
   selectDay(el) {
     const selectedNumbers = document.getElementById('conclusion-day');
 
-    if (el.classList.contains('empty')) return
+    if (el.classList.contains('empty')) return;
 
     if (selectedNumbers) {
       selectedNumbers.id = '';
@@ -46,11 +46,6 @@ export default class Calendar {
   }
 
   createCalendar() {
-    if (this.calendarValue) {
-      this.date = new Date(`${this.calendarValue}T00:00:00-03:00`);
-      this.currentMonth = this.date.getMonth();
-    }
-
     const year = this.date.getFullYear();
     const firstDay = new Date(year, this.currentMonth, 1).getDay();
     const daysInMonth = new Date(year, this.currentMonth + 1, 0).getDate();
@@ -97,7 +92,6 @@ export default class Calendar {
       for (let j = 0; j < 7; j++) {
         const dayCell = document.createElement('td');
         dayCell.classList.add(
-          'days',
           'text-white',
           'text-center',
           'p-2',
@@ -145,8 +139,6 @@ export default class Calendar {
   }
 
   nextMonth() {
-    console.log(`Mês do nextMonth: ${this.currentMonth}`);
-
     if (this.currentMonth === 11) {
       this.currentMonth = 0;
       this.date.setFullYear(this.date.getFullYear() + 1);
@@ -157,8 +149,6 @@ export default class Calendar {
   }
 
   previousMonth() {
-    console.log(`Mês do previousMonth: ${this.currentMonth}`);
-
     if (this.currentMonth === 0) {
       this.currentMonth = 11;
       this.date.setFullYear(this.date.getFullYear() - 1);
@@ -213,7 +203,6 @@ export default class Calendar {
     this.clickConfirm();
     this.createCalendar();
   }
-
 }
 
 const calendarEl = document.getElementById('calendar');

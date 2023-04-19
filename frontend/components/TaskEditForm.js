@@ -175,7 +175,7 @@ class TaskEditForm {
     input.setAttribute('type', 'date');
     input.setAttribute('name', id);
     input.setAttribute('id', id);
-    // input.setAttribute('hidden', true);
+    input.setAttribute('hidden', true);
 
     input.value = dateString;
     return input;
@@ -430,7 +430,7 @@ class TaskEditForm {
 
     form.appendChild(hr);
 
-    
+
     ul.appendChild(liImportantAndNotify);
     ul.appendChild(liConclusion);
     ul.appendChild(liRepeat);
@@ -447,9 +447,9 @@ class TaskEditForm {
     const tasksArray = await this.taskModel.getAllTasks();
     const obj = tasksArray.find(task => task._id === taskId);
     const content = this.createElementsModal(obj);
-    const modalFormExist = document.getElementById('modal-edit');
-
-    modalFormExist ? modalFormExist.remove() : null;
+    
+    const modalFormExist = document.querySelector('aside');
+    if (modalFormExist) return modalFormExist.remove();
 
     const modalForm = document.createElement('aside');
 

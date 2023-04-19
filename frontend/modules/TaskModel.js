@@ -250,10 +250,6 @@ export default class TaskModel {
         'Content-Type': 'application/json',
       },
     };
-
-    console.log(newData)
-
-    return;
     
     try {
       const response = await fetch(`/task/edit/${taskId}`, requestOptions);
