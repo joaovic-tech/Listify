@@ -58,11 +58,19 @@ body::-webkit-scrollbar-track {
   animation: rotate 5s linear infinite;
 }
 
-#svg_background {
+.svg_background {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: url('/assets/svg/background.svg') no-repeat;
+}
+
+#svg_background_dark {
+  background: url('/assets/svg/background-light.svg') no-repeat;
+  background-size: cover;
+}
+
+#svg_background_light {
+  background: url('/assets/svg/background-dark.svg') no-repeat;
   background-size: cover;
 }
 

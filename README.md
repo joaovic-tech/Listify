@@ -23,6 +23,7 @@
 ### Recursos novos
 * [x] Notificar o usuário da data de conclusão da tarefa quando entrar na aplicação
 * [ ] Ajustar o dark mode de todas as páginas
+  * [x] Profile
 
 ### ***Animação***
 * [ ] Fazer `animação` de quando a página for renderizada (cada página será diferente)

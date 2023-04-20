@@ -20,7 +20,7 @@ export default class Calendar {
       'Novembro': '11',
       'Dezembro': '12'
     };
-    this.stylesIconCheck = ['text-white', 'text-blue-500', 'bg-gray-900', 'bg-gray-800', 'border-gray-700', 'border-blue-500'];
+    this.stylesIconCheck = ['text-gray-950', 'text-blue-500', 'dark:text-blue-500', 'bg-gray-900', 'bg-gray-800', 'dark:bg-gray-800', 'border-slate-100', 'dark:border-gray-700', 'border-blue-500'];
     this.toggleStyles = new ToggleStyles();
     this.calendar = element;
   }
@@ -52,25 +52,25 @@ export default class Calendar {
 
     const calendarContainer = this.calendar;
     calendarContainer.innerHTML = '';
-    calendarContainer.classList.add('bg-gray-800', 'p-2', 'rounded');
+    calendarContainer.classList.add('bg-slate-200', 'dark:bg-gray-800', 'p-2', 'rounded');
 
     const monthHeader = document.createElement('caption');
-    monthHeader.innerHTML = `<p class="flex gap-2 text-white" id="conclusion-month">${this.monthNames[this.currentMonth]} ${year}</p>`;
+    monthHeader.innerHTML = `<p class="flex gap-2 text-gray-950 dark:text-white" id="conclusion-month">${this.monthNames[this.currentMonth]} ${year}</p>`;
 
     const prevBtn = document.createElement('button');
-    prevBtn.innerHTML = '<i class="fa-solid fa-caret-left text-xl text-white"></i>';
+    prevBtn.innerHTML = '<i class="fa-solid fa-caret-left text-xl text-gray-950 dark:text-white"></i>';
     prevBtn.addEventListener('click', () => this.previousMonth());
 
     const nextBtn = document.createElement('button');
-    nextBtn.innerHTML = '<i class="fa-solid fa-caret-right text-xl text-white"></i>';
+    nextBtn.innerHTML = '<i class="fa-solid fa-caret-right text-xl text-gray-950 dark:text-white"></i>';
     nextBtn.addEventListener('click', () => this.nextMonth());
 
     const arrowAndCurrentMonth = document.createElement('div');
-    arrowAndCurrentMonth.classList.add('flex', 'justify-between', 'gap-2', 'text-white');
+    arrowAndCurrentMonth.classList.add('flex', 'justify-between', 'gap-2', 'text-gray-950', 'dark:text-white');
 
     const divCurrentMonth = document.createElement('div');
 
-    divCurrentMonth.classList.add('flex', 'gap-2', 'text-white');
+    divCurrentMonth.classList.add('flex', 'gap-2', 'text-gray-950', 'dark:text-white');
 
     divCurrentMonth.append(monthHeader);
     arrowAndCurrentMonth.append(prevBtn, divCurrentMonth, nextBtn);
@@ -79,7 +79,7 @@ export default class Calendar {
     const weekdays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
     weekdays.forEach(day => {
       const weekday = document.createElement('th');
-      weekday.classList.add('text-white', 'p-2');
+      weekday.classList.add('text-gray-950', 'dark:text-white', 'p-2');
       weekday.textContent = day;
       weekdaysRow.appendChild(weekday);
     });
@@ -92,7 +92,8 @@ export default class Calendar {
       for (let j = 0; j < 7; j++) {
         const dayCell = document.createElement('td');
         dayCell.classList.add(
-          'text-white',
+          'text-gray-950',
+          'dark:text-white',
           'text-center',
           'p-2',
           'rounded',
@@ -110,7 +111,12 @@ export default class Calendar {
         });
 
         if (i === 0 && j < firstDay || day > daysInMonth) {
-          dayCell.classList.add('empty');
+          dayCell.classList.remove(
+            'hover:bg-gray-950',
+            'hover:text-blue-600',
+            'focus:text-blue-600',
+            'focus:bg-gray-950'
+          );
         } else {
           if (this.date.getFullYear() === new Date(this.calendarValue).getFullYear() &&
             this.currentMonth === new Date(this.calendarValue).getMonth() &&

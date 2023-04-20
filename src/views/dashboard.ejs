@@ -16,48 +16,48 @@
   <script src="https://kit.fontawesome.com/673aed7dea.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="bg-gray-900 dark">
-  <div id="svg_background" class="pointer-events-none"></div>
+<body class="bg-slate-200">
+  <div id="svg_background_dark" class="svg_background pointer-events-none"></div>
 
   <%- include('includes/messages'); %>
 
-  <nav class="relative flex items-center justify-between w-full p-2 bg-gray-800">
+  <nav class="relative flex items-center justify-between w-full p-2 bg-slate-100 dark:bg-gray-800 transition duration-500 ease-in-out shadow-xl rounded-b-lg">
     <div class="flex items-center">
-      <i class="fa-solid fa-list-ul fill-current rounded-md px-3 py-3 bg-gray-900 text-blue-500"></i>
-      <a href="#" class="ml-4 text-lg font-semibold text-white hover:text-gray-400">Minhas tarefas</a>
+      <i class="fa-solid fa-list-ul fill-current rounded-md px-3 py-3 bg-slate-200 dark:bg-gray-900 text-blue-500"></i>
+      <a href="#" class="ml-4 text-lg font-semibold text-gray-800 dark:text-white">Minhas tarefas</a>
     </div>
     <form id="search-form" class="relative flex items-center w-1/3 rounded-md">
       <input type="text" id="search"
-        class="w-full h-full p-3 rounded-md bg-gray-700 border-2 border-solid border-gray-700 focus:border-blue-500 outline-0 text-white appearance-nonev"
+        class="w-full h-full p-3 rounded-md transition bg-slate-200 dark:bg-gray-700 border-2 border-solid border-slate-200 dark:border-gray-700 dark:focus:border-blue-500 focus:border-blue-500 outline-0 text-white appearance-nonev"
         placeholder="Search" />
       <button type="submit"
-        class="absolute right-0 top-0 mt-2 mr-4 rounded-md bg-gray-800 px-3 py-1 text-gray-500 hover:bg-gray-900 hover:text-blue-500">
+        class="absolute right-0 top-0 mt-2 mr-4 rounded-md px-3 py-1 transition text-gray-500 bg-slate-50 hover:bg-slate-300 dark:bg-gray-800 dark:hover:bg-gray-900 hover:text-blue-600">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
     </form>
     <div class="relative">
       <button type="submit" id="btn-settings"
-        class="rounded-md bg-gray-700 px-3 py-2 text-gray-500 hover:bg-gray-900 hover:text-blue-500">
+        class="rounded-md bg-slate-200 dark:bg-gray-900 px-3 py-2 text-gray-500 hover:bg-slate-300 dark:hover:bg-gray-900 hover:text-blue-500">
         <i class="fa-solid fa-gear pointer-events-none"></i>
       </button>
       <ul id="menu-settings"
-        class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute z-50 top-12 right-0 w-56 h-auto grid gap-2 p-2 rounded justify-center items-center bg-gray-800 text-white text-base">
+        class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute z-50 top-12 right-0 w-56 h-auto grid gap-2 p-2 rounded-b-lg justify-center items-center bg-slate-100 dark:bg-gray-800 text-base text-gray-800 dark:text-white shadow-md">
         <li>
           <a href="/profile"
-            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 transition ease hover:bg-gray-700 rounded-lg cursor-pointer">
+            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 transition ease hover:bg-slate-300 dark:hover:bg-gray-700 hover:text-blue-600 rounded-lg cursor-pointer">
             <i class="fa-solid fa-user pointer-events-none"></i>
             Editar Perfil
           </a>
         <li>
           <button id="theme-toggle"
-            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 transition ease hover:bg-gray-700 rounded-lg cursor-pointer">
+            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 transition ease hover:bg-slate-300 dark:hover:bg-gray-700 hover:text-blue-600 rounded-lg cursor-pointer">
             <i id="theme-icon" class="fas fa-moon pointer-events-none"></i>
             Dark mode
           </button>
         </li>
         <li>
           <a href="/login/logout"
-            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 transition ease hover:bg-gray-700 rounded-lg cursor-pointer">
+            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 transition ease hover:bg-slate-300 dark:hover:bg-gray-700 hover:text-blue-600 rounded-lg cursor-pointer">
             <i class="fas fa-sign-out-alt pointer-events-none"></i>
             Sair
           </a>
@@ -70,7 +70,7 @@
     <section class="w-full h-full p-4 grid gap-8">
       <header id="header" class="relative flex justify-between">
         <div class="left">
-          <h2 class="text-3xl text-white">
+          <h2 class="text-3xl text-gray-800 dark:text-white">
             <i class="fa-solid fa-moon"></i>
             Tarefas
           </h2>
@@ -94,25 +94,25 @@
       </header>
       <form action="/task" method="post" id="task-form" class="relative w-full bg-gray-700 rounded-lg">
         <input type="text" name="username" id="username" value="<%- user.username %>" hidden />
-        <input class="input-task-create outline-0 w-full py-2 px-3 bg-gray-700 text-white appearance-none" type="text"
+        <input class="input-task-create outline-0 w-full py-2 px-3 bg-slate-50 dark:bg-gray-700 text-white appearance-none" type="text"
           id="task" name="task" placeholder="Exemplo: Estudar para prova" autocomplete="off" />
         <hr class="border-blue-500" />
         <div id="task-options"
-          class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute w-full grid sm:flex items-center sm:justify-between justify-center bg-gray-700 shadow-md shadow-gray-900/50 rounded-b-lg px-8 py-2">
+          class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute w-full grid sm:flex items-center sm:justify-between justify-center bg-slate-100 dark:bg-gray-700 shadow-md shadow-gray-900/50 rounded-b-lg px-8 py-2">
           <ul class="w-full sm:flex grid grid-cols-2 justify-start gap-4">
             <li class="relative flex items-center justify-center">
               <label for="conclusion" id="label-conclusion"
-                class="show-span show-modal text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700">
+                class="show-span show-modal text-gray-950 dark:text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-slate-200 dark:bg-gray-800">
                 <i class="fa-solid fa-calendar-days pointer-events-none"></i>
                 <span
-                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
+                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-slate-200 dark:bg-gray-800 rounded-lg shadow-md">
                   Conclusão
                 </span>
               </label>
               <div id="modal-conclusion"
                 class="modal-option opacity-0 pointer-events-none transition duration-500 ease absolute z-20 -left-8 top-14 border-t-2 border-blue-500 backdrop-blur-sm bg-gray-900/30 shadow-xl shadow-gray-900 rounded min-w-[25rem] max-w-[18rem]">
                 <i class="fa-solid fa-sort-up text-4xl text-blue-500 absolute -top-[1.1rem] left-10"></i>
-                <h1 class="text-center text-white text-base p-4">
+                <h1 class="text-center text-gray-950 dark:text-white text-base p-4">
                   Defina a conclusão da tarefa
                 </h1>
                 <hr class="border-blue-500 mb-8" />
@@ -129,86 +129,86 @@
             <li class="relative flex items-center justify-center">
               <input type="checkbox" name="important" id="important" hidden />
               <label for="important" id="label-important"
-                class="show-span text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700">
+                class="show-span flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-slate-200 dark:bg-gray-800">
                 <i class="fa-solid fa-star pointer-events-none"></i>
                 <span
-                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
+                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-slate-200 dark:bg-gray-800 rounded-lg shadow-md">
                   Importante
                 </span>
               </label>
             </li>
             <li class="relative flex items-center justify-center">
               <label for="repeat" id="label-repeat"
-                class="show-span text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700">
+                class="show-span text-gray-950 dark:text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-slate-200 dark:bg-gray-800">
                 <i class="fa-solid fa-repeat pointer-events-none"></i>
                 <span
-                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center gap-4 text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
+                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center gap-4 text-center text-blue-500 bg-slate-200 dark:bg-gray-800 rounded-lg shadow-md">
                   Repetir
                 </span>
               </label>
               <div id="modal-repeat"
                 class="modal-option opacity-0 pointer-events-none transition duration-500 ease z-10 border-t-2 border-blue-500 absolute left-auto top-14 backdrop-blur-md bg-gray-900/30 shadow-lg shadow-gray-900 rounded min-w-[15rem] max-w-[18rem] pb-2">
                 <i class="fa-solid fa-sort-up text-4xl text-blue-500 absolute -top-[1.1rem] left-[6.8rem]"></i>
-                <h1 class="text-center text-white text-base p-4">
+                <h1 class="text-center text-gray-950 dark:text-white text-base p-4">
                   Que dia deseja repetir?
                 </h1>
                 <hr class="border-blue-500 mb-8" />
                 <ol id="repeat-days" class="grid grid-cols-3 justify-center items-center text-center gap-4">
                   <li>
                     <label for="day-sun"
-                      class="label-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
+                      class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
                       Dom
-                      <input type="checkbox" hidden class="checkbox-day" name="day-sun" id="day-sun" />
                     </label>
+                    <input type="checkbox" hidden class="checkbox-day" name="day-sun" id="day-sun" />
                   </li>
                   <li>
                     <label for="day-mon"
-                      class="label-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
+                      class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
                       Seg
-                      <input type="checkbox" hidden class="checkbox-day" name="day-mon" id="day-mon" />
                     </label>
+                    <input type="checkbox" hidden class="checkbox-day" name="day-mon" id="day-mon" />
                   </li>
                   <li>
                     <label for="day-tue"
-                      class="label-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
+                      class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
                       Ter
-                      <input type="checkbox" hidden class="checkbox-day" name="day-tue" id="day-tue" />
                     </label>
+                    <input type="checkbox" hidden class="checkbox-day" name="day-tue" id="day-tue" />
                   </li>
                   <li>
                     <label for="day-wed"
-                      class="label-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
+                      class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
                       Qua
-                      <input type="checkbox" hidden class="checkbox-day" name="day-wed" id="day-wed" />
                     </label>
+                    <input type="checkbox" hidden class="checkbox-day" name="day-wed" id="day-wed" />
                   </li>
                   <li>
                     <label for="day-thu"
-                      class="label-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
+                      class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
                       Qui
-                      <input type="checkbox" hidden class="checkbox-day" name="day-thu" id="day-thu" />
                     </label>
+                    <input type="checkbox" hidden class="checkbox-day" name="day-thu" id="day-thu" />
                   </li>
                   <li>
                     <label for="day-fri"
-                      class="label-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
+                      class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
                       Sex
-                      <input type="checkbox" hidden class="checkbox-day" name="day-fri" id="day-fri" />
                     </label>
+                    <input type="checkbox" hidden class="checkbox-day" name="day-fri" id="day-fri" />
                   </li>
                   <li>
                     <label for="day-sat"
-                      class="label-day p-2 cursor-pointer bg-gray-800 rounded-md border-2 text-white border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
+                      class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
                       Sáb
-                      <input type="checkbox" hidden class="checkbox-day" name="day-sat" id="day-sat" />
                     </label>
+                    <input type="checkbox" hidden class="checkbox-day" name="day-sat" id="day-sat" />
                   </li>
                 </ol>
                 <div id="time-modal"
-                  class="w-full grid gap-4 mt-4 p-4 backdrop-blur-sm bg-gray-900/30 border-t-2 border-blue-500">
-                  <h2 class="text-base text-center text-white">Escolha um horário</h2>
+                  class="w-full grid gap-4 mt-4 p-4 border-t-2 border-blue-500">
+                  <h2 class="text-base text-center text-gray-950 dark:text-white">Escolha um horário</h2>
                   <input type="time" name="time-repeat" id="time-repeat"
-                    class="outline-0 text-white rounded flex items-center justify-center cursor-pointer w-11/12 h-8 px-4 m-auto text-center bg-gray-700 transition esae hover:bg-gray-800 focus:bg-gray-800" />
+                    class="outline-0 text-gray-950 dark:text-white rounded flex items-center justify-center cursor-pointer w-11/12 h-8 px-4 m-auto text-center transition ease bg-slate-50 hover:bg-slate-200 focus:bg-slate-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:bg-gray-700" />
                 </div>
               </div>
             </li>
@@ -216,17 +216,17 @@
               class="relative flex items-center justify-center opacity-0 pointer-events-none transition duration-500 ease">
               <input type="checkbox" name="notify" id="notify" hidden />
               <label for="notify" id="label-notify"
-                class="show-span text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-gray-800 border-2 border-gray-700">
+                class="show-span text-gray-950 dark:text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-slate-200 dark:bg-gray-800">
                 <i class="fa-solid fa-bell pointer-events-none"></i>
                 <span
-                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-gray-800 rounded-lg shadow-md">
+                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-slate-200 dark:bg-gray-800 rounded-lg shadow-md">
                   Notificar
                 </span>
               </label>
             </li>
           </ul>
           <button type="submit"
-            class="px-6 py-1 m-2 flex items-center justify-center rounded bg-blue-700 text-white transition ease hover:rounded-md hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50">
+            class="px-6 py-1 m-2 flex items-center justify-center rounded bg-blue-700 text-gray-950 dark:text-white transition ease hover:rounded-md hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50">
             Salvar
           </button>
         </div>

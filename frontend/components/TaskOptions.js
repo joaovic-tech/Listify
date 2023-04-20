@@ -4,7 +4,7 @@ import Message from '../utils/Message.js';
 class TaskOptions {
   constructor() {
     this.toggleStyles = new ToggleStyles();
-    this.stylesIconCheck = ['text-white', 'text-blue-500', 'bg-gray-900', 'bg-gray-800', 'border-gray-700', 'border-blue-500'];
+    this.stylesIconCheck = ['text-gray-950', 'text-blue-500', 'dark:text-blue-500', 'bg-gray-900', 'bg-gray-800', 'dark:bg-gray-800', 'border-slate-100', 'dark:border-gray-700', 'border-blue-500'];
   }
 
   changePositionRepeatModal(modalTime) {

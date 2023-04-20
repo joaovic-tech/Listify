@@ -58,16 +58,22 @@ export default class Tasks {
       'ease',
       'cursor-pointer',
       'backdrop-blur-sm',
-      'bg-gray-700/50',
-      'hover:bg-gray-800',
-      'focus:bg-gray-800',
+      'bg-white/50',
+      'dark:bg-gray-700/50',
+      'hover:bg-slate-300',
+      'focus:bg-slate-300',
+      'dark:hover:bg-gray-800',
+      'dark:focus:bg-gray-800',
     );
 
     if (checked_task === 'off') return li;
     li.classList.add(
-      'bg-gray-700/50',
-      'hover:bg-gray-600/80',
-      'focus:bg-gray-600/80',
+      'bg-white/50',
+      'dark:bg-gray-700/50',
+      'hover:bg-slate-300',
+      'focus:bg-slate-300',
+      'dark:hover:bg-gray-600/80',
+      'dark:focus:bg-gray-600/80',
     );
 
     return li;
@@ -75,7 +81,7 @@ export default class Tasks {
 
   createTitle(checked_task, text) {
     const h2 = document.createElement('h2');
-    h2.classList.add('text-base', 'text-white', 'text-bold');
+    h2.classList.add('text-base', 'text-gray-800', 'dark:text-white', 'text-bold');
     h2.textContent = text;
 
     if (checked_task === 'off') return h2;
@@ -100,7 +106,8 @@ export default class Tasks {
       'py-2',
       'px-3',
       'rounded',
-      'bg-gray-900',
+      'bg-slate-200',
+      'dark:bg-gray-900',
       'text-blue-500'
     );
     return important === 'on' ? icon : '';
