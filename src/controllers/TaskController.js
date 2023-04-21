@@ -116,7 +116,8 @@ class TaskController {
   async createNotifications(req, res) {
     const { username } = req.session.user;
     const tasks = await task.taskModel.find({ username: username }).sort({ checked_task: 1, important: -1, created_at: -1 });
-    
+    const pendingTasks = [];
+
     tasks.forEach(task => {
       const today = new Date();
       const targetDate = new Date(task.conclusion);
@@ -124,17 +125,33 @@ class TaskController {
       const difference = targetDate.getTime() - today.getTime();
   
       const daysDifference = Math.ceil(difference / (1000 * 60 * 60 * 24));
+      
       if (task.checked_task === 'off' && daysDifference <= daysAhead) {
+        pendingTasks.push(task.task);
+      }
+    });
+
+    if (!pendingTasks.length) return;
+      
+      if (pendingTasks.length === 1) {
         notifier.notify({
           title: 'Tarefa pendente',
-          message: `Existem tarefa(s) próxima(s) do prazo de conclusão!`,
+          message: `Existem uma tarefa próxima do prazo de conclusão!`,
+          sound: true,
+          wait: true,
+          timeout: 10000,
+          icon: path.join(__dirname, '..', '..', '/frontend/assets/img/Logo.png'),
+        });
+      } else {
+        notifier.notify({
+          title: 'Tarefa pendente',
+          message: `Existem ${pendingTasks.length} tarefas próximas do prazo de conclusão!`,
           sound: true,
           wait: true,
           timeout: 10000,
           icon: path.join(__dirname, '..', '..', '/frontend/assets/img/Logo.png'),
         });
       }
-    });
   }   
 }
 
