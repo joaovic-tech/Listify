@@ -20,10 +20,15 @@
 ### **PROFILE**
 * [x] Model para pergunta se quer realmente apagar a conta
 ---
-### Recursos novos
-* [x] Notificar o usuário da data de conclusão da tarefa quando entrar na aplicação
-* [ ] Ajustar o dark mode de todas as páginas
-  * [x] Profile
+### Tasks
+* [x] Profile - dark mode
+* [x] Dashboard - dark mode
+* [x] Home - dark mode
+* [x] Login - dark mode
+* [x] Register - dark mode
+* [ ] Colocar tema padrão dark nos body e no DarkMode.js
+* [ ] Melhorar a tela 404
+* [ ] Melhorar a mensagem de success e errors do `flash`
 
 ### ***Animação***
 * [ ] Fazer `animação` de quando a página for renderizada (cada página será diferente)

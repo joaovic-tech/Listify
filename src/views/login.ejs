@@ -16,11 +16,17 @@
   <script src="https://kit.fontawesome.com/673aed7dea.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="dark">
+<body class="transition duration-500 ease-in-out">
+  <button id="theme-toggle"
+    class="absolute top-0 right-0 z-50 outline-0 flex justify-center items-center gap-2 p-2 m-auto transition rounded cursor-pointer dark:bg-gray-800 dark:text-gray-50 bg-gray-300 hover:text-gray-50 hover:bg-gradient-to-r dark:hover:from-blue-500 dark:hover:to-indigo-600 hover:from-yellow-500 hover:to-pink-600 hover:shadow-md dark:hover:shadow-blue-600 hover:shadow-yellow-600">
+    <i id="theme-icon" class="fas fa-moon pointer-events-none"></i>
+    <span id="theme-text">Dark mode</span>
+  </button>
+
   <div id="svg_background_dark" class="svg_background pointer-events-none"></div>
-  
+
   <%- include('includes/messages'); %>
-  
+
   <section class="bg-gray-200 dark:bg-gray-900">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0 relative">
       <a href="/" class="flex gap-4 items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
@@ -41,16 +47,18 @@
                 placeholder="exemplo@dominio.com" />
             </div>
             <div class="relative">
-              <button type="button" id="show-password" class="absolute bottom-2 right-2 text-base text-white transition hover:text-blue-600 focus:text-blue-600">
+              <button type="button" id="show-password"
+                class="absolute bottom-2 right-2 text-base text-white transition hover:text-blue-600 focus:text-blue-600">
                 <i class="fa-solid fa-eye-slash"></i>
               </button>
               <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Senha</label>
               <input type="password" name="password" id="password" placeholder="••••••••"
-                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" autocomplete/>
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                autocomplete />
             </div>
             <button type="submit"
-              class="w-full text-white transition ease bg-gradient-to-r from-blue-800 to-blue-500 hover:from-blue-500 hover:to-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Entrar
+              class="w-full text-white transition-all duration-300 ease-in-out bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center hover:shadow-md hover:shadow-blue-600">
+              Login
             </button>
             <p class="text-lg text-zinc-300">Não possui uma conta? <a
                 class="outline-0 text-blue-500 transition ease hover:text-blue-700 transition ease focus:text-blue-700"
@@ -60,11 +68,16 @@
       </div>
     </div>
   </section>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.9.0/validator.js" integrity="sha512-rOMALLrxlgIcEeMdX0O7A+pysTPb/201n7g04dPGvgJFB+f0CKvL8qljuIU/lDfG8IBi3o5R921G2013ihGuWg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.js" integrity="sha512-xuJa2iaoUiQzj8b9ENT7vyJkaWrPeg5OooeqTgE47QlOCdh10rrthb9g74yk3eIXYgUXUQc1vNvldedWxb2eSA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.9.0/validator.js"
+    integrity="sha512-rOMALLrxlgIcEeMdX0O7A+pysTPb/201n7g04dPGvgJFB+f0CKvL8qljuIU/lDfG8IBi3o5R921G2013ihGuWg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.js"
+    integrity="sha512-xuJa2iaoUiQzj8b9ENT7vyJkaWrPeg5OooeqTgE47QlOCdh10rrthb9g74yk3eIXYgUXUQc1vNvldedWxb2eSA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="module" src="/modules/Login.js"></script>
   <script type="module" src="/utils/MessageServer.js"></script>
   <script src="/utils/ShowPassword.js"></script>
+  <script src="/settings/DarkMode.js"></script>
 </body>
 
 </html>

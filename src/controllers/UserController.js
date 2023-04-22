@@ -42,7 +42,7 @@ class UserController {
         });
       }
   
-      const updatedUser = await userModel.update(id, req.body);
+      const updatedUser = await userModel.update(id, req.body, req.session.user);
       req.session.user = {
         ...req.session.user,
         username: updatedUser.username,

@@ -15,13 +15,15 @@ class TaskEditForm {
       'justify-center',
       'hover:text-blue-500',
       'cursor-pointer',
-      'bg-gray-700',
-      'text-white',
+      'dark:bg-gray-700',
+      'bg-gray-300',
+      'dark:text-white',
+      'text-gray-950',
       'w-full',
       'h-8',
       'text-center'
     ];
-
+    this.modalForm = '';
   }
 
   createInputTaskId(id) {
@@ -42,13 +44,16 @@ class TaskEditForm {
       'h-full',
       'p-2',
       'rounded-md',
-      'bg-gray-700',
+      'bg-slate-50',
+      'dark:bg-gray-700',
       'border-2',
       'border-solid',
-      'border-gray-700',
+      'border-slate-50',
+      'dark:border-gray-700',
       'focus:border-blue-500',
       'outline-0',
-      'text-white'
+      'dark:text-white',
+      'text-gray-950'
     );
     input.value = text;
     return input;
@@ -155,6 +160,38 @@ class TaskEditForm {
     return button;
   }
 
+  createButtonClose(id, className, color, icon) {
+    const button = document.createElement('button');
+    className === 'btn-save' ? button.type = 'submit' : button.type = 'button';
+    button.id = id;
+    button.classList.add(
+      className,
+      'absolute',
+      'right-0',
+      'top-0',
+      'w-8',
+      'h-8',
+      'flex',
+      'justify-center',
+      'items-center',
+      'text-center',
+      'gap-2',
+      'transition',
+      'text-2xl',
+      'rounded',
+      `bg-${color}-500`,
+      `hover:bg-${color}-600`,
+      `focus:bg-${color}-600`,
+      `hover:shadow-md`,
+      `focus:shadow-md`,
+      `hover:shadow-${color}-600`,
+      `focus:shadow-${color}-600`,
+      'text-white',
+    );
+    button.appendChild(icon);
+    return button;
+  }
+
   createSpanImportant() {
     const span = document.createElement('span');
     span.classList.add(
@@ -165,7 +202,7 @@ class TaskEditForm {
 
   createLabel(content) {
     const label = document.createElement('label');
-    label.classList.add('text-base', 'text-white');
+    label.classList.add('text-base', 'dark:text-white', 'text-gray-950');
     label.innerText = content;
     return label;
   }
@@ -250,24 +287,8 @@ class TaskEditForm {
       const li = document.createElement('li');
 
       const label = document.createElement('label');
-      label.classList.add(
-        'label-day',
-        'p-2',
-        'cursor-pointer',
-        'bg-gray-800',
-        'rounded-md',
-        'border-2',
-        'text-white',
-        'border-gray-700',
-        'transition',
-        'ease',
-        'hover:border-blue-500',
-        'hover:bg-gray-900',
-        'focus:border-blue-500',
-        'focus:bg-gray-900',
-        'hover:text-blue-500',
-        'focus:text-blue-500'
-      );
+      label.classList.add('label-day', 'p-2', 'cursor-pointer', 'dark:bg-gray-800', 'rounded-md', 'border-2', 'text-gray-950', 'dark:text-white', 'bg-slate-200', 'border-slate-100', 'dark:border-gray-700', 'transition', 'ease', 'hover:border-blue-500', 'hover:bg-gray-900', 'focus:border-blue-500', 'focus:bg-gray-900', 'hover:text-blue-500', 'focus:text-blue-500');
+
       label.innerText = day;
 
       const input = document.createElement('input');
@@ -368,6 +389,7 @@ class TaskEditForm {
       repeat,
       created_at
     } = obj;
+    this.modalForm = _id;
     const form = this.createForm();
     const textId = this.createP('task-id', `id: ${_id}`);
     const textCreateAt = this.createP('created_at', `Tarefa criada em: ${created_at}`);
@@ -388,8 +410,8 @@ class TaskEditForm {
 
     liImportant.appendChild(liImportantContent);
 
-    const iconClose = this.createIcon('fa-solid', 'fa-right-from-bracket');
-    const btnClose = this.createButton('btn-close', 'btn-close', 'gray', iconClose, 'Fechar');
+    const iconClose = this.createIcon('fa-solid', 'fa-xmark');
+    const btnClose = this.createButtonClose('btn-close', 'btn-close', 'red', iconClose);
     const iconDelete = this.createIcon('fa-solid', 'fa-trash');
     const btnDelete = this.createButton(_id, 'btn-delete', 'rose', iconDelete, 'Deletar');
     const iconSave = this.createIcon('fa-solid', 'fa-floppy-disk');
@@ -414,26 +436,30 @@ class TaskEditForm {
   }
 
   async createModal(taskId) {
+    const modalFormExist = document.querySelector('aside');
+    if (modalFormExist && modalFormExist.classList.contains(taskId)) return modalFormExist.remove();
+    if (modalFormExist) modalFormExist.remove();
+
     const main = document.querySelector('main');
     const tasksArray = await this.taskModel.getAllTasks();
     const obj = tasksArray.find(task => task._id === taskId);
     const content = this.createElementsModal(obj);
-    
-    const modalFormExist = document.querySelector('aside');
-    if (modalFormExist) return modalFormExist.remove();
 
     const modalForm = document.createElement('aside');
 
     modalForm.setAttribute('id', 'modal-edit');
     modalForm.classList.add(
+      obj._id,
       'w-96',
       'h-full',
       'backdrop-blur-md',
-      'bg-gray-800/50',
+      'bg-white/30',
+      'dark:bg-gray-900/30',
       'p-4',
-      'rounded',
-      'shadow-2xl',
-      'shadow-blue-500/50',
+      'rounded-b-lg',
+      'shadow-lg',
+      'border-b-4',
+      'border-blue-600',
       'transition',
       'ease'
     );

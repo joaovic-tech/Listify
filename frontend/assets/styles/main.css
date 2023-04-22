@@ -23,34 +23,6 @@ body::-webkit-scrollbar-track {
   background-color: #ffffff00;
 }
 
-#fancy404 {
-  position: fixed;
-  bottom: 0rem;
-  right: 0;
-  width: 43rem;
-  height: 37rem;
-  background: url('/assets/svg/fancy404.svg') no-repeat;
-}
-
-#alien {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 30rem;
-  height: 30rem;
-  background: url('/assets/svg/alien spaceship-amico.svg')  no-repeat;
-}
-
-.fancy-border {
-  position: fixed;
-  bottom: 0;
-  left: -2rem;
-  width: 350px;
-  height: 350px;
-  background: linear-gradient(45deg,#111827 0%,#4b5563 100%);
-  border-radius: 30% 70% 70% 30%/30% 30% 70% 70%;
-}
-
 .animation-rotate {
   position: fixed;
   top: 0;
@@ -62,6 +34,7 @@ body::-webkit-scrollbar-track {
   position: fixed;
   width: 100%;
   height: 100%;
+  z-index: 0;
 }
 
 #svg_background_dark {
@@ -72,12 +45,6 @@ body::-webkit-scrollbar-track {
 #svg_background_light {
   background: url('/assets/svg/background-dark.svg') no-repeat;
   background-size: cover;
-}
-
-#todo-list-girl {
-  background-image: url('/assets/svg/listGirl.svg');
-  width: 900px;
-  height: 450px;
 }
 
 .show {

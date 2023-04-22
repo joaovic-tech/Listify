@@ -16,8 +16,15 @@
       src="https://kit.fontawesome.com/673aed7dea.js"
       crossorigin="anonymous"
     ></script>
+    <script src="/settings/DarkMode.js" defer></script>
   </head>
-  <body class="dark">
+  <body class="transition duration-500 ease-in-out">
+    <button id="theme-toggle"
+      class="absolute top-0 right-0 z-50 outline-0 flex justify-center items-center gap-2 p-2 m-auto transition rounded cursor-pointer dark:bg-gray-800 dark:text-gray-50 bg-gray-300 hover:text-gray-50 hover:bg-gradient-to-r dark:hover:from-blue-500 dark:hover:to-indigo-600 hover:from-yellow-500 hover:to-pink-600 hover:shadow-md dark:hover:shadow-blue-600 hover:shadow-yellow-600">
+      <i id="theme-icon" class="fas fa-moon pointer-events-none"></i>
+      <span id="theme-text">Dark mode</span>
+    </button>
+    
     <div id="svg_background_dark" class="svg_background pointer-events-none"></div>
   
     <%- include('includes/messages'); %>
@@ -107,10 +114,8 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
               </div>
-              <button
-                type="submit"
-                class="w-full text-white transition ease bg-gradient-to-r from-blue-800 to-blue-500 hover:from-blue-500 hover:to-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >
+              <button type="submit"
+                class="w-full text-white transition-all duration-300 ease-in-out bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center hover:shadow-md hover:shadow-blue-600">
                 Cadastrar
               </button>
               <p class="text-lg text-zinc-300">

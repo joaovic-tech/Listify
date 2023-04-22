@@ -175,11 +175,11 @@ class UserModel {
       username,
       email,
       password: this.userData.password,
-      confirmPassword
+      confirmPassword,
     };
   }
 
-  async update(id, userData) {
+  async update(id, userData, userSession) {
     const newUserData = await this.validateUpdate(userData);
 
     if (this.errors.length > 0) {
@@ -192,6 +192,10 @@ class UserModel {
       }, newUserData, {
         new: true
       });
+
+      await this.taskModel.updateMany({ username: userSession.username }, { username: user.username });
+      await this.refreshTokenModel.updateMany({ username: userSession.username }, { username: user.username });
+
       return user;
     } catch (error) {
       console.error(error);
