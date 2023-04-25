@@ -11,8 +11,8 @@
   <script src="https://kit.fontawesome.com/673aed7dea.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="transition duration-500 ease-in-out">
-  <div id="svg_background_dark" class="svg_background pointer-events-none h-auto sm:h-screen"></div>
+<body class="dark bg-gray-950 transition duration-500 ease-in-out">
+  <div id="svg_background_dark" class="svg_background pointer-events-none h-screen animate-pulse"></div>
   <div class="animation-rotate grid gap-2">
     <div
       class="animate-pulse flex gap-2 items-center w-64 p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -34,7 +34,7 @@
   <%- include('includes/messages'); %>
 
   <!-- Begin Main Content -->
-  <main class="w-screen h-auto sm:h-screen p-8 dark:bg-gray-900 grid gap-12">
+  <main class="w-screen h-auto sm:h-screen p-8 grid gap-12">
     <div class="relative max-w-5xl mx-auto pt-20 sm:pt-24 lg:pt-32">
       <h1
         class="text-slate-900 font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-center dark:text-white">
@@ -86,7 +86,7 @@
       </div>
     </div>
     <button id="theme-toggle"
-      class="outline-0 flex justify-center items-center gap-2 w-64 h-12 m-auto transition rounded cursor-pointer dark:bg-gray-800 dark:text-gray-50 bg-gray-300 hover:text-gray-50 hover:bg-gradient-to-r dark:hover:from-blue-500 dark:hover:to-indigo-600 hover:from-yellow-500 hover:to-pink-600 hover:shadow-md dark:hover:shadow-blue-600 hover:shadow-yellow-600">
+      class="outline-0 flex justify-center items-center gap-2 w-64 h-12 m-auto transition rounded cursor-pointer backdrop-blur-md dark:bg-gray-800 dark:text-gray-50 bg-gray-300 hover:text-gray-50 hover:bg-gradient-to-r dark:hover:from-blue-500 dark:hover:to-indigo-600 hover:from-yellow-500 hover:to-pink-600 hover:shadow-md dark:hover:shadow-blue-600 hover:shadow-yellow-600">
       <i id="theme-icon" class="fas fa-moon pointer-events-none"></i>
       <span id="theme-text">Dark mode</span>
     </button>

@@ -411,7 +411,7 @@ class TaskEditForm {
     liImportant.appendChild(liImportantContent);
 
     const iconClose = this.createIcon('fa-solid', 'fa-xmark');
-    const btnClose = this.createButtonClose('btn-close', 'btn-close', 'red', iconClose);
+    const btnClose = this.createButtonClose('btn-close', 'btn-close', 'rose', iconClose);
     const iconDelete = this.createIcon('fa-solid', 'fa-trash');
     const btnDelete = this.createButton(_id, 'btn-delete', 'rose', iconDelete, 'Deletar');
     const iconSave = this.createIcon('fa-solid', 'fa-floppy-disk');

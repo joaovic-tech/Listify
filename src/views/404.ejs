@@ -16,25 +16,33 @@
   <script src="https://kit.fontawesome.com/673aed7dea.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="transition duration-500 ease-in-out h-screen flex justify-center items-center text-center">
-  <button id="theme-toggle"
-    class="absolute top-0 right-0 z-50 outline-0 flex justify-center items-center gap-2 p-2 m-auto transition rounded cursor-pointer dark:bg-gray-800 dark:text-gray-50 bg-gray-300 hover:text-gray-50 hover:bg-gradient-to-r dark:hover:from-blue-500 dark:hover:to-indigo-600 hover:from-yellow-500 hover:to-pink-600 hover:shadow-md dark:hover:shadow-blue-600 hover:shadow-yellow-600">
-    <i id="theme-icon" class="fas fa-moon pointer-events-none"></i>
-    <span id="theme-text">Dark mode</span>
-  </button>
+<body
+  class="dark bg-gray-950 transition duration-500 ease-in-out p-4 h-screen flex flex-col justify-center items-center text-center">
+  <div id="svg_background_dark" class="svg_background pointer-events-none h-screen animate-pulse"></div>
 
-  <div id="svg_background_dark" class="svg_background pointer-events-none h-auto sm:h-screen animate-pulse"></div>
-  
-  <main class="relative text-zinc-300 flex flex-col justify-center items-center">
-    <h1 class="relative italic text-blue-600 text-9xl mb-0 animate-falling">404</h1>
-    <p class="dark:text-gray-300 text-gray-800 text-3xl mb-2 animate-down">Oops, você se perdeu no espaço</p>
-    <p class="dark:text-gray-300 text-gray-800 text-3xl mb-8 animate-down">Não podemos encontrar a página que você está procurando</p>
+  <main class="relative text-zinc-300 flex flex-col justify-center items-center m-auto">
+    <h1 class="relative italic text-blue-600 text-[20rem] mb-0 animate-falling" style="text-shadow: .5rem 0 0 #1e40af">
+      404
+    </h1>
+    <p class="dark:text-gray-300 text-gray-800 text-3xl mb-2 animate-down">Oops, você se perdeu no caminho das tarefas
+    </p>
+    <p class="dark:text-gray-300 text-gray-800 text-3xl mb-8 animate-down">Não podemos encontrar a página que você está
+      procurando</p>
+    <% if (user) { %>
+    <a href="/dashboard"
+      class="text-xl text-white rounded font-bold flex items-center p-4 bg-blue-600 transition hover:bg-blue-800 focus:bg-blue-800 animate-down">
+      <i class="fa-solid fa-list-ul"></i>
+      <span class="ml-2">Voltar para as tarefas</span>
+    </a>
+    <% } else { %>
     <a href="/"
-      class="text-xl text-white rounded font-bold flex items-center p-2 bg-blue-600 transition hover:bg-blue-800 focus:bg-blue-800 animate-down">
+      class="text-xl text-white rounded font-bold flex items-center p-4 bg-blue-600 transition hover:bg-blue-800 focus:bg-blue-800 animate-down">
       <i class="fas fa-house"></i>
-      <span class="ml-2">Ir para home</span></a>
+      <span class="ml-2">Voltar para o inicio</span>
+    </a>
+    <% } %>
   </main>
-  <script src="/settings/DarkMode.js"></script>
+  <%- include('includes/footer'); %>
 </body>
 
 </html>

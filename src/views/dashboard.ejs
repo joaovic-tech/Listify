@@ -17,8 +17,8 @@
   <script src="/settings/DarkMode.js" defer></script>
 </head>
 
-<body class="transition duration-500 ease-in-out">
-  <div id="svg_background_dark" class="svg_background pointer-events-none"></div>
+<body class="dark bg-gray-950 transition duration-500 ease-in-out">
+  <div id="svg_background_dark" class="svg_background pointer-events-none h-screen animate-pulse"></div>
 
   <%- include('includes/messages'); %>
 
@@ -68,8 +68,8 @@
       </ul>
     </div>
   </nav>
-  <main class="flex">
-    <section class="w-full h-full p-4 grid gap-8">
+  <main class="flex p-4">
+    <section class="w-full h-full grid gap-8">
       <header id="header" class="relative flex justify-between">
         <div class="left">
           <h2 class="text-3xl text-gray-800 dark:text-white">

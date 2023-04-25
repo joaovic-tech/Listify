@@ -18,6 +18,7 @@ export default class Message {
     modalMessage.id = 'msg';
     modalMessage.classList.add(
       'fixed',
+      'z-50',
       'top-0',
       'right-0',
       'w-auto',
@@ -34,12 +35,14 @@ export default class Message {
       'items-center',
       'text-bold',
       'text-center',
-      'bg-gray-900',
-      'shadow-lg',
-      'shadow-gray-900',
-      'rounded',
+      'bg-gray-300',
+      'dark:bg-gray-950',
+      'dark:shadow-gray-950',
+      'shadow-md',
+      'shadow-gray-300',
       'opacity-0',
       'scale-90',
+      'animate-pulse',
     );
 
     modalMessage.innerHTML = `${icon} ${msg}`;    
@@ -50,9 +53,12 @@ export default class Message {
       'absolute',
       'bottom-0',
       'left-0',
+      'rounded-full',
       'w-full',
       'h-1',
       `bg-${color}-500`,
+      'shadow-md',
+      `shadow-${color}-500`,
     );
     modalMessage.appendChild(lineAnimation);
     

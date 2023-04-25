@@ -1,21 +1,22 @@
 class ThemeToggler {
   constructor(themeToggleId) {
-    this.themeToggle = document.getElementById(themeToggleId);
     this.body = document.body;
+    this.themeToggle = document.getElementById(themeToggleId);
     this.svg_background = document.querySelector('.svg_background ');
     this.init();
   }
 
   init() {
     const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    // Recupera o tema do local storage, se existir
     const savedTheme = localStorage.getItem('theme');
+
     if (savedTheme === 'dark' || isDarkMode) {
       this.body.classList.add('dark', 'bg-gray-950')
       this.svg_background.id = 'svg_background_dark';
       this.themeToggle.innerHTML = '<i class="fas fa-moon"></i> Dark mode';
-    } else {
+    }
+    if (savedTheme === 'light') {
+      this.body.classList.remove('dark');
       this.body.classList.add('bg-slate-200');
       this.svg_background.id = 'svg_background_light';
       this.themeToggle.innerHTML = '<i class="fas fa-sun"></i> Light mode';
@@ -43,9 +44,8 @@ class ThemeToggler {
       this.body.classList.remove('bg-gray-950');
       this.body.classList.add('bg-slate-200');
       this.svg_background.id = 'svg_background_light';
-
-      // Remove o tema do local storage
-      localStorage.removeItem('theme');
+      
+      localStorage.setItem('theme', 'light');
     }
   }
 }

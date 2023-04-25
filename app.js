@@ -10,6 +10,7 @@ const deleteRoutes = require('./src/routes/deleteRoutes');
 const taskRoutes = require('./src/routes/taskRoutes');
 const updateUserRoutes = require('./src/routes/updateUserRoutes');
 const tokenRoutes = require('./src/routes/tokenRoutes');
+const aboutRoutes = require('./src/routes/aboutRoutes');
 const readmeMD = require('./src/routes/readmeMD');
 const serveStatic = require('serve-static');
 
@@ -53,10 +54,11 @@ class App {
     this.app.use('/', updateUserRoutes);
     this.app.use('/', deleteRoutes);
     this.app.use('/', tokenRoutes);
+    this.app.use('/', aboutRoutes);
     this.app.use('/', readmeMD);
     this.app.use(function (req, res) {
-      res.status(404).render('404');
-    })
+      return res.render('404', { user: req.session.user });
+    });
   }
 }
 
