@@ -23,6 +23,11 @@ body::-webkit-scrollbar-track {
   background-color: #ffffff00;
 }
 
+
+.about {
+  overflow: hidden;
+}
+
 .animation-rotate {
   position: fixed;
   top: 0;

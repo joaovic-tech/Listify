@@ -1,13 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sobre</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.15/tailwind.min.css">
+  <link rel="stylesheet" href="/assets/styles/main.css" />
+  <title>Listify - Sobre</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/673aed7dea.js" crossorigin="anonymous"></script>
 </head>
-<body class="dark bg-gray-950 transition duration-500 ease-in-out">
+
+<body class="bg-gray-900 about">
   <div id="svg_background_dark" class="svg_background pointer-events-none h-screen animate-pulse"></div>
-  
+  <main class="flex justify-between h-screen">
+    <section class="p-8 flex flex-col justify-between w-3/6 animate-down">
+      <div class="w-[30rem] h-auto p-2 bg-blue-600 rounded flex justity-start items-center">
+        <h1 class="text-white text-4xl">Sobre o projeto</h1>
+      </div>
+      <div class="grid gap-10">
+        <h2 class="text-slate-200 text-5xl"><span class="text-blue-600">Listify</span> - Gerenciador de tarefas</h2>
+        <p class="text-slate-300 text-xl">Bem-vindo à minha aplicação de gerenciamento de tarefas! Esta ferramenta foi
+          desenvolvida com o objetivo de ajudar os usuários a organizar suas tarefas de forma eficiente e fácil. Aqui,
+          você pode criar, acompanhar e concluir suas tarefas, tudo em um só lugar.</p>
+        <p class="text-slate-300 text-xl">Gostaria de ressaltar que esta aplicação foi desenvolvida com fins de estudos.
+          Como um profissional da área de Engenharia de Software, busquei aplicar as melhores práticas e padrões de
+          programação para garantir que a aplicação seja segura, confiável e de fácil uso.</p>
+        <p class="text-slate-300 text-xl">Se você quiser conhecer mais sobre mim e meu trabalho, sinta-se à vontade para
+          clicar no link para acessar meu <a
+            class="outline-0 text-blue-600 underline transition hover:text-blue-800 focus:text-blue-800"
+            href="https://joaovictor-portfolio.vercel.app/">portfolio</a>. Obrigado por usar minha aplicação!</p>
+      </div>
+      <div></div>
+    </section>
+    <section class="relative w-3/6 animate-falling">
+      <div class="absolute left-0 bottom-0 w-screen h-[122vh] flex flex-col gap-4 justify-center bg-slate-200 shadow-xl shadow-[#000] -rotate-12 p-8">
+        <div class="flex justify-start gap-60 mb-32">
+          <img src="/assets/svg/squares.svg" class="" alt="squares" />
+          <div class="flex flex-col gap-4 text-center">
+            <h4 class="text-bold text-4xl text-gray-950">Tarefas</h4>
+            <p class="text-sm text-gray-600">Crie e organize facilmente suas tarefas.</p>
+          </div>
+          <i class="fa-solid fa-list-check text-blue-600 text-4xl"></i>
+        </div>
+        <div class="w-full bg-gray-700 rounded-lg">
+          <input
+            class="outline-0 w-full py-2 px-3 bg-slate-50 dark:bg-gray-700 text-gray-950 dark:text-white appearance-none"
+            type="text" placeholder="Exemplo: Estudar para prova" disabled />
+          <hr class="border-blue-500" />
+          <ul class="w-full flex gap-4 items-center justify-start bg-slate-100 shadow-md rounded-b-lg px-8 py-4">
+            <li class="w-8 h-8 p-2 text-md flex justify-center items-center rounded bg-slate-200"><i
+                class="fa-solid fa-calendar-days pointer-events-none"></i></li>
+            <li class="w-8 h-8 p-2 text-md flex justify-center items-center rounded bg-slate-200"><i
+                class="fa-solid fa-star pointer-events-none"></i></li>
+            <li class="w-8 h-8 p-2 text-md flex justify-center items-center rounded bg-slate-200"><i
+                class="fa-solid fa-repeat pointer-events-none"></i></li>
+          </ul>
+        </div>
+        <ul class="grid gap-2">
+          <li class="li-task p-2 grid rounded gap-2 transition ease bg-white">
+            <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
+              <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
+                <i
+                  class="fa-regular fa-square pointer-events-none checked_false checkbox-task flex justify-center items-center text-center text-3xl pointer-events-auto text-blue-500 transition ease hover:text-blue-800 focus:text-blue-800"></i>
+                <h2 class="text-base text-gray-800 dark:text-white text-bold">Ler livro - 8:00h</h2>
+              </div>
+              <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
+                <i
+                  class="fa-solid fa-star pointer-events-none flex justify-center items-center text-center py-2 px-3 rounded bg-slate-200 dark:bg-gray-900 text-blue-500"></i>
+              </div>
+            </div>
+            <p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-zinc-400"><i
+                class="fa-solid fa-repeat text-blue-500"></i></p>
+          </li>
+          <li class="li-task p-2 grid rounded gap-2 transition ease bg-white">
+            <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
+              <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
+                <i
+                  class="fa-regular fa-square pointer-events-none checked_false checkbox-task flex justify-center items-center text-center text-3xl pointer-events-auto text-blue-500 transition ease hover:text-blue-800 focus:text-blue-800"></i>
+                <h2 class="text-base text-gray-800 dark:text-white text-bold">Reunião - 15:00h</h2>
+              </div>
+              <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
+                <i
+                  class="fa-solid fa-star pointer-events-none flex justify-center items-center text-center py-2 px-3 rounded bg-slate-200 dark:bg-gray-900 text-blue-500"></i>
+              </div>
+            </div>
+            <p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-zinc-400">
+              <span class="flex justify-center items-center text-center gap-2">
+                <i class="fa-solid fa-calendar-days text-blue-500"></i>
+                27/04/2023
+              </span>
+            </p>
+          </li>
+          <li class="li-task p-2 grid rounded gap-2 transition ease bg-white">
+            <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
+              <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
+                <i
+                  class="fa-regular fa-square pointer-events-none checked_false checkbox-task flex justify-center items-center text-center text-3xl pointer-events-auto text-blue-500 transition ease hover:text-blue-800 focus:text-blue-800"></i>
+                <h2 class="text-base text-gray-800 dark:text-white text-bold">Viagem para Acapulco</h2>
+              </div>
+              <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
+                <i
+                  class="fa-solid fa-star pointer-events-none flex justify-center items-center text-center py-2 px-3 rounded bg-slate-200 dark:bg-gray-900 text-blue-500"></i>
+              </div>
+            </div>
+            <p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-zinc-400">
+              <span class="flex justify-center items-center text-center gap-2">
+                <i class="fa-solid fa-calendar-days text-blue-500"></i>
+                12/12/2023
+              </span>
+            </p>
+          </li>
+          <li
+            class="li-task p-2 grid rounded gap-2 transition ease bg-white dark:hover:bg-gray-600/80 dark:focus:bg-gray-600/80">
+            <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
+              <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
+                <i
+                  class="fa-regular fa-square-check pointer-events-none checked_true text-blue-700 checkbox-task flex justify-center items-center text-center text-3xl pointer-events-auto text-blue-500 transition ease hover:text-blue-800 focus:text-blue-800"></i>
+                <h2 class="text-base text-gray-800 dark:text-white text-bold line-through text-green-600">Concluir as
+                  provas 'Objetivas' da faculdade</h2>
+              </div>
+              <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
+                <i
+                  class="fa-solid fa-star pointer-events-none flex justify-center items-center text-center py-2 px-3 rounded bg-slate-200 dark:bg-gray-900 text-blue-500"></i>
+              </div>
+            </div>
+            <p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-green-600">
+              Completo:
+              <span class="flex justify-center items-center text-center gap-2">
+                <i class="fa-solid fa-calendar-days text-blue-500"></i>
+                22/04/2023
+              </span>
+            </p>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+  </main>
 </body>
+
 </html>
