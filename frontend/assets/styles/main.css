@@ -24,8 +24,11 @@ body::-webkit-scrollbar-track {
 }
 
 
-.about {
-  overflow: hidden;
+
+@media (min-width: 640px) {
+  .about {
+    overflow: hidden;
+  }
 }
 
 .animation-rotate {
@@ -93,6 +96,24 @@ body::-webkit-scrollbar-track {
 
 .animate-falling {
   animation: falling 1.5s ease-in-out;
+}
+
+.typing-wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
+.typing-pulse{
+  animation: typing-pulse 1000ms infinite;
+}
+
+@keyframes typing-pulse {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes falling {

@@ -440,7 +440,7 @@ class TaskEditForm {
     if (modalFormExist && modalFormExist.classList.contains(taskId)) return modalFormExist.remove();
     if (modalFormExist) modalFormExist.remove();
 
-    const main = document.querySelector('main');
+    const container = document.getElementById('container');
     const tasksArray = await this.taskModel.getAllTasks();
     const obj = tasksArray.find(task => task._id === taskId);
     const content = this.createElementsModal(obj);
@@ -450,6 +450,11 @@ class TaskEditForm {
     modalForm.setAttribute('id', 'modal-edit');
     modalForm.classList.add(
       obj._id,
+      'absolute',
+      'sm:relative',
+      'top-0',
+      'right-0',
+      'z-50',
       'w-96',
       'h-full',
       'backdrop-blur-md',
@@ -458,13 +463,14 @@ class TaskEditForm {
       'p-4',
       'rounded-b-lg',
       'shadow-lg',
+      'border-x-4',
       'border-b-4',
       'border-blue-600',
       'transition',
       'ease'
     );
     modalForm.appendChild(content);
-    main.appendChild(modalForm);
+    container.appendChild(modalForm);
   }
 
   clickEvent() {

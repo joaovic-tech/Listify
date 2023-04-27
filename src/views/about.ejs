@@ -13,9 +13,9 @@
 
 <body class="bg-gray-900 about">
   <div id="svg_background_dark" class="svg_background pointer-events-none h-screen animate-pulse"></div>
-  <main class="flex justify-between h-screen">
-    <section class="p-8 flex flex-col justify-between w-3/6 animate-down">
-      <div class="w-[30rem] h-auto p-2 bg-blue-600 rounded flex justity-start items-center">
+  <main class="grid gap-2 sm:flex sm:gap-2 justify-between h-screen">
+    <section class="p-8 flex flex-col justify-between sm:w-3/6 w-full animate-down">
+      <div class="w-[30rem] h-auto p-2 mb-32 sm:mb-0 bg-blue-600 rounded flex justity-start items-center">
         <h1 class="text-white text-4xl">Sobre o projeto</h1>
       </div>
       <div class="grid gap-10">
@@ -31,11 +31,15 @@
             class="outline-0 text-blue-600 underline transition hover:text-blue-800 focus:text-blue-800"
             href="https://joaovictor-portfolio.vercel.app/">portfolio</a>. Obrigado por usar minha aplicação!</p>
       </div>
-      <div></div>
+      <ul class="flex gap-4">
+        <li><a href="/home" class="outline-0 text-blue-600 underline transition hover:text-blue-800 focus:text-blue-800">Inicio</a></li>
+        <li><a href="/login" class="outline-0 text-blue-600 underline transition hover:text-blue-800 focus:text-blue-800">Entrar</a></li>
+      </ul>
     </section>
-    <section class="relative w-3/6 animate-falling">
-      <div class="absolute left-0 bottom-0 w-screen h-[122vh] flex flex-col gap-4 justify-center bg-slate-200 shadow-xl shadow-[#000] -rotate-12 p-8">
-        <div class="flex justify-start gap-60 mb-32">
+    <section class="relative w-full sm:w-3/6 sm:bg-transparent bg-slate-200 animate-falling flex flex-col justify-between">
+      <div
+        class="sm:absolute left-0 bottom-0 w-screen h-[122vh] flex flex-col gap-4 justify-center bg-slate-200 shadow-xl sm:shadow-[#000] shadow-transparent sm:-rotate-12 p-8">
+        <div class="flex justify-start sm:gap-60 mb-32">
           <img src="/assets/svg/squares.svg" class="" alt="squares" />
           <div class="flex flex-col gap-4 text-center">
             <h4 class="text-bold text-4xl text-gray-950">Tarefas</h4>
@@ -43,10 +47,13 @@
           </div>
           <i class="fa-solid fa-list-check text-blue-600 text-4xl"></i>
         </div>
-        <div class="w-full bg-gray-700 rounded-lg">
-          <input
-            class="outline-0 w-full py-2 px-3 bg-slate-50 dark:bg-gray-700 text-gray-950 dark:text-white appearance-none"
-            type="text" placeholder="Exemplo: Estudar para prova" disabled />
+        <div class="w-full bg-slate-50 rounded-lg">
+          <div class="typing-wrapper">
+            <div class="relative flex w-auto">
+              <div id="typing-container" class="outline-0 bg-slate-50 text-gray-950 py-2 pl-3"></div>
+            </div>
+            <p class="text-base text-gray-950 typing-pulse">|</p>
+          </div>                   
           <hr class="border-blue-500" />
           <ul class="w-full flex gap-4 items-center justify-start bg-slate-100 shadow-md rounded-b-lg px-8 py-4">
             <li class="w-8 h-8 p-2 text-md flex justify-center items-center rounded bg-slate-200"><i
@@ -63,11 +70,11 @@
               <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
                 <i
                   class="fa-regular fa-square pointer-events-none checked_false checkbox-task flex justify-center items-center text-center text-3xl pointer-events-auto text-blue-500 transition ease hover:text-blue-800 focus:text-blue-800"></i>
-                <h2 class="text-base text-gray-800 dark:text-white text-bold">Ler livro - 8:00h</h2>
+                <h2 class="text-base text-gray-800 text-bold">Ler livro - 8:00h</h2>
               </div>
               <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
                 <i
-                  class="fa-solid fa-star pointer-events-none flex justify-center items-center text-center py-2 px-3 rounded bg-slate-200 dark:bg-gray-900 text-blue-500"></i>
+                  class="fa-solid fa-star pointer-events-none flex justify-center items-center text-center py-2 px-3 rounded bg-slate-200 text-blue-500"></i>
               </div>
             </div>
             <p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-zinc-400"><i
@@ -78,11 +85,11 @@
               <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
                 <i
                   class="fa-regular fa-square pointer-events-none checked_false checkbox-task flex justify-center items-center text-center text-3xl pointer-events-auto text-blue-500 transition ease hover:text-blue-800 focus:text-blue-800"></i>
-                <h2 class="text-base text-gray-800 dark:text-white text-bold">Reunião - 15:00h</h2>
+                <h2 class="text-base text-gray-800 text-bold">Reunião - 15:00h</h2>
               </div>
               <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
                 <i
-                  class="fa-solid fa-star pointer-events-none flex justify-center items-center text-center py-2 px-3 rounded bg-slate-200 dark:bg-gray-900 text-blue-500"></i>
+                  class="fa-solid fa-star pointer-events-none flex justify-center items-center text-center py-2 px-3 rounded bg-slate-200 text-blue-500"></i>
               </div>
             </div>
             <p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-zinc-400">
@@ -97,11 +104,11 @@
               <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
                 <i
                   class="fa-regular fa-square pointer-events-none checked_false checkbox-task flex justify-center items-center text-center text-3xl pointer-events-auto text-blue-500 transition ease hover:text-blue-800 focus:text-blue-800"></i>
-                <h2 class="text-base text-gray-800 dark:text-white text-bold">Viagem para Acapulco</h2>
+                <h2 class="text-base text-gray-800 text-bold">Viagem para Acapulco</h2>
               </div>
               <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
                 <i
-                  class="fa-solid fa-star pointer-events-none flex justify-center items-center text-center py-2 px-3 rounded bg-slate-200 dark:bg-gray-900 text-blue-500"></i>
+                  class="fa-solid fa-star pointer-events-none flex justify-center items-center text-center py-2 px-3 rounded bg-slate-200 text-blue-500"></i>
               </div>
             </div>
             <p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-zinc-400">
@@ -111,18 +118,17 @@
               </span>
             </p>
           </li>
-          <li
-            class="li-task p-2 grid rounded gap-2 transition ease bg-white dark:hover:bg-gray-600/80 dark:focus:bg-gray-600/80">
+          <li class="li-task p-2 grid rounded gap-2 transition ease bg-white">
             <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
               <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
                 <i
                   class="fa-regular fa-square-check pointer-events-none checked_true text-blue-700 checkbox-task flex justify-center items-center text-center text-3xl pointer-events-auto text-blue-500 transition ease hover:text-blue-800 focus:text-blue-800"></i>
-                <h2 class="text-base text-gray-800 dark:text-white text-bold line-through text-green-600">Concluir as
+                <h2 class="text-base text-gray-800 text-bold line-through text-green-600">Concluir as
                   provas 'Objetivas' da faculdade</h2>
               </div>
               <div class="flex justify-between items-center text-center gap-2 pointer-events-none">
                 <i
-                  class="fa-solid fa-star pointer-events-none flex justify-center items-center text-center py-2 px-3 rounded bg-slate-200 dark:bg-gray-900 text-blue-500"></i>
+                  class="fa-solid fa-star pointer-events-none flex justify-center items-center text-center py-2 px-3 rounded bg-slate-200 text-blue-500"></i>
               </div>
             </div>
             <p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-green-600">
@@ -133,11 +139,43 @@
               </span>
             </p>
           </li>
-
         </ul>
       </div>
+      <%- include('includes/footer') %>
     </section>
   </main>
+  <script>
+    const input = document.getElementById('typing-container');
+    const phrases = ['Estudar para prova', 'Aprender programação', 'Desenvolver projetos'];
+
+    function typePhrase(phrase) {
+      return new Promise((resolve) => {
+        const letters = phrase.split('');
+        let i = 0;
+
+        const intervalId = setInterval(() => {
+          if (i >= letters.length) {
+            clearInterval(intervalId);
+            resolve();
+          } else {
+            input.innerHTML += `${letters[i]}`;
+            i++;
+          }
+        }, 100);
+      });
+    }
+
+    async function typing() {
+      for (const phrase of phrases) {
+        await typePhrase(phrase);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        input.innerHTML = '';
+      }
+      input.innerHTML = 'Desenvolver projetos';
+    }
+
+    typing();
+  </script>
 </body>
 
 </html>

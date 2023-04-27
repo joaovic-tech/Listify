@@ -89,6 +89,7 @@ export default class TaskModel {
       return;
     }
 
+    this.tasks.resetNumTasksContainer();
     data.forEach((obj) => {
       this.tasks.createTask(obj);
     });

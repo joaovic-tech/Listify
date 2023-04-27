@@ -17,9 +17,9 @@
   <script src="/settings/DarkMode.js" defer></script>
 </head>
 
-<body class="dark bg-gray-950 transition duration-500 ease-in-out">
+<body class="dark bg-gray-950 transition duration-500 ease-in-out h-screen">
   <button id="theme-toggle"
-    class="absolute bottom-0 right-0 z-50 outline-0 flex justify-center items-center gap-2 p-2 m-auto transition rounded cursor-pointer dark:bg-gray-800 dark:text-gray-50 bg-gray-300 hover:text-gray-50 hover:bg-gradient-to-r dark:hover:from-blue-500 dark:hover:to-indigo-600 hover:from-yellow-500 hover:to-pink-600 hover:shadow-md dark:hover:shadow-blue-600 hover:shadow-yellow-600">
+    class="absolute bottom-0 right-0 z-50 outline-0 flex justify-center items-center gap-2 p-2 m-auto transition rounded cursor-pointer dark:bg-gray-900 dark:text-gray-50 bg-gray-300 hover:text-gray-50 hover:bg-gradient-to-r dark:hover:from-blue-500 dark:hover:to-indigo-600 hover:from-yellow-500 hover:to-pink-600 hover:shadow-md dark:hover:shadow-blue-600 hover:shadow-yellow-600">
     <i id="theme-icon" class="fas fa-moon pointer-events-none"></i>
     <span id="theme-text">Dark mode</span>
   </button>
@@ -29,18 +29,18 @@
   <%- include('includes/messages'); %>
 
 
-  <section class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 relative">
+  <section class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-full lg:py-0 relative">
     <a href="/" class="flex gap-4 items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
       <i class="fa-solid fa-list text-blue-500"></i>
       Listify
     </a>
     <div
       class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+      <div class="p-6 space-y-4 md:space-y-6 sm:p-8  sm:h-auto h-full">
         <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
           Cadastre-se
         </h1>
-        <form id="form-register" class="space-y-4 md:space-y-6" action="/auth/register" method="post">
+        <form id="form-register" class="space-y-4 md:space-y-6 sm:h-auto h-full" action="/auth/register" method="post">
           <div>
             <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seu
               username</label>

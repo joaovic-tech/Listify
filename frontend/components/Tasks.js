@@ -3,6 +3,8 @@ import ToggleStyles from "../utils/ToggleStyles.js";
 export default class Tasks {
   constructor() {
     this.toggleStyles = new ToggleStyles();
+    this.numCheckedTask = 0;
+    this.totalTasks = 0;
   }
 
   getConclusionText(conclusion) {
@@ -143,6 +145,24 @@ export default class Tasks {
     return icon;
   }
 
+  resetNumTasksContainer() {
+    this.numCheckedTask = 0;
+    this.totalTasks = 0;
+  }
+
+  createNumTasksContainer(obj) {
+    const numTasksContainer = document.getElementById('num-tasks');
+
+    obj.checked_task === 'on' ? this.numCheckedTask++ : null;
+    this.totalTasks++
+
+    const styles = "text-red-100 p-1 rounded shadow-lg";
+
+    numTasksContainer.innerHTML = `<li class="${styles} bg-green-600 shadow-green-500/50">Concluídas: ${this.numCheckedTask}</li>`;
+    numTasksContainer.innerHTML += `<li class="${styles} bg-rose-600 shadow-rose-500/50">Pendentes: ${this.totalTasks - this.numCheckedTask}</li>`;
+    numTasksContainer.innerHTML += `<li class="${styles} bg-blue-600 shadow-blue-500/50">Total de tarefas: ${this.totalTasks}</li>`;
+  }
+
   createTask(obj) {
     const {
       _id,
@@ -176,6 +196,7 @@ export default class Tasks {
     const textOptions = this.getTextOptions(checked_task, conclusion, repeat);
     textOptions ? li.innerHTML += textOptions : null;
 
+    this.createNumTasksContainer(obj);
     ul.appendChild(li);
     return ul;
   }

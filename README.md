@@ -29,9 +29,17 @@
 * [x] Colocar tema padrão dark nos body e no DarkMode.js
 * [x] Melhorar a tela 404
 * [x] Melhorar a mensagem de success e errors do `flash`
-* [ ] Criar a tela de about - falando o intuito do projeto e um campo para mandar mensagem para o e-mail
-* [ ] Na tela do dashboard colocar quantas tarefas concluídas e quantas não concluídas
-* [ ] Melhorar a responsividade
+* [x] Criar a tela de about - falando o intuito do projeto e um campo para mandar mensagem para o e-mail
+* [x] Na tela do dashboard colocar quantas tarefas concluídas e quantas não concluídas
+* [x] Melhorar a responsividade
+  * [x] Register
+  * [x] Login
+  * [x] Profile
+  * [x] Home
+  * [x] Dashboard - Bug na hora de editar a task
+  * [x] About
+  * [x] 404
+[ ] Fazer o pegar e arrastar a imagem de foto de perfil
 
 ### ***Animação***
 * [ ] Fazer `animação` de quando a página for renderizada (cada página será diferente)
