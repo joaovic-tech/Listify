@@ -42,7 +42,6 @@ export default class Message {
       'shadow-gray-300',
       'opacity-0',
       'scale-90',
-      'animate-pulse',
     );
 
     modalMessage.innerHTML = `${icon} ${msg}`;    
@@ -71,6 +70,6 @@ export default class Message {
 
     setTimeout(() => {
       modalMessage.remove();
-    }, 5000);
+    }, 3000);
   }
 }

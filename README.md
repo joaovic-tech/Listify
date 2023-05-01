@@ -21,25 +21,10 @@
 * [x] Model para pergunta se quer realmente apagar a conta
 ---
 ### Tasks
-* [x] Profile - dark mode
-* [x] Dashboard - dark mode
-* [x] Home - dark mode
-* [x] Login - dark mode
-* [x] Register - dark mode
-* [x] Colocar tema padrão dark nos body e no DarkMode.js
-* [x] Melhorar a tela 404
-* [x] Melhorar a mensagem de success e errors do `flash`
-* [x] Criar a tela de about - falando o intuito do projeto e um campo para mandar mensagem para o e-mail
-* [x] Na tela do dashboard colocar quantas tarefas concluídas e quantas não concluídas
-* [x] Melhorar a responsividade
-  * [x] Register
-  * [x] Login
-  * [x] Profile
-  * [x] Home
-  * [x] Dashboard - Bug na hora de editar a task
-  * [x] About
-  * [x] 404
-[ ] Fazer o pegar e arrastar a imagem de foto de perfil
+[x] Fazer o pegar e arrastar a imagem de foto de perfil
+[x] Bug nos calendário `Na hora de salvar ou criar uma task`
+[x] Melhorar a posição do TaskEditForm
+[ ] Criar uma página listando os perfis de usuário e mostrando quantas tarefas completadas
 
 ### ***Animação***
 * [ ] Fazer `animação` de quando a página for renderizada (cada página será diferente)

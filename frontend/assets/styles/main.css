@@ -23,8 +23,6 @@ body::-webkit-scrollbar-track {
   background-color: #ffffff00;
 }
 
-
-
 @media (min-width: 640px) {
   .about {
     overflow: hidden;
@@ -82,7 +80,7 @@ body::-webkit-scrollbar-track {
 }
 
 .line-animate {
-  animation: line-animate 5s linear;
+  animation: line-animate 3s linear;
   animation-fill-mode: forwards;
 }
 

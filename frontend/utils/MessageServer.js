@@ -7,7 +7,7 @@ class MessageServer {
 
       setInterval(() => {
         msg.remove();
-      }, 5000);
+      }, 3000);
     });
   }
 }

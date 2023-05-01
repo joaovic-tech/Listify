@@ -435,10 +435,22 @@ class TaskEditForm {
     return form;
   }
 
+  removeModal(modal) {
+    setTimeout(() => {
+      modal.classList.remove('translate-x-0');
+      modal.classList.add('translate-x-full');
+    }, 100);
+
+    setTimeout(() => {
+      modal.remove();
+    }, 300);
+  }
+
   async createModal(taskId) {
     const modalFormExist = document.querySelector('aside');
-    if (modalFormExist && modalFormExist.classList.contains(taskId)) return modalFormExist.remove();
-    if (modalFormExist) modalFormExist.remove();
+
+    if (modalFormExist && modalFormExist.classList.contains(taskId)) return this.removeModal(modalFormExist);
+    if (modalFormExist) this.removeModal(modalFormExist);;
 
     const container = document.getElementById('container');
     const tasksArray = await this.taskModel.getAllTasks();
@@ -451,12 +463,10 @@ class TaskEditForm {
     modalForm.classList.add(
       obj._id,
       'absolute',
-      'sm:relative',
       'top-0',
-      'right-0',
       'z-50',
       'w-96',
-      'h-full',
+      'h-auto',
       'backdrop-blur-md',
       'bg-white/30',
       'dark:bg-gray-900/30',
@@ -466,9 +476,17 @@ class TaskEditForm {
       'border-x-4',
       'border-b-4',
       'border-blue-600',
+      'translate-x-full',
+      'right-0',
       'transition',
-      'ease'
+      'ease',
+      'duration-300',
     );
+
+    setTimeout(() => {
+      modalForm.classList.add('translate-x-0');
+    }, 100);
+    
     modalForm.appendChild(content);
     container.appendChild(modalForm);
   }

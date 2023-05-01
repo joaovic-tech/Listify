@@ -20,9 +20,9 @@ export default class Calendar {
       'Novembro': '11',
       'Dezembro': '12'
     };
-    this.stylesIconCheck = ['text-gray-950', 'text-blue-500', 'dark:text-blue-500', 'bg-gray-900', 'bg-gray-800', 'dark:bg-gray-800', 'border-slate-200', 'border-blue-500', 'dark:border-gray-800', 'dark:border-blue-500'];
     this.toggleStyles = new ToggleStyles();
     this.calendar = element;
+    this.stylesIconCheck = ['active', 'text-gray-950', 'text-blue-500', 'dark:text-blue-500', 'bg-gray-900', 'bg-gray-800', 'dark:bg-gray-800', 'border-slate-200', 'border-blue-500', 'dark:border-gray-800', 'dark:border-blue-500'];
   }
 
   selectDay(el) {
@@ -34,14 +34,18 @@ export default class Calendar {
       selectedNumbers.id = '';
       selectedNumbers.classList.remove(
         'text-blue-600',
-        'bg-gray-950'
+        'dark:text-blue-600',
+        'text-white',
+        'bg-gray-950',
       );
     }
 
     el.id = 'conclusion-day';
     el.classList.add(
       'text-blue-600',
-      'bg-gray-950'
+      'text-white',
+      'bg-gray-950',
+      'dark:text-blue-600',
     );
   }
 
@@ -52,7 +56,13 @@ export default class Calendar {
 
     const calendarContainer = this.calendar;
     calendarContainer.innerHTML = '';
-    calendarContainer.classList.add('bg-slate-200', 'dark:bg-gray-800', 'p-2', 'rounded');
+    calendarContainer.classList.add(
+      'backdrop-blur-md',
+      'bg-white/30',
+      'dark:bg-gray-900/30',
+      'p-2',
+      'rounded'
+    );
 
     const monthHeader = document.createElement('caption');
     monthHeader.innerHTML = `<p class="flex gap-2 text-gray-950 dark:text-white" id="conclusion-month">${this.monthNames[this.currentMonth]} ${year}</p>`;
@@ -92,7 +102,6 @@ export default class Calendar {
       for (let j = 0; j < 7; j++) {
         const dayCell = document.createElement('td');
         dayCell.classList.add(
-          'text-gray-950',
           'dark:text-white',
           'text-center',
           'p-2',
@@ -164,20 +173,15 @@ export default class Calendar {
     this.createCalendar();
   }
 
-  activeIcon(selector) {
-    const conclusion = document.querySelector(`${selector} #conclusion`);
+  activeIcon() {
     const labelConclusion = document.getElementById('label-conclusion');
-
-    if (!conclusion.value) {
-      this.toggleStyles.toggle(labelConclusion, this.stylesIconCheck);
-      return;
-    }
+    
     this.toggleStyles.toggle(labelConclusion, this.stylesIconCheck);
   }
 
   confirmCalendar(selector) {
     const inputConclusion = document.querySelector(`${selector} #conclusion`);
-    let monthAndYear = document.getElementById('conclusion-month').innerText;
+    let monthAndYear = document.querySelector(`${selector} #conclusion-month`).innerText;
 
     monthAndYear = monthAndYear.split(' ');
 
@@ -185,7 +189,8 @@ export default class Calendar {
     const year = monthAndYear[1];
     const month = this.monthMapping[monthName];
 
-    const day = document.getElementById('conclusion-day').innerText;
+    let day = document.getElementById('conclusion-day').innerText;
+    if (day <= 9) day = `0${day}`;
 
     const dateFormatted = `${year}-${month}-${day}`;
 
@@ -193,8 +198,10 @@ export default class Calendar {
 
     if (selector === '#task-form') {
       const model = document.getElementById('modal-conclusion');
+      const labelConclusion = document.getElementById('label-conclusion');
       model.classList.remove('show');
-      this.activeIcon(selector);
+      
+      if (!labelConclusion.classList.contains('active')) this.activeIcon(selector);
     }
   }
 
@@ -204,8 +211,24 @@ export default class Calendar {
     btnConclusion.addEventListener('click', () => this.confirmCalendar('#task-form'));
   }
 
+  clickCancel(selector = '#task-form') {
+    const btnConclusion = document.getElementById('btn-conclusion-cancel');
+
+    btnConclusion.addEventListener('click', () => {
+      const conclusion = document.querySelector(`${selector} #conclusion`);
+      const model = document.getElementById('modal-conclusion');
+      const labelConclusion = document.querySelector(`${selector} #label-conclusion`);
+      
+      if (conclusion.value) this.toggleStyles.toggle(labelConclusion, this.stylesIconCheck);
+
+      conclusion.value = '';
+      model.classList.remove('show');
+    });
+  }
+
   init() {
     this.clickConfirm();
+    this.clickCancel();
     this.createCalendar();
   }
 }

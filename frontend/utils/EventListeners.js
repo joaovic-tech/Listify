@@ -14,7 +14,16 @@ export default class EventListeners {
 
   closeTaskEditForm() {
     const modal = document.querySelector('aside');
-    modal.remove();
+    
+    setTimeout(() => {
+      modal.classList.remove('translate-x-0');
+      modal.classList.add('translate-x-full');
+    }, 100);
+
+    setTimeout(() => {
+      modal.remove();
+    }, 300);
+
   }
 
   textHeader(id) {

@@ -99,16 +99,18 @@ export default class TaskModel {
     const inputs = document.querySelectorAll('input');
     const labels = document.querySelectorAll('#task-form label');
     const labelStyles = [
-      'text-white',
+      'text-gray-950',
       'text-blue-500',
       'bg-gray-900',
       'bg-gray-800',
-      'border-gray-700',
-      'border-blue-500'
+      'border-blue-500',
+      'dark:border-gray-800',
+      'dark:text-blue-500',
+      'dark:border-blue-500',
+      'dark:bg-gray-800',
     ];
 
     for (const label of labels) {
-
       if (label.classList.contains('border-blue-500')) {
         this.toggleStyles.toggle(label, labelStyles);
       }
