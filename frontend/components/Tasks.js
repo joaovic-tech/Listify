@@ -14,7 +14,7 @@ export default class Tasks {
       const month = parts[1];
       const year = parts[0];
       const formattedDate = `${day}/${month}/${year}`;
-  
+
       return `
         <span class="flex justify-center items-center text-center gap-2">
           <i class="fa-solid fa-calendar-days text-blue-500"></i>
@@ -24,27 +24,36 @@ export default class Tasks {
     } else {
       return '';
     }
-  }  
+  }
 
-  getRepeatIcon(repeat) {
-    return repeat[0] !== 'time-repeat: ' ? `<i class="fa-solid fa-repeat text-blue-500"></i>` : '';
+  getRepeatContent(repeat) {
+    const hours = repeat[repeat.length - 1].split('time-repeat: ');
+    const icon = '<i class="fa-solid fa-repeat text-blue-500"></i>'
+    const content = `
+    <span class="flex justify-center items-center text-center gap-2">
+      ${icon}
+      ${hours[hours.length - 1]}
+    </span>
+  `;
+
+    return repeat[0] !== 'time-repeat: ' ? content : '';
   }
 
   getTextOptions(checked_task, conclusion, repeat) {
     const textOptions = [];
 
     this.getConclusionText(conclusion) ? textOptions.push(this.getConclusionText(conclusion)) : null;
-    this.getRepeatIcon(repeat) ? textOptions.push(this.getRepeatIcon(repeat)) : null;
+    this.getRepeatContent(repeat) ? textOptions.push(this.getRepeatContent(repeat)) : null;
 
     if (checked_task === 'off') {
       return textOptions.length > 0 ?
         `<p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-zinc-400">${textOptions.join('')}</p>` :
-        ''
+        null;
     }
 
     return textOptions.length > 0 ?
       `<p class="pointer-events-none flex justify-start items-center text-center gap-4 text-sm text-green-600">Completo: ${textOptions.join('')}</p>` :
-      ''
+      null;
   }
 
   createLi(checked_task, taskId) {
@@ -52,6 +61,7 @@ export default class Tasks {
     li.setAttribute('id', taskId);
     li.classList.add(
       'li-task',
+      'slide-in-left',
       'p-2',
       'grid',
       'rounded',

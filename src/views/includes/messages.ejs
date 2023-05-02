@@ -1,5 +1,5 @@
 <% if (errors.length > 0) { %>
-  <div id="msg-server" role="alert" class="absolute z-50 top-0 right-0 w-auto h-16 py-2 px-4 transition duration-500 ease flex gap-2 justify-center items-centershadow-md bg-gray-300 shadow-md shadow-gray-300 dark:bg-gray-900 dark:shadow-gray-950">
+  <div id="msg-server" role="alert" class="absolute z-50 top-0 left-0 w-auto h-16 py-2 px-4 transition duration-500 ease flex gap-2 justify-center items-centershadow-md bg-gray-300 shadow-md shadow-gray-300 dark:bg-gray-900 dark:shadow-gray-950">
     <div class="px-4 py-3">
       <p class="text-rose-500 font-semibold">
         <% errors.forEach(msg => { %>
@@ -12,7 +12,7 @@
 <% } %>
 
 <% if (success.length > 0) { %>
-  <div id="msg-server" role="alert" class="absolute z-50 top-0 right-0 w-auto h-16 py-2 px-4 transition duration-500 ease flex gap-2 justify-center items-centershadow-md bg-gray-300 shadow-md shadow-gray-300 dark:bg-gray-900 dark:shadow-gray-950">
+  <div id="msg-server" role="alert" class="absolute z-50 top-0 left-0 w-auto h-16 py-2 px-4 transition duration-500 ease flex gap-2 justify-center items-centershadow-md bg-gray-300 shadow-md shadow-gray-300 dark:bg-gray-900 dark:shadow-gray-950">
     <div class="px-4 py-3">
       <p class="text-green-500 font-semibold">
         <% success.forEach(msg => { %>

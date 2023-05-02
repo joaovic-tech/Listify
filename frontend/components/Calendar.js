@@ -57,10 +57,17 @@ export default class Calendar {
     const calendarContainer = this.calendar;
     calendarContainer.innerHTML = '';
     calendarContainer.classList.add(
+      'flex',
+      'flex-col',
+      'justify-center',
+      'items-center',
+      'text-center',
       'backdrop-blur-md',
       'bg-white/30',
       'dark:bg-gray-900/30',
-      'p-2',
+      'sm:p-2',
+      'text-xl',
+      'sm:text-base',
       'rounded'
     );
 
@@ -68,15 +75,15 @@ export default class Calendar {
     monthHeader.innerHTML = `<p class="flex gap-2 text-gray-950 dark:text-white" id="conclusion-month">${this.monthNames[this.currentMonth]} ${year}</p>`;
 
     const prevBtn = document.createElement('button');
-    prevBtn.innerHTML = '<i class="fa-solid fa-caret-left text-xl text-gray-950 dark:text-white"></i>';
+    prevBtn.innerHTML = '<i class="fa-solid fa-caret-left p-2 text-3xl sm:text-xl text-gray-950 dark:text-white"></i>';
     prevBtn.addEventListener('click', () => this.previousMonth());
 
     const nextBtn = document.createElement('button');
-    nextBtn.innerHTML = '<i class="fa-solid fa-caret-right text-xl text-gray-950 dark:text-white"></i>';
+    nextBtn.innerHTML = '<i class="fa-solid fa-caret-right p-2 text-3xl sm:text-xl text-gray-950 dark:text-white"></i>';
     nextBtn.addEventListener('click', () => this.nextMonth());
 
     const arrowAndCurrentMonth = document.createElement('div');
-    arrowAndCurrentMonth.classList.add('flex', 'justify-between', 'gap-2', 'text-gray-950', 'dark:text-white');
+    arrowAndCurrentMonth.classList.add('flex', 'justify-center', 'items-center', 'text-center', 'gap-6', 'text-gray-950', 'dark:text-white');
 
     const divCurrentMonth = document.createElement('div');
 
@@ -104,7 +111,10 @@ export default class Calendar {
         dayCell.classList.add(
           'dark:text-white',
           'text-center',
-          'p-2',
+          'p-4',
+          'sm:p-2',
+          'text-xl',
+          'sm:text-base',
           'rounded',
           'cursor-pointer',
           'transition',
@@ -115,6 +125,7 @@ export default class Calendar {
         );
 
         dayCell.addEventListener('click', (event) => {
+          if (dayCell.classList.contains('empty')) return;
           const clickedDayCell = event.target;
           this.selectDay(clickedDayCell);
         });
@@ -126,6 +137,7 @@ export default class Calendar {
             'focus:text-blue-600',
             'focus:bg-gray-950'
           );
+          dayCell.classList.add('empty', 'cursor-default')
         } else {
           if (this.date.getFullYear() === new Date(this.calendarValue).getFullYear() &&
             this.currentMonth === new Date(this.calendarValue).getMonth() &&

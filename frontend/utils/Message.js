@@ -20,7 +20,7 @@ export default class Message {
       'fixed',
       'z-50',
       'top-0',
-      'right-0',
+      'left-0',
       'w-auto',
       'h-16',
       'py-2',

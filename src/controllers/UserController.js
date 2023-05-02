@@ -9,7 +9,7 @@ class UserController {
       await userModel.create(req.body);
 
       if (userModel.errors.length > 0) {
-        req.flash("errors", userModel.errors);
+        req.flash("errors", userModel.errors[0]);
         req.session.save(() => {
           return res.redirect('/register');
         });
