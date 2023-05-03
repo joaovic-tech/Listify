@@ -79,7 +79,7 @@ class TaskEditForm {
 
   createP(id, text) {
     const p = document.createElement("p");
-    p.classList.add("text-sm", "text-zinc-400", "text-bold");
+    p.classList.add("text-sm", "text-zinc-400", "font-bold");
     p.id = id;
     p.innerText = text;
     return p;

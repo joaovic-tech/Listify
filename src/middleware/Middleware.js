@@ -1,7 +1,8 @@
 const { verify } = require('jsonwebtoken');
+const UserModel = require('../models/UserModel');
 
 class Middleware {
-  loginRequired(req, res, next) {
+  async loginRequired(req, res, next) {
     if (!req.session.user) {
       req.flash("errors", `Você precisar está logado para acessar a página`);
       return req.session.save(() => res.redirect('/login'));
@@ -14,8 +15,8 @@ class Middleware {
       
       return next();
     } catch (err) {
-      console.error(err);
-      req.flash("errors", `Token inválido ou expirado`);
+      const { id } = req.session.user;
+      await new UserModel().deleteSessionUser(id);
       return req.session.save(() => res.redirect('/login/logout'));
     }
   }

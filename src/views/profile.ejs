@@ -5,8 +5,10 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/assets/img/Logo.png">
   <link rel="stylesheet" href="/assets/styles/main.css" />
   <title>Edite seu perfil - Listify</title>
+  <meta name="description" content="Perfil da sua conta Listify, Edite ou exclua sua conta">
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer>
     tailwind.config = {
@@ -14,58 +16,69 @@
     }
   </script>
   <script src="https://kit.fontawesome.com/673aed7dea.js" crossorigin="anonymous"></script>
+  <style>
+    html {
+      overflow: hidden;
+    }
+
+    @media (max-width: 650px) {
+      html {
+        overflow: auto;
+      }
+    }
+  </style>
 </head>
 
-<body class="dark bg-gray-950 transition duration-500 ease-in-out flex justify-center items-center h-screen">
+<body id="profile" class="dark bg-gray-950 transition duration-500 ease-in-out flex flex-col justify-center items-center h-full gap-8 sm:gap-0">
   <div id="svg_background_dark" class="svg_background pointer-events-none h-screen animate-pulse"></div>
 
-  <%- include('includes/messages'); %>
+  <nav class="relative z-50 animate-nav flex items-center justify-between w-full h-auto p-2 bg-slate-100 dark:bg-gray-800 transition duration-500 ease-in-out shadow-md shadow-gray-300 dark:shadow-gray-950 rounded-b-lg">
+    <div class="flex items-center">
+      <i
+        class="fa-solid fa-list-ul fill-current rounded-md px-3 py-3 bg-slate-200 dark:bg-gray-900 text-blue-500"></i>
+      <p class="ml-4 text-lg font-semibold text-gray-800 dark:text-white">
+        Meu perfil</span>
+      </p>
+    </div>
+    <div class="relative">
+      <button type="button" id="btn-settings"
+        class="rounded-md bg-slate-200 dark:bg-gray-900 px-3 py-2 text-gray-500 hover:bg-slate-300 dark:hover:bg-gray-900 hover:text-blue-500">
+        <i class="fa-solid fa-gear pointer-events-none"></i>
+      </button>
+      <ul id="menu-settings"
+        class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute z-50 top-12 right-0 w-56 h-auto grid gap-2 p-2 rounded-b-lg justify-center items-center bg-slate-100 dark:bg-gray-800 text-base text-gray-800 dark:text-white">
+        <li>
+          <button id="theme-toggle"
+            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 border-2 border-transparent transition ease hover:bg-slate-300 dark:hover:bg-gray-950 dark:hover:text-blue-600 hover:text-yellow-600 rounded dark:hover:border-blue-600 hover:border-yellow-600 rounded-lg cursor-pointer">
+            <i id="theme-icon" class="fas fa-moon pointer-events-none"></i>
+            Dark mode
+          </button>
+        </li>
+        <li>
+          <a href="/dashboard"
+            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 border-2 border-transparent transition ease hover:bg-slate-300 dark:hover:bg-gray-950 hover:text-blue-500 hover:border-blue-500 rounded-lg cursor-pointer">
+            <i class="fa-solid fa-arrow-left pointer-events-none"></i>
+            Voltar
+          </a>
+        </li>
+        <li>
+          <a href="/login/logout"
+            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 border-2 border-transparent transition ease hover:bg-slate-300 dark:hover:bg-gray-950 hover:text-rose-500 hover:border-rose-500 rounded-lg cursor-pointer">
+            <i class="fas fa-sign-out-alt pointer-events-none"></i>
+            Sair
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-  <main class="flex flex-col items-center justify-between gap-2 w-screen h-screen">
-    <nav class="animate-falling flex items-center justify-between w-full h-auto p-2 bg-slate-100 dark:bg-gray-800 transition duration-500 ease-in-out shadow-md shadow-gray-300 dark:shadow-gray-950 rounded-b-lg">
-      <div class="flex items-center">
-        <i
-          class="fa-solid fa-list-ul fill-current rounded-md px-3 py-3 bg-slate-200 dark:bg-gray-900 text-blue-500"></i>
-        <p class="ml-4 text-lg font-semibold text-gray-800 dark:text-white">
-          Meu perfil</span>
-        </p>
-      </div>
-      <div class="relative">
-        <button type="button" id="btn-settings"
-          class="rounded-md bg-slate-200 dark:bg-gray-900 px-3 py-2 text-gray-500 hover:bg-slate-300 dark:hover:bg-gray-900 hover:text-blue-500">
-          <i class="fa-solid fa-gear pointer-events-none"></i>
-        </button>
-        <ul id="menu-settings"
-          class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute z-50 top-12 right-0 w-56 h-auto grid gap-2 p-2 rounded-b-lg justify-center items-center bg-slate-100 dark:bg-gray-800 text-base text-gray-800 dark:text-white">
-          <li>
-            <button id="theme-toggle"
-              class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 transition ease hover:bg-slate-300 dark:hover:bg-gray-700 hover:text-blue-600 rounded-lg cursor-pointer">
-              <i id="theme-icon" class="fas fa-moon pointer-events-none"></i>
-              Dark mode
-            </button>
-          </li>
-          <li>
-            <a href="/dashboard"
-              class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 transition ease hover:bg-slate-300 dark:hover:bg-gray-700 hover:text-blue-600 rounded-lg cursor-pointer">
-              <i class="fa-solid fa-arrow-left pointer-events-none"></i>
-              Voltar
-            </a>
-          </li>
-          <li>
-            <a href="/login/logout"
-              class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 transition ease hover:bg-slate-300 dark:hover:bg-gray-700 hover:text-blue-600 rounded-lg cursor-pointer">
-              <i class="fas fa-sign-out-alt pointer-events-none"></i>
-              Sair
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <section
-      class="slide-in-left relative grid gap-8 justify-initial items-center text-cente m-auto bg-white dark:bg-gray-800 p-8 rounded-lg w-10/12 h-auto transition duration-500 ease-in-out">
-      <div class="grid sm:flex justify-between items-center text-center">
-        <form id="form-user-image" action="/update/user/image/<%- user.id %>" method="post"
-          enctype="multipart/form-data" class="w-full sm:w-6/12 p-3 flex flex-col gap-4">
+  <%- include('includes/messages'); %>
+  
+  <main class="flex items-center justify-between gap-2 w-screen h-screen">
+    <section class="slide-in-left relative z-0 flex flex-col gap-8 justify-between items-center text-cente m-auto bg-white dark:bg-gray-700 p-8 p-2 w-full sm:w-11/12 h-auto transition duration-500 ease-in-out sm:rounded-lg">
+      <div class="w-full sm:flex flex-col sm:flex-row justify-between items-center text-center">
+        <form id="form-user-image" class="w-full sm:w-6/12 p-3 flex flex-col gap-4" action="/update/user/image/<%- user.id %>" method="post"
+          enctype="multipart/form-data">
           <input type="text" name="username" id="username" value="<%- user.username %>" hidden />
           <input type="text" name="email" id="email" value="<%- user.email %>" hidden />
           <div class="flex justify-start items-center text-center gap-2">
@@ -87,7 +100,7 @@
           </div>
           <div class="flex items-center justify-center w-full">
             <label for="profile_picture"
-              class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+              class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-500 dark:hover:border-gray-500 dark:hover:bg-gray-500">
               <div class="flex flex-col items-center justify-center pt-5 pb-6">
                 <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor"
                   viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -109,14 +122,14 @@
             <label for="username"
               class="text-start block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
             <input type="text" name="username" id="username"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               value="<%- user.username %>" autocomplete="true" />
           </div>
           <div>
             <label for="email"
               class="text-start block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
             <input type="email" name="email" id="email"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="exemplo@dominio.com" value="<%- user.email %>" autocomplete="true" />
           </div>
           <div class="relative">
@@ -127,14 +140,14 @@
             <label for="password" class="text-start block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nova
               senha</label>
             <input type="password" name="password" id="password" placeholder="••••••••"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               autocomplete="true" />
           </div>
           <div>
             <label for="confirm-password"
               class="text-start block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirme sua senha</label>
             <input type="password" name="confirmPassword" id="confirm-password" placeholder="••••••••"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               autocomplete="true" />
           </div>
           <button type="submit"
@@ -143,7 +156,7 @@
           </button>
         </form>
       </div>
-      <div class="grid gap-2 sm:gap-0 sm:flex justify-between items-center text-center">
+      <div class="w-full flex flex-col gap-2 sm:flex justify-between items-center text-center">
         <h2
           class="ml-3 px-8 py-1 bg-gradient-to-l dark:from-gray-800 dark:to-gray-900 from-white to-gray-300 text-blue-500 font-bold rounded-lg">
           <span class="text-xl font-semibold">Id:</span>

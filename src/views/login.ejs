@@ -5,8 +5,10 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="/assets/img/Logo.png">
   <link rel="stylesheet" href="/assets/styles/main.css" />
   <title>Login - Listify</title>
+  <meta name="description" content="Entrar no Listify, Acesse suas tarefas e gerencie suas tarefas">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -43,7 +45,7 @@
           <div>
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
             <input type="email" name="email" id="email"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              class="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="exemplo@dominio.com" />
           </div>
           <div class="relative">
@@ -53,14 +55,14 @@
             </span>
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Senha</label>
             <input type="password" name="password" id="password" placeholder="••••••••"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              class="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg outline-0 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               autocomplete />
           </div>
           <button type="submit"
-            class="w-full text-white transition-all duration-300 ease-in-out bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center hover:shadow-md hover:shadow-blue-600">
+            class="w-full font-bold text-white transition-all duration-300 ease-in-out bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center hover:shadow-md hover:shadow-blue-600">
             Login
           </button>
-          <p class="text-lg text-zinc-300">Não possui uma conta? <a
+          <p class="font-bold text-lg text-zinc-400">Não possui uma conta? <a
               class="outline-0 text-blue-500 transition ease hover:text-blue-700 transition ease focus:text-blue-700"
               href="/register">Cadastre-se.</a></p>
         </form>

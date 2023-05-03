@@ -93,7 +93,7 @@ export default class Tasks {
 
   createTitle(checked_task, text) {
     const h2 = document.createElement('h2');
-    h2.classList.add('text-base', 'text-gray-800', 'dark:text-white', 'text-bold');
+    h2.classList.add('text-base', 'text-gray-800', 'dark:text-white', 'font-bold');
     h2.textContent = text;
 
     if (checked_task === 'off') return h2;

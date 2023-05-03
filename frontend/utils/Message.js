@@ -33,7 +33,7 @@ export default class Message {
       'gap-2',
       'justify-center',
       'items-center',
-      'text-bold',
+      'font-bold',
       'text-center',
       'bg-gray-300',
       'dark:bg-gray-950',

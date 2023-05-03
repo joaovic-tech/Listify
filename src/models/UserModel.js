@@ -8,6 +8,7 @@ const TaskModel = require('./TaskModel');
 const TokenModel = require('./TokenModel');
 const fs = require('fs');
 const path = require('path');
+const dayjs = require('dayjs');
 
 class UserModel {
   constructor() {
@@ -279,7 +280,7 @@ class UserModel {
       };
 
     } catch (e) {
-      console.log(e);
+      console.error(e);
       this.errors.push('Token expirado ou inválido');
     }
   }
@@ -300,6 +301,20 @@ class UserModel {
     }
   
     return this.userModel.deleteMany({ username: user.username });
+  }
+
+  async deleteSessionUser(id) {
+    if (typeof id !== 'string') return;
+    
+    try {
+      const user = await this.userModel.findOne({ _id: id });
+      if (!user) return;
+
+      await this.refreshTokenModel.deleteMany({ userId: user.username });
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
   }
 }
 

@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="/assets/img/Logo.png">
+  <meta name="description" content="Dashboard - Crie e edite suas tarefas">
   <link rel="stylesheet" href="/assets/styles/main.css" />
   <title>Dashboard - Listify</title>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -23,7 +25,7 @@
   <%- include('includes/messages'); %>
 
   <nav
-    class="animate-falling relative flex items-center justify-between w-full p-2 bg-slate-100 dark:bg-gray-800 transition duration-500 ease-in-out shadow-md shadow-gray-300 dark:shadow-gray-950 rounded-b-lg">
+    class="animate-nav relative flex items-center justify-between w-full p-2 bg-slate-100 dark:bg-gray-800 transition duration-500 ease-in-out shadow-md shadow-gray-300 dark:shadow-gray-950 rounded-b-lg">
     <div class="flex items-center w-full">
       <i
         class="fa-solid fa-list-ul fill-current rounded-md px-3 py-3 bg-slate-200 dark:bg-gray-900 text-blue-500"></i>
@@ -50,7 +52,7 @@
       </div>
       <div class="right flex justify-center text-center items-center gap-4">
         <a href="/profile"
-          class="outline-0 capitalize text-bold text-3xl text-blue-600 text-shadow-md text-shadow-300 transition hover:text-blue-700 focus:text-blue-700 hover:underline focus:underline">
+          class="outline-0 capitalize font-bold text-3xl text-blue-600 text-shadow-md text-shadow-300 transition hover:text-blue-700 focus:text-blue-700 hover:underline focus:underline">
           <%- user.username %>
         </a>
         <a href="/profile">
@@ -203,7 +205,7 @@
   </main>
   <div class="fixed bottom-4 right-4 z-50">
     <button type="submit" id="btn-settings"
-      class="rounded-md bg-blue-600 text-lg px-3 py-2 text-white transition hover:bg-blue-700 hover:text-gray-950">
+      class="rounded-md bg-gray-900 text-lg px-3 py-2 text-white shadow-lg transition hover:bg-blue-600 hover:shadow-blue-600 focus:bg-blue-600 focus:shadow-blue-600">
       <i class="fa-solid fa-gear pointer-events-none"></i>
     </button>
     <ul id="menu-settings"
@@ -224,7 +226,7 @@
       </li>
       <li>
         <a href="/profile"
-          class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 border-2 border-transparent transition ease hover:bg-slate-300 dark:hover:bg-gray-950/30 hover:text-blue-500 hover:border-blue-500 rounded-lg cursor-pointer">
+          class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 border-2 border-transparent transition ease hover:bg-slate-300 dark:hover:bg-gray-950/30 hover:text-purple-500 hover:border-purple-500 rounded-lg cursor-pointer">
           <i class="fa-solid fa-user pointer-events-none"></i>
           Editar Perfil
         </a>
