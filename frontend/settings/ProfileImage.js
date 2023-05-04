@@ -1,7 +1,7 @@
-import Message from "../utils/Message.js";
+import Message from '../utils/Message.js';
 
 class ProfileImage {
-  constructor(){
+  constructor() {
     this.imgElement = document.getElementById('image');
     this.uploadInput = document.getElementById('profile_picture');
     this.form = document.getElementById('form-user-image');
@@ -9,48 +9,40 @@ class ProfileImage {
   }
 
   initialize() {
-    // Adiciona o evento "dragover" para o input file
-    this.uploadInput.addEventListener('dragover', (event) => {
-      event.preventDefault();
+    ['dragover', 'drop'].forEach((event) => {
+      this.uploadInput.addEventListener(event, (e) => {
+        e.preventDefault();
+        if (event === 'drop') {
+          const file = e.dataTransfer.files[0];
+          this.uploadInput.value = file.name;
+          this.validateImageType(file);
+        }
+      });
     });
 
-    // Adiciona o evento "drop" para o input file
-    this.uploadInput.addEventListener('drop', (event) => {
-      event.preventDefault();
-
-      // Obtém o arquivo solto
-      const file = event.dataTransfer.files[0];
-
-      // Define o valor do input file para o nome do arquivo
-      this.uploadInput.value = file.name;
-
-      // Valida o tipo de imagem e envia o formulário se for válido
-      this.validateImageType(file);
-    });
-
-    // Adiciona o evento "change" para o input file
     this.uploadInput.addEventListener('change', () => {
-      this.validateImageType(this.uploadInput.files[0]);
+      const file = this.uploadInput.files[0];
+      this.validateImageType(file);
     });
   }
 
-  validateImageType(imageFile){
+  validateImageType(file) {
     const types = ['svg', 'png', 'jpg', 'jpeg', 'gif'];
-    const fileNameSplit = imageFile.name.split('.');
-    const correctType = types.includes(fileNameSplit[fileNameSplit.length - 1]);
-    const image = new Image();
-    image.src = URL.createObjectURL(imageFile);
-    const form = this.form;
+    const ext = file.name.split('.').pop();
+    const isImage = types.includes(ext.toLowerCase());
 
-    image.onload = function() {
-      const verifyLengthImage = this.naturalWidth <= 1080;
+    if (!isImage) {
+      return Message.create('Arquivo inválido, por favor envie uma imagem!', 'red');
+    }
 
-      !verifyLengthImage ? Message.create('Imagem muito grande', 'red') : null;
-
-      if (verifyLengthImage) form.submit();
+    const img = new Image();
+    img.onload = () => {
+      if (img.naturalWidth > 1080) {
+        return Message.create('Imagem muito grande', 'red');
+      }
+      this.form.submit();
     };
-
-    !correctType ? Message.create('Arquivo inválida, por favor envie uma imagem!', 'red') : null;
+    img.src = URL.createObjectURL(file);
   }
 }
 

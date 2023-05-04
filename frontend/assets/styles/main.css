@@ -1,26 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+}
+
+h1,h2,h3,h4,h5 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+p, span, i {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
 }
 
 html {
   overflow-x: hidden;
 }
 
-body::-webkit-scrollbar {
-  width: 0.89rem;
+body.dark::-webkit-scrollbar {
+  width: 0.5rem;
 }
 
-body::-webkit-scrollbar-thumb {
+body.dark::-webkit-scrollbar-thumb {
   background-color: #252e3c;
   border-radius: 0.4rem;
-  border: 0.3rem solid #0f172a;
+  border: 0.3rem solid #030712;
 }
 
-body::-webkit-scrollbar-track {
-  background-color: #ffffff00;
+body.dark::-webkit-scrollbar-track {
+  background: linear-gradient(190deg, #1f2937, #030712);
 }
 
 .animate-nav {
@@ -49,7 +60,7 @@ body::-webkit-scrollbar-track {
   }
 }
 
-@ (min-width: 640px) {
+@media (min-width: 640px) {
   .about {
     overflow: hidden;
   }

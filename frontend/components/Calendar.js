@@ -96,7 +96,7 @@ export default class Calendar {
     const weekdays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
     weekdays.forEach(day => {
       const weekday = document.createElement('th');
-      weekday.classList.add('text-gray-950', 'dark:text-white', 'p-2');
+      weekday.classList.add('text-gray-950', 'dark:text-white', 'p-4', 'sm:p-2');
       weekday.textContent = day;
       weekdaysRow.appendChild(weekday);
     });

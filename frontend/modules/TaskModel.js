@@ -75,8 +75,8 @@ export default class TaskModel {
       const response = await fetch('/tasks');
       const data = await response.json();
       return data;
-    } catch (erro) {
-      console.log(erro);
+    } catch (err) {
+      console.log(err);
     }
   }
 

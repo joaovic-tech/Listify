@@ -7,13 +7,15 @@ export default class Tasks {
     this.totalTasks = 0;
   }
 
-  getConclusionText(conclusion) {
+  getConclusionText(conclusion, boolean) {
     if (conclusion) {
       const parts = conclusion.split('-');
       const day = parts[2];
       const month = parts[1];
       const year = parts[0];
       const formattedDate = `${day}/${month}/${year}`;
+
+      if (boolean) return formattedDate;
 
       return `
         <span class="flex justify-center items-center text-center gap-2">
@@ -58,35 +60,15 @@ export default class Tasks {
 
   createLi(checked_task, taskId) {
     const li = document.createElement('li');
-    li.setAttribute('id', taskId);
-    li.classList.add(
-      'li-task',
-      'slide-in-left',
-      'p-2',
-      'grid',
-      'rounded',
-      'gap-2',
-      'transition',
-      'ease',
-      'cursor-pointer',
-      'backdrop-blur-sm',
-      'bg-white/50',
-      'dark:bg-gray-700/50',
-      'hover:bg-slate-300',
-      'focus:bg-slate-300',
-      'dark:hover:bg-gray-800',
-      'dark:focus:bg-gray-800',
-    );
+    li.id = taskId;
+    li.classList.add('li-task', 'relative', 'z-0', 'slide-in-left', 'p-2', 'grid', 'rounded', 'gap-2', 'transition', 'ease', 'cursor-pointer');
 
-    if (checked_task === 'off') return li;
-    li.classList.add(
-      'bg-white/50',
-      'dark:bg-gray-700/50',
-      'hover:bg-slate-300',
-      'focus:bg-slate-300',
-      'dark:hover:bg-gray-600/80',
-      'dark:focus:bg-gray-600/80',
-    );
+    const bgColors = {
+      off: ['bg-slate-100', 'dark:bg-gray-800', 'hover:bg-slate-300', 'dark:hover:bg-gray-700'],
+      on: ['bg-slate-200/50', 'dark:bg-gray-800/50', 'hover:bg-slate-50/50', 'dark:hover:bg-gray-700/50']
+    }
+
+    li.classList.add(...bgColors[checked_task]);
 
     return li;
   }
@@ -126,32 +108,17 @@ export default class Tasks {
   }
 
   createCheckboxTask(checked_task, id) {
-    let icon;
-
-    if (checked_task === 'on') {
-      icon = this.createIcon('fa-regular', 'fa-square-check');
+    const checked = checked_task === 'on';
+    const icon = this.createIcon('fa-regular', checked ? 'fa-square-check' : 'fa-square');
+    icon.id = id;
+    icon.classList.add('checkbox-task', 'flex', 'justify-center', 'items-center', 'text-center', 'text-3xl', 'pointer-events-auto', 'text-blue-500', 'transition', 'ease', 'hover:text-blue-800', 'focus:text-blue-800');
+  
+    if (checked) {
       icon.classList.add('checked_true', 'text-blue-700');
     } else {
-      icon = this.createIcon('fa-regular', 'fa-square');
       icon.classList.add('checked_false');
     }
-
-    icon.id = id;
-    icon.classList.add(
-      'checkbox-task',
-      'flex',
-      'justify-center',
-      'items-center',
-      'text-center',
-      'text-3xl',
-      'pointer-events-auto',
-      'text-blue-500',
-      'transition',
-      'ease',
-      'hover:text-blue-800',
-      'focus:text-blue-800',
-    );
-
+  
     return icon;
   }
 
@@ -182,32 +149,38 @@ export default class Tasks {
       repeat,
       checked_task
     } = obj;
+  
     const ul = document.getElementById('tasks');
     const li = this.createLi(checked_task, _id);
     const div = document.createElement('div');
     const divRight = document.createElement('div');
     const divLeft = document.createElement('div');
     const taskContent = this.createTitle(checked_task, task);
-    const iconImportant = this.getImportantIcon(important);
+    const iconImportant = important ? this.getImportantIcon(important) : null;
     const checkboxTask = this.createCheckboxTask(checked_task, _id);
     const classDiv = ['flex', 'justify-between', 'items-center', 'text-center', 'gap-2', 'pointer-events-none'];
-
+  
     this.toggleStyles.add(div, classDiv);
     this.toggleStyles.add(divLeft, classDiv);
     this.toggleStyles.add(divRight, classDiv);
-
+  
     divLeft.appendChild(checkboxTask);
     divLeft.appendChild(taskContent);
-    iconImportant ? divRight.appendChild(iconImportant) : null;
+    if (iconImportant) {
+      divRight.appendChild(iconImportant);
+    }
     div.appendChild(divLeft);
     div.appendChild(divRight);
     li.appendChild(div);
-
+  
     const textOptions = this.getTextOptions(checked_task, conclusion, repeat);
-    textOptions ? li.innerHTML += textOptions : null;
-
+    if (textOptions) {
+      li.insertAdjacentHTML('beforeend', textOptions);
+    }
+  
     this.createNumTasksContainer(obj);
     ul.appendChild(li);
+  
     return ul;
   }
 }

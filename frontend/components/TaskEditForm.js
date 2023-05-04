@@ -1,6 +1,7 @@
 import TaskModel from "../modules/TaskModel.js";
 import ToggleStyles from "../utils/ToggleStyles.js";
 import Calendar from "./Calendar.js";
+import Tasks from "./Tasks.js";
 
 class TaskEditForm {
   constructor() {
@@ -456,7 +457,7 @@ class TaskEditForm {
     const textId = this.createP("task-id", `id: ${_id}`);
     const textCreateAt = this.createP(
       "created_at",
-      `Tarefa criada em: ${created_at}`
+      `Tarefa criada em: ${new Tasks().getConclusionText(conclusion, true)}`
     );
     const inputTask = this.createInput(task);
     const hr = this.createHr();
@@ -559,13 +560,9 @@ class TaskEditForm {
       "bg-white/30",
       "dark:bg-gray-900/30",
       "shadow-xl",
-      "shadow-blue-600",
+      "shadow-gray-950",
       "p-4",
       "rounded-b-lg",
-      "shadow-lg",
-      "border-x-4",
-      "border-b-4",
-      "border-blue-600",
       "translate-x-full",
       "right-0",
       "transition",

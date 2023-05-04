@@ -1,16 +1,11 @@
 class MessageServer {
-  init() {
-    window.addEventListener("load", () => {
-      const msg = document.getElementById('msg-server');
-
-      if (!msg) return;
-
-      setInterval(() => {
-        msg.remove();
-      }, 3000);
-    });
+  constructor() {
+    this.msg = document.getElementById('msg-server');
+    if (!this.msg) return;
+    setTimeout(() => {
+      this.msg.remove();
+    }, 3000);
   }
 }
 
-const messageServer = new MessageServer();
-messageServer.init();
+new MessageServer();

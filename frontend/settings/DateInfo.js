@@ -1,42 +1,29 @@
 class DateInfo {
   constructor(selector) {
-    this.element = document.querySelector(selector);
-    this.update();
+    this.dateElement = document.querySelector(selector);
+    this.updateDate();
+    setInterval(() => this.updateDate(), 1000);
   }
 
-  update() {
-    if (!this.element) return;
+  updateDate() {
+    if (!this.dateElement) return;
+
     const now = new Date();
-    const daysOfWeek = [
-      "Domingo",
-      "Segunda-feira",
-      "Terça-feira",
-      "Quarta-feira",
-      "Quinta-feira",
-      "Sexta-feira",
-      "Sábado",
-    ];
-    const monthsOfYear = [
-      "Janeiro",
-      "Fevereiro",
-      "Março",
-      "Abril",
-      "Maio",
-      "Junho",
-      "Julho",
-      "Agosto",
-      "Setembro",
-      "Outubro",
-      "Novembro",
-      "Dezembro",
-    ];
-    const dayOfWeek = daysOfWeek[now.getDay()];
-    const dayOfMonth = now.getDate();
-    const monthOfYear = monthsOfYear[now.getMonth()];
-    const text = `${dayOfWeek}, ${dayOfMonth} ${monthOfYear}`;
-    this.element.textContent = text;
+    const hours = now.getHours();
+    const iconElement = document.querySelector('.icon-info');
+
+    if (hours >= 6 && hours < 18) {
+      iconElement.classList.remove('fa-moon');
+      iconElement.classList.add('fa-sun');
+    } else {
+      iconElement.classList.remove('fa-sun');
+      iconElement.classList.add('fa-moon');
+    }
+
+    const options = { weekday: 'long', day: 'numeric', month: 'long' };
+    const dateText = now.toLocaleDateString('pt-BR', options);
+    this.dateElement.textContent = dateText;
   }
 }
 
 const dateInfo = new DateInfo("p.date-info");
-setInterval(() => dateInfo.update(), 1000);
