@@ -23,10 +23,12 @@ class UserModel {
       username: {
         type: String,
         required: true,
+        unique: true
       },
       email: {
         type: String,
         required: true,
+        unique: true
       },
       password: {
         type: String,
@@ -146,7 +148,8 @@ class UserModel {
     username,
     email,
     password,
-    confirmPassword
+    confirmPassword,
+    profile_picture
   }) {
     this.errors = [];
 
@@ -167,7 +170,8 @@ class UserModel {
 
     if (!password) return {
       username,
-      email
+      email,
+      profile_picture
     };
 
     await this.validatePassword(password, confirmPassword);
@@ -176,6 +180,7 @@ class UserModel {
       email,
       password: this.userData.password,
       confirmPassword,
+      profile_picture
     };
   }
 

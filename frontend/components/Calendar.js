@@ -92,14 +92,18 @@ export default class Calendar {
     divCurrentMonth.append(monthHeader);
     arrowAndCurrentMonth.append(prevBtn, divCurrentMonth, nextBtn);
 
+    const weekContainer = document.createElement('thead');
     const weekdaysRow = document.createElement('tr');
     const weekdays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+
     weekdays.forEach(day => {
       const weekday = document.createElement('th');
-      weekday.classList.add('text-gray-950', 'dark:text-white', 'p-4', 'sm:p-2');
+      weekday.classList.add('dark:text-white', 'text-center', 'p-2', 'text-xl', 'sm:text-base', 'rounded', 'cursor-pointer', 'transition', 'empty', 'cursor-default');
       weekday.textContent = day;
       weekdaysRow.appendChild(weekday);
     });
+
+    weekContainer.appendChild(weekdaysRow)
 
     const daysContainer = document.createElement('tbody');
 
@@ -111,8 +115,7 @@ export default class Calendar {
         dayCell.classList.add(
           'dark:text-white',
           'text-center',
-          'p-4',
-          'sm:p-2',
+          'p-3',
           'text-xl',
           'sm:text-base',
           'rounded',
@@ -161,7 +164,7 @@ export default class Calendar {
     }
 
     const calendarTable = document.createElement('table');
-    calendarContainer.append(arrowAndCurrentMonth, weekdaysRow, daysContainer);
+    calendarContainer.append(arrowAndCurrentMonth, weekContainer, daysContainer);
     calendarContainer.appendChild(calendarTable);
   }
 
