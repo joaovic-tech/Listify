@@ -21,17 +21,27 @@ html {
 }
 
 body.dark::-webkit-scrollbar {
-  width: 0.5rem;
+  width: 1rem;
 }
 
 body.dark::-webkit-scrollbar-thumb {
-  background-color: #252e3c;
-  border-radius: 0.4rem;
-  border: 0.3rem solid #030712;
+  background: #ffffff1b;
 }
 
 body.dark::-webkit-scrollbar-track {
   background: linear-gradient(190deg, #1f2937, #030712);
+}
+
+body::-webkit-scrollbar {
+  width: 1rem;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #0000004c;
+}
+
+body::-webkit-scrollbar-track {
+  background: linear-gradient(190deg, #e2e8f0, #cbd5e1);
 }
 
 .animate-nav {
