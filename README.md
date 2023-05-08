@@ -13,9 +13,13 @@
 
 </div>
 
-| Light Mode                      | Dark Mode                         |
-|:-------------------------------:|:---------------------------------:|
-| ![](./templates/lightMode.png)  | ![](./templates/darkMode.png)     |
+|  Light Mode                         |
+|:-----------------------------------:|
+|  ![](./templates/Desktop-Light.png)  |
+|  ![](./templates/Mobile-Light.png)     |
+|  Dark Mode                          |
+|  ![](./templates/Desktop-Dark.png) |
+|  ![](./templates/Mobile-Dark.png)  |
 
 
 > Status do Projeto: :heavy_check_mark: (concluido)
