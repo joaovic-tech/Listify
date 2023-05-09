@@ -22,6 +22,8 @@ class ThemeToggler {
   }
 
   init() {
+    this.body.classList.add('from-gray-800', 'to-gray-950');
+
     const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     const savedTheme = localStorage.getItem('theme');
     
