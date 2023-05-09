@@ -2,7 +2,7 @@ const Route = require('express').Router;
 const router = new Route();
 const UserController = require('../controllers/UserController');
 
-router.get('/login', (req, res) => {
+router.get('/login', async (req, res) => {
   if (req.session.user) return res.redirect('/dashboard');
 
   return res.render('login', {

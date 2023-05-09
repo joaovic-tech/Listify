@@ -294,18 +294,22 @@ class UserModel {
     
     const user = await this.userModel.findOne({ _id: id });
     
+    console.log(user);
+
     if (!user) return;
-    
+
+    await this.userModel.deleteMany({ username: user.username })
     await this.taskModel.deleteMany({ username: user.username });
-    await this.refreshTokenModel.deleteMany({ username: user.username });
-  
+    await this.refreshTokenModel.deleteMany({ userId: user.username });
+
     if (user.profile_picture) {
       const filePath = path.join(user.profile_picture);
       fs.unlinkSync(filePath);
     }
-  
-    return this.userModel.deleteMany({ username: user.username });
+
+    return user; // Retorna o usuário deletado
   }
+
 
   async deleteSessionUser(id) {
     if (typeof id !== 'string') return;

@@ -1,8 +1,11 @@
 {
-  "name": "nodejs-Todo-List",
+  "name": "Listify",
   "version": "1.0.0",
   "description": "aplicativo de gerenciamento de tarefas",
   "main": "index.js",
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
     "start": "nodemon index.js --ignore frontend"
   },

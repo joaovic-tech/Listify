@@ -13,6 +13,7 @@ const tokenRoutes = require("./src/routes/tokenRoutes");
 const aboutRoutes = require("./src/routes/aboutRoutes");
 const readmeMD = require("./src/routes/readmeMD");
 const serveStatic = require("serve-static");
+const UserDelete = require("./config/UserDelete");
 
 class App {
   constructor() {
@@ -20,6 +21,7 @@ class App {
     this.path = require("path");
     this.middlewares();
     this.routes();
+    UserDelete.init();
   }
 
   middlewares() {
