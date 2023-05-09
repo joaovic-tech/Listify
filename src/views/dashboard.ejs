@@ -1,255 +1,464 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/img/Logo.png" />
+    <meta name="description" content="Dashboard - Crie e edite suas tarefas" />
+    <link rel="stylesheet" href="/assets/styles/main.css" />
+    <title>Dashboard - Listify</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+    <script
+      src="https://kit.fontawesome.com/673aed7dea.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/settings/DarkMode.js" defer></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" href="/assets/img/Logo.png">
-  <meta name="description" content="Dashboard - Crie e edite suas tarefas">
-  <link rel="stylesheet" href="/assets/styles/main.css" />
-  <title>Dashboard - Listify</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-    }
-  </script>
-  <script src="https://kit.fontawesome.com/673aed7dea.js" crossorigin="anonymous"></script>
-  <script src="/settings/DarkMode.js" defer></script>
-</head>
+  <body
+    class="dark transition duration-500 ease-in-out flex flex-col justify-between bg-gradient-to-b h-screen"
+  >
+    <div
+      id="svg_background_dark"
+      class="svg_background pointer-events-none h-screen animate-pulse"
+    ></div>
 
-<body class="dark transition duration-500 ease-in-out flex flex-col justify-between bg-gradient-to-b h-screen">
-  <div id="svg_background_dark" class="svg_background pointer-events-none h-screen animate-pulse"></div>
+    <%- include('includes/messages'); %>
 
-  <%- include('includes/messages'); %>
+    <nav
+      class="animate-nav relative flex items-center justify-between w-full p-2 bg-slate-100 dark:bg-gray-800 transition duration-500 ease-in-out shadow-md shadow-gray-300 dark:shadow-gray-900 rounded-b-lg"
+    >
+      <div class="flex items-center w-full">
+        <i
+          class="fa-solid fa-list-ul fill-current rounded-md px-3 py-3 bg-slate-200 dark:bg-gray-900 text-blue-500"
+        ></i>
+        <a
+          href="#"
+          class="ml-4 text-lg font-semibold text-gray-800 dark:text-white"
+          >Minhas tarefas</a
+        >
+      </div>
+      <form
+        id="search-form"
+        class="relative flex items-center w-full rounded-md"
+      >
+        <input
+          type="text"
+          id="search"
+          class="w-full h-full p-3 rounded-md transition bg-slate-200 dark:bg-gray-700 border-2 border-solid border-slate-200 dark:border-gray-700 dark:focus:border-blue-500 focus:border-blue-500 outline-0 text-white appearance-nonev"
+          placeholder="Search"
+        />
+        <button
+          type="submit"
+          class="absolute right-0 top-0 mt-2 mr-4 rounded-md px-3 py-1 transition text-gray-500 bg-slate-50 hover:bg-slate-300 dark:bg-gray-800 dark:hover:bg-gray-900 hover:text-blue-600"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+    </nav>
 
-  <nav class="animate-nav relative flex items-center justify-between w-full p-2 bg-slate-100 dark:bg-gray-800 transition duration-500 ease-in-out shadow-md shadow-gray-300 dark:shadow-gray-900 rounded-b-lg">
-    <div class="flex items-center w-full">
-      <i
-        class="fa-solid fa-list-ul fill-current rounded-md px-3 py-3 bg-slate-200 dark:bg-gray-900 text-blue-500"></i>
-      <a href="#" class="ml-4 text-lg font-semibold text-gray-800 dark:text-white">Minhas tarefas</a>
+    <!-- Messagem de aviso -->
+    <div id="msg-aviso" class="relative slide-in-left w-full text-center m-4">
+      <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+        Nota: Por favor, tenha em mente que sua conta expira em 24 horas a
+        partir do momento em que foi criada. Depois disso, sua conta será
+        excluída automaticamente. Fizemos isso para manter nossa aplicação
+        funcionando sem problemas.Se você quiser continuar usando nossa
+        aplicação, basta criar uma nova conta. Pedimos desculpas por qualquer
+        inconveniente e agradecemos sua compreensão. Qualquer dúvida, estamos
+        aqui para ajudar!
+      </p>
     </div>
-    <form id="search-form" class="relative flex items-center w-full rounded-md">
-      <input type="text" id="search"
-        class="w-full h-full p-3 rounded-md transition bg-slate-200 dark:bg-gray-700 border-2 border-solid border-slate-200 dark:border-gray-700 dark:focus:border-blue-500 focus:border-blue-500 outline-0 text-white appearance-nonev"
-        placeholder="Search" />
-      <button type="submit"
-        class="absolute right-0 top-0 mt-2 mr-4 rounded-md px-3 py-1 transition text-gray-500 bg-slate-50 hover:bg-slate-300 dark:bg-gray-800 dark:hover:bg-gray-900 hover:text-blue-600">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
-    </form>
-  </nav>
-  <main class="w-full h-full flex flex-col gap-2 sm:gap-8 p-4">
-    <header id="header" class="relative flex justify-between slide-in-left">
-      <div class="left">
-        <h2 class="text-3xl text-gray-800 dark:text-white">
-          <i class="fa-solid fa-moon icon-info"></i>
-          Tarefas
-        </h2>
-        <p class="text-base text-zinc-400 date-info"></p>
-      </div>
-      <div class="right flex justify-center text-center items-center gap-4">
-        <a href="/profile"
-          class="outline-0 capitalize font-bold text-3xl text-blue-600 text-shadow-md text-shadow-300 transition hover:text-blue-700 focus:text-blue-700 hover:underline focus:underline">
-          <%- user.username %>
-        </a>
-        <a href="/profile">
-          <% if(user.profile_picture) { %>
-          <img src="<%- user.profile_picture %>" id="image" alt="Profile Image"
-            class="w-16 h-16 rounded-full object-cover rounded-full shadow-md" />
-          <% } else { %>
-          <img src="/assets/svg/userImage.svg" id="image" alt="Profile Image"
-            class="w-24 h-24 rounded-full object-cover rounded-full shadow-md" />
-          <% } %>
-        </a>
-      </div>
-    </header>
-    <form action="/task" method="post" id="task-form" class="relative z-50 w-full bg-gray-700 rounded-lg animate-down">
-      <input type="text" name="username" id="username" value="<%- user.username %>" hidden />
-      <input
-        class="input-task-create outline-0 w-full py-2 px-3 bg-slate-50 dark:bg-gray-700 text-gray-950 dark:text-white appearance-none"
-        type="text" id="task" name="task" placeholder="Exemplo: Estudar para prova" autocomplete="off" />
-      <hr class="border-blue-500" />
-      <div id="task-options"
-        class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute w-full grid sm:flex items-center justify-between bg-slate-100 dark:bg-gray-700 shadow-md dark:shadow-gray-900/50 rounded-b-lg px-8 py-2">
-        <ul class="w-full flex justify-start gap-4">
-          <li class="relative flex items-center justify-center">
-            <label for="conclusion" id="label-conclusion"
-              class="show-span show-modal text-gray-950 dark:text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-slate-200 dark:bg-gray-800 border-2 border-slate-200 dark:border-gray-800">
-              <i class="fa-solid fa-calendar-days pointer-events-none"></i>
-              <span
-                class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-slate-200 dark:bg-gray-800 rounded-lg shadow-md">
-                Conclusão
-              </span>
-            </label>
-            <div id="modal-conclusion"
-              class="modal-option opacity-0 pointer-events-none transition duration-500 ease absolute z-20 -left-8 top-14 border-t-2 border-blue-500 bg-gray-50 dark:bg-gray-900 shadow-md dark:shadow-gray-900 rounded min-w-[25rem] max-w-[18rem]">
-              <i class="fa-solid fa-sort-up text-4xl text-blue-500 absolute -top-[1.1rem] left-10"></i>
-              <h1 class="text-center text-gray-950 dark:text-white text-base p-4">
-                Defina a conclusão da tarefa
-              </h1>
-              <hr class="border-blue-500 mb-8" />
-              <div class="grid gap-8 p-4">
-                <input type="date" name="conclusion" id="conclusion" class="hidden" />
-                <div id="calendar"></div>
-                <div class="flex flex-col gap-4">
-                  <button id="btn-conclusion" type="button"
-                  class="px-6 py-1 m-2 flex items-center justify-center rounded bg-blue-700 text-white transition ease hover:rounded-md hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50">
-                  Confirmar
-                </button>
-                <button id="btn-conclusion-cancel" type="button"
-                  class="px-6 py-1 m-2 flex items-center justify-center rounded bg-gray-700 text-white transition ease hover:rounded-md hover:bg-gray-500 hover:shadow-lg hover:shadow-gray-500/50">
-                  Cancelar
-                </button>
+
+    <main class="w-full h-full flex flex-col gap-2 sm:gap-8 p-4">
+      <header id="header" class="relative flex justify-between slide-in-left">
+        <div class="left">
+          <h2 class="text-3xl text-gray-800 dark:text-white">
+            <i class="fa-solid fa-moon icon-info"></i>
+            Tarefas
+          </h2>
+          <p class="text-base text-zinc-400 date-info"></p>
+        </div>
+        <div class="right flex justify-center text-center items-center gap-4">
+          <a
+            href="/profile"
+            class="outline-0 capitalize font-bold text-3xl text-blue-600 text-shadow-md text-shadow-300 transition hover:text-blue-700 focus:text-blue-700 hover:underline focus:underline"
+          >
+            <%- user.username %>
+          </a>
+          <a href="/profile">
+            <% if(user.profile_picture) { %>
+            <img
+              src="<%- user.profile_picture %>"
+              id="image"
+              alt="Profile Image"
+              class="w-16 h-16 rounded-full object-cover rounded-full shadow-md"
+            />
+            <% } else { %>
+            <img
+              src="/assets/svg/userImage.svg"
+              id="image"
+              alt="Profile Image"
+              class="w-24 h-24 rounded-full object-cover rounded-full shadow-md"
+            />
+            <% } %>
+          </a>
+        </div>
+      </header>
+      <form
+        action="/task"
+        method="post"
+        id="task-form"
+        class="relative z-50 w-full bg-gray-700 rounded-lg animate-down"
+      >
+        <input
+          type="text"
+          name="username"
+          id="username"
+          value="<%- user.username %>"
+          hidden
+        />
+        <input
+          class="input-task-create outline-0 w-full py-2 px-3 bg-slate-50 dark:bg-gray-700 text-gray-950 dark:text-white appearance-none"
+          type="text"
+          id="task"
+          name="task"
+          placeholder="Exemplo: Estudar para prova"
+          autocomplete="off"
+        />
+        <hr class="border-blue-500" />
+        <div
+          id="task-options"
+          class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute w-full grid sm:flex items-center justify-between bg-slate-100 dark:bg-gray-700 shadow-md dark:shadow-gray-900/50 rounded-b-lg px-8 py-2"
+        >
+          <ul class="w-full flex justify-start gap-4">
+            <li class="relative flex items-center justify-center">
+              <label
+                for="conclusion"
+                id="label-conclusion"
+                class="show-span show-modal text-gray-950 dark:text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-slate-200 dark:bg-gray-800 border-2 border-slate-200 dark:border-gray-800"
+              >
+                <i class="fa-solid fa-calendar-days pointer-events-none"></i>
+                <span
+                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-slate-200 dark:bg-gray-800 rounded-lg shadow-md"
+                >
+                  Conclusão
+                </span>
+              </label>
+              <div
+                id="modal-conclusion"
+                class="modal-option opacity-0 pointer-events-none transition duration-500 ease absolute z-20 -left-8 top-14 border-t-2 border-blue-500 bg-gray-50 dark:bg-gray-900 shadow-md dark:shadow-gray-900 rounded min-w-[25rem] max-w-[18rem]"
+              >
+                <i
+                  class="fa-solid fa-sort-up text-4xl text-blue-500 absolute -top-[1.1rem] left-10"
+                ></i>
+                <h1
+                  class="text-center text-gray-950 dark:text-white text-base p-4"
+                >
+                  Defina a conclusão da tarefa
+                </h1>
+                <hr class="border-blue-500 mb-8" />
+                <div class="grid gap-8 p-4">
+                  <input
+                    type="date"
+                    name="conclusion"
+                    id="conclusion"
+                    class="hidden"
+                  />
+                  <div id="calendar"></div>
+                  <div class="flex flex-col gap-4">
+                    <button
+                      id="btn-conclusion"
+                      type="button"
+                      class="px-6 py-1 m-2 flex items-center justify-center rounded bg-blue-700 text-white transition ease hover:rounded-md hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50"
+                    >
+                      Confirmar
+                    </button>
+                    <button
+                      id="btn-conclusion-cancel"
+                      type="button"
+                      class="px-6 py-1 m-2 flex items-center justify-center rounded bg-gray-700 text-white transition ease hover:rounded-md hover:bg-gray-500 hover:shadow-lg hover:shadow-gray-500/50"
+                    >
+                      Cancelar
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </li>
-          <li class="relative flex items-center justify-center">
-            <input type="checkbox" name="important" id="important" hidden />
-            <label for="important" id="label-important"
-              class="show-span text-gray-950 dark:text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-slate-200 dark:bg-gray-800 border-2 border-slate-200 dark:border-gray-800">
-              <i class="fa-solid fa-star pointer-events-none"></i>
-              <span
-                class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-slate-200 dark:bg-gray-800 rounded-lg shadow-md">
-                Importante
-              </span>
-            </label>
-          </li>
-          <li class="relative flex items-center justify-center">
-            <label for="repeat" id="label-repeat"
-              class="show-span text-gray-950 dark:text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-slate-200 dark:bg-gray-800 border-2 border-slate-200 dark:border-gray-800">
-              <i class="fa-solid fa-repeat pointer-events-none"></i>
-              <span
-                class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center gap-4 text-center text-blue-500 bg-slate-200 dark:bg-gray-800 rounded-lg shadow-md">
-                Repetir
-              </span>
-            </label>
-            <div id="modal-repeat"
-              class="modal-option opacity-0 pointer-events-none transition duration-500 ease absolute left-auto top-14 bg-gray-50 dark:bg-gray-900 border-t-2 border-blue-600 rounded min-w-[15rem] max-w-[18rem] pb-2 shadow-lg">
-              <i class="fa-solid fa-sort-up text-4xl text-blue-500 absolute -top-[1.1rem] left-[6.8rem]"></i>
-              <h1 class="text-center text-gray-950 dark:text-white text-base p-4">
-                Que dia deseja repetir?
-              </h1>
-              <hr class="border-blue-500 mb-8" />
-              <ol id="repeat-days" class="grid grid-cols-3 justify-center items-center text-center gap-4">
-                <li>
-                  <label for="day-sun"
-                    class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
-                    Dom
-                  </label>
-                  <input type="checkbox" hidden class="checkbox-day" name="day-sun" id="day-sun" />
-                </li>
-                <li>
-                  <label for="day-mon"
-                    class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
-                    Seg
-                  </label>
-                  <input type="checkbox" hidden class="checkbox-day" name="day-mon" id="day-mon" />
-                </li>
-                <li>
-                  <label for="day-tue"
-                    class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
-                    Ter
-                  </label>
-                  <input type="checkbox" hidden class="checkbox-day" name="day-tue" id="day-tue" />
-                </li>
-                <li>
-                  <label for="day-wed"
-                    class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
-                    Qua
-                  </label>
-                  <input type="checkbox" hidden class="checkbox-day" name="day-wed" id="day-wed" />
-                </li>
-                <li>
-                  <label for="day-thu"
-                    class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
-                    Qui
-                  </label>
-                  <input type="checkbox" hidden class="checkbox-day" name="day-thu" id="day-thu" />
-                </li>
-                <li>
-                  <label for="day-fri"
-                    class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
-                    Sex
-                  </label>
-                  <input type="checkbox" hidden class="checkbox-day" name="day-fri" id="day-fri" />
-                </li>
-                <li>
-                  <label for="day-sat"
-                    class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500">
-                    Sáb
-                  </label>
-                  <input type="checkbox" hidden class="checkbox-day" name="day-sat" id="day-sat" />
-                </li>
-              </ol>
-              <div id="time-modal" class="w-full grid gap-4 mt-4 p-4 border-t-2 border-blue-500">
-                <h2 class="text-base text-center text-gray-950 dark:text-white">Escolha um horário</h2>
-                <input type="time" name="time-repeat" id="time-repeat"
-                  class="outline-0 text-gray-950 dark:text-white rounded flex items-center justify-center cursor-pointer w-11/12 h-8 px-4 m-auto text-center transition ease bg-slate-300 hover:bg-slate-500 focus:bg-slate-500 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:bg-gray-700" />
+            </li>
+            <li class="relative flex items-center justify-center">
+              <input type="checkbox" name="important" id="important" hidden />
+              <label
+                for="important"
+                id="label-important"
+                class="show-span text-gray-950 dark:text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-slate-200 dark:bg-gray-800 border-2 border-slate-200 dark:border-gray-800"
+              >
+                <i class="fa-solid fa-star pointer-events-none"></i>
+                <span
+                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center text-center text-blue-500 bg-slate-200 dark:bg-gray-800 rounded-lg shadow-md"
+                >
+                  Importante
+                </span>
+              </label>
+            </li>
+            <li class="relative flex items-center justify-center">
+              <label
+                for="repeat"
+                id="label-repeat"
+                class="show-span text-gray-950 dark:text-white rounded flex items-center justify-center w-6 h-6 p-4 my-2 hover:text-blue-500 cursor-pointer bg-slate-200 dark:bg-gray-800 border-2 border-slate-200 dark:border-gray-800"
+              >
+                <i class="fa-solid fa-repeat pointer-events-none"></i>
+                <span
+                  class="opacity-0 pointer-events-none transition duration-500 ease absolute -top-6 left-auto w-28 h-8 p-2 flex items-center justify-center gap-4 text-center text-blue-500 bg-slate-200 dark:bg-gray-800 rounded-lg shadow-md"
+                >
+                  Repetir
+                </span>
+              </label>
+              <div
+                id="modal-repeat"
+                class="modal-option opacity-0 pointer-events-none transition duration-500 ease absolute left-auto top-14 bg-gray-50 dark:bg-gray-900 border-t-2 border-blue-600 rounded min-w-[15rem] max-w-[18rem] pb-2 shadow-lg"
+              >
+                <i
+                  class="fa-solid fa-sort-up text-4xl text-blue-500 absolute -top-[1.1rem] left-[6.8rem]"
+                ></i>
+                <h1
+                  class="text-center text-gray-950 dark:text-white text-base p-4"
+                >
+                  Que dia deseja repetir?
+                </h1>
+                <hr class="border-blue-500 mb-8" />
+                <ol
+                  id="repeat-days"
+                  class="grid grid-cols-3 justify-center items-center text-center gap-4"
+                >
+                  <li>
+                    <label
+                      for="day-sun"
+                      class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500"
+                    >
+                      Dom
+                    </label>
+                    <input
+                      type="checkbox"
+                      hidden
+                      class="checkbox-day"
+                      name="day-sun"
+                      id="day-sun"
+                    />
+                  </li>
+                  <li>
+                    <label
+                      for="day-mon"
+                      class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500"
+                    >
+                      Seg
+                    </label>
+                    <input
+                      type="checkbox"
+                      hidden
+                      class="checkbox-day"
+                      name="day-mon"
+                      id="day-mon"
+                    />
+                  </li>
+                  <li>
+                    <label
+                      for="day-tue"
+                      class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500"
+                    >
+                      Ter
+                    </label>
+                    <input
+                      type="checkbox"
+                      hidden
+                      class="checkbox-day"
+                      name="day-tue"
+                      id="day-tue"
+                    />
+                  </li>
+                  <li>
+                    <label
+                      for="day-wed"
+                      class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500"
+                    >
+                      Qua
+                    </label>
+                    <input
+                      type="checkbox"
+                      hidden
+                      class="checkbox-day"
+                      name="day-wed"
+                      id="day-wed"
+                    />
+                  </li>
+                  <li>
+                    <label
+                      for="day-thu"
+                      class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500"
+                    >
+                      Qui
+                    </label>
+                    <input
+                      type="checkbox"
+                      hidden
+                      class="checkbox-day"
+                      name="day-thu"
+                      id="day-thu"
+                    />
+                  </li>
+                  <li>
+                    <label
+                      for="day-fri"
+                      class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500"
+                    >
+                      Sex
+                    </label>
+                    <input
+                      type="checkbox"
+                      hidden
+                      class="checkbox-day"
+                      name="day-fri"
+                      id="day-fri"
+                    />
+                  </li>
+                  <li>
+                    <label
+                      for="day-sat"
+                      class="label-day p-2 cursor-pointer dark:bg-gray-800 rounded-md border-2 text-gray-950 dark:text-white bg-slate-200 border-slate-100 dark:border-gray-700 transition ease hover:border-blue-500 hover:bg-gray-900 focus:border-blue-500 focus:bg-gray-900 hover:text-blue-500 focus:text-blue-500"
+                    >
+                      Sáb
+                    </label>
+                    <input
+                      type="checkbox"
+                      hidden
+                      class="checkbox-day"
+                      name="day-sat"
+                      id="day-sat"
+                    />
+                  </li>
+                </ol>
+                <div
+                  id="time-modal"
+                  class="w-full grid gap-4 mt-4 p-4 border-t-2 border-blue-500"
+                >
+                  <h2
+                    class="text-base text-center text-gray-950 dark:text-white"
+                  >
+                    Escolha um horário
+                  </h2>
+                  <input
+                    type="time"
+                    name="time-repeat"
+                    id="time-repeat"
+                    class="outline-0 text-gray-950 dark:text-white rounded flex items-center justify-center cursor-pointer w-11/12 h-8 px-4 m-auto text-center transition ease bg-slate-300 hover:bg-slate-500 focus:bg-slate-500 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:bg-gray-700"
+                  />
+                </div>
               </div>
-            </div>
-          </li>
-        </ul>
-        <button type="submit" class="px-6 py-1 m-2 flex items-center justify-center transition ease bg-blue-500 dark:bg-blue-700 text-white dark:text-gray-950 dark:text-white rounded-md hover:shadow-lg hover:bg-blue-600 hover:shadow-blue-600/50 dark:hover:bg-blue-500 dark:hover:shadow-blue-500/50">
-          Salvar
-        </button>
-      </div>
-    </form> 
-    <ul id="num-tasks" class="animate-down mt-36 sm:mt-12 flex justify-start gap-6 dark:text-slate-50 text-slate-600 w-full"></ul>
-    <section id="container" class="flex gap-2">
-      <ul id="tasks" class="flex flex-col gap-2 relative w-full"></ul>
-    </section>
-    <%- include('includes/footer') %>
-  </main>
-  <div class="fixed bottom-4 right-4 z-50">
-    <button type="submit" id="btn-settings"
-      class="rounded-md bg-gray-900 text-white dark:bg-slate-200 dark:text-gray-900 text-lg px-3 py-2 shadow-lg transition hover:text-white hover:bg-blue-600 dark:hover:bg-blue-600 dark:hover:text-white hover:shadow-blue-600 focus:bg-blue-600 focus:shadow-blue-600 dark:focus:bg-blue-600 dark:focus:shadow-blue-600 dark:focus:text-white">
-      <i class="fa-solid fa-gear pointer-events-none"></i>
-    </button>
-    <ul id="menu-settings"
-      class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute z-50 bottom-12 right-0 w-56 h-auto grid gap-2 p-2 rounded-b-lg justify-center items-center backdrop-blur-md bg-white/30 dark:bg-gray-900/30 text-base text-gray-800 dark:text-white shadow-md">
-      <li>
-        <a href="/"
-          class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 border-2 border-transparent transition ease hover:bg-slate-300 dark:hover:bg-gray-950/30 hover:text-green-500 hover:border-green-500 rounded-lg cursor-pointer">
-          <i class="fa-solid fa-house-chimney pointer-events-none"></i>
-          Início
-        </a>
-      </li>
-      <li>
-        <a href="/about"
-          class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 border-2 border-transparent transition ease hover:bg-slate-300 dark:hover:bg-gray-950/30 hover:text-yellow-500 hover:border-yellow-500 rounded-lg cursor-pointer">
-          <i class="fa-solid fa-circle-info pointer-events-none"></i>
-          Sobre
-        </a>
-      </li>
-      <li>
-        <a href="/profile"
-          class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 border-2 border-transparent transition ease hover:bg-slate-300 dark:hover:bg-gray-950/30 hover:text-purple-500 hover:border-purple-500 rounded-lg cursor-pointer">
-          <i class="fa-solid fa-user pointer-events-none"></i>
-          Editar Perfil
-        </a>
-      </li>
-      <li>
-        <button id="theme-toggle"
-          class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 border-2 border-transparent transition ease hover:bg-slate-300 dark:hover:bg-gray-950/30 dark:hover:text-blue-600 hover:text-yellow-600 rounded dark:hover:border-blue-600 hover:border-yellow-600 rounded-lg cursor-pointer">
-          <i id="theme-icon" class="fas fa-moon pointer-events-none"></i>
-          Dark mode
-        </button>
-      </li>
-      <li>
-        <a href="/login/logout"
-          class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 border-2 border-transparent transition ease hover:bg-slate-300 dark:hover:bg-gray-950/30 hover:text-rose-500 hover:border-rose-500 rounded-lg cursor-pointer">
-          <i class="fas fa-sign-out-alt pointer-events-none"></i>
-          Sair
-        </a>
-      </li>
-    </ul>
-  </div>
+            </li>
+          </ul>
+          <button
+            type="submit"
+            class="px-6 py-1 m-2 flex items-center justify-center transition ease bg-blue-500 dark:bg-blue-700 text-white dark:text-gray-950 dark:text-white rounded-md hover:shadow-lg hover:bg-blue-600 hover:shadow-blue-600/50 dark:hover:bg-blue-500 dark:hover:shadow-blue-500/50"
+          >
+            Salvar
+          </button>
+        </div>
+      </form>
+      <ul
+        id="num-tasks"
+        class="animate-down mt-36 sm:mt-12 flex justify-start gap-6 dark:text-slate-50 text-slate-600 w-full"
+      ></ul>
+      <section id="container" class="flex gap-2">
+        <ul id="tasks" class="flex flex-col gap-2 relative w-full"></ul>
+      </section>
+      <%- include('includes/footer') %>
+    </main>
+    <div class="fixed bottom-4 right-4 z-50">
+      <button
+        type="submit"
+        id="btn-settings"
+        class="rounded-md bg-gray-900 text-white dark:bg-slate-200 dark:text-gray-900 text-lg px-3 py-2 shadow-lg transition hover:text-white hover:bg-blue-600 dark:hover:bg-blue-600 dark:hover:text-white hover:shadow-blue-600 focus:bg-blue-600 focus:shadow-blue-600 dark:focus:bg-blue-600 dark:focus:shadow-blue-600 dark:focus:text-white"
+      >
+        <i class="fa-solid fa-gear pointer-events-none"></i>
+      </button>
+      <ul
+        id="menu-settings"
+        class="opacity-0 pointer-events-none transition duration-500 ease-in-out absolute z-50 bottom-12 right-0 w-56 h-auto grid gap-2 p-2 rounded-b-lg justify-center items-center backdrop-blur-md bg-white/30 dark:bg-gray-900/30 text-base text-gray-800 dark:text-white shadow-md"
+      >
+        <li>
+          <a
+            href="/"
+            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 border-2 border-transparent transition ease hover:bg-slate-300 dark:hover:bg-gray-950/30 hover:text-green-500 hover:border-green-500 rounded-lg cursor-pointer"
+          >
+            <i class="fa-solid fa-house-chimney pointer-events-none"></i>
+            Início
+          </a>
+        </li>
+        <li>
+          <a
+            href="/about"
+            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 border-2 border-transparent transition ease hover:bg-slate-300 dark:hover:bg-gray-950/30 hover:text-yellow-500 hover:border-yellow-500 rounded-lg cursor-pointer"
+          >
+            <i class="fa-solid fa-circle-info pointer-events-none"></i>
+            Sobre
+          </a>
+        </li>
+        <li>
+          <a
+            href="/profile"
+            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 border-2 border-transparent transition ease hover:bg-slate-300 dark:hover:bg-gray-950/30 hover:text-purple-500 hover:border-purple-500 rounded-lg cursor-pointer"
+          >
+            <i class="fa-solid fa-user pointer-events-none"></i>
+            Editar Perfil
+          </a>
+        </li>
+        <li>
+          <button
+            id="theme-toggle"
+            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 border-2 border-transparent transition ease hover:bg-slate-300 dark:hover:bg-gray-950/30 dark:hover:text-blue-600 hover:text-yellow-600 rounded dark:hover:border-blue-600 hover:border-yellow-600 rounded-lg cursor-pointer"
+          >
+            <i id="theme-icon" class="fas fa-moon pointer-events-none"></i>
+            Dark mode
+          </button>
+        </li>
+        <li>
+          <a
+            href="/login/logout"
+            class="outline-0 flex justify-center items-center text-center gap-2 px-5 py-2 border-2 border-transparent transition ease hover:bg-slate-300 dark:hover:bg-gray-950/30 hover:text-rose-500 hover:border-rose-500 rounded-lg cursor-pointer"
+          >
+            <i class="fas fa-sign-out-alt pointer-events-none"></i>
+            Sair
+          </a>
+        </li>
+      </ul>
+    </div>
+    <script>
+      const aviso = document.getElementById("msg-aviso");
 
-  <script type="module" src="/main.js"></script>
-  <script type="module" src="/utils/MessageServer.js"></script>
-  <script type="module" src="/components/Calendar.js"></script>
-</body>
+      // Salvar o valor da mensagem
+      setTimeout(() => {
+        localStorage.setItem("aviso", "on");
+      }, 2000);
+
+      // Obtém o valor do localStorage
+      const valor = localStorage.getItem("aviso");
+
+      // Verifica se o valor é "on"
+      if (valor === "on") {
+        // Oculta o elemento usando CSS
+        aviso.style.display = "none";
+      } else {
+        // Exibe o elemento na página
+        aviso.style.display = "block";
+      }
+    </script>
+    <script type="module" src="/main.js"></script>
+    <script type="module" src="/utils/MessageServer.js"></script>
+    <script type="module" src="/components/Calendar.js"></script>
+  </body>
 </html>
