@@ -293,8 +293,6 @@ class UserModel {
     if (typeof id !== 'string') return;
     
     const user = await this.userModel.findOne({ _id: id });
-    
-    console.log(user);
 
     if (!user) return;
 

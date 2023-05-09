@@ -9,8 +9,6 @@ module.exports = class RefreshTokenUserUseCase {
   }
 
   async execute(refresh_token = String) {
-    console.log(refresh_token);
-
     const refreshToken = await this.RefreshToken.findOne({ _id: refresh_token });
 
     if (!refreshToken) {

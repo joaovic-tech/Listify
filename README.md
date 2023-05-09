@@ -26,7 +26,7 @@
 
 ### Tópicos 
 
-:small_blue_diamond: [Deploy da Aplicação](#deploy-da-aplicação-dash)
+:small_blue_diamond: [Deploy da Aplicação](https://listify-2kqb.onrender.com)
 
 :small_blue_diamond: [Descrição do projeto](#descrição-do-projeto)
 
@@ -113,6 +113,17 @@ As dependências do Listify são:
     "validator": "^13.9.0"
 }
 ```
+
+## Segurança
+
+O Listify traz segurança para seus usuários!
+
+A importância de manter as senhas seguras e confidenciais. Por isso, utilizei o algoritmo bcrypt para criptografar a senha cadastrada ao criar ou editar sua conta na aplicação.
+
+O bcrypt é um dos algoritmos de hash de senhas mais seguros disponíveis atualmente. Ele garante que suas senhas sejam armazenadas de forma segura e protegida contra ameaças externas, como ataques de hackers e vazamentos de dados.
+
+> **Aqui está um exemplo de como a senha `HASH` fica armazenada no banco:**
+> ![](./templates/DemonstraçãoSEnhaHask.png)
 
 ## Licença
 
