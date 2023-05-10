@@ -3,11 +3,9 @@
   "version": "1.0.0",
   "description": "aplicativo de gerenciamento de tarefas",
   "main": "index.js",
-  "engines": {
-    "node": "18"
-  },
   "scripts": {
-    "start": "nodemon index.js --ignore frontend"
+    "dev": "nodemon index.js --ignore frontend",
+    "start": "node index.js"
   },
   "author": "João Victor @joaovic-tech",
   "license": "MIT License",
@@ -28,7 +26,6 @@
     "marked": "^4.2.5",
     "mongoose": "^6.8.1",
     "multer": "^1.4.5-lts.1",
-    "node-notifier": "^10.0.1",
     "serve-static": "^1.15.0",
     "validator": "^13.9.0"
   }
