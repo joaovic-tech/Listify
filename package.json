@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "aplicativo de gerenciamento de tarefas",
   "main": "index.js",
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
     "dev": "nodemon index.js --ignore frontend",
     "start": "node index.js"
