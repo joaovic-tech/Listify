@@ -15,11 +15,11 @@
 
 |  Light Mode                         |
 |:-----------------------------------:|
-|  ![](./templates/Desktop-Light.png)  |
-|  ![](./templates/Mobile-Light.png)     |
+|  ![](./template/Desktop-Light.png)  |
+|  ![](./template/Mobile-Light.png)     |
 |  Dark Mode                          |
-|  ![](./templates/Desktop-Dark.png) |
-|  ![](./templates/Mobile-Dark.png)  |
+|  ![](./template/Desktop-Dark.png) |
+|  ![](./template/Mobile-Dark.png)  |
 
 
 > Status do Projeto: :heavy_check_mark: (concluido)
@@ -123,7 +123,7 @@ A importância de manter as senhas seguras e confidenciais. Por isso, utilizei o
 O bcrypt é um dos algoritmos de hash de senhas mais seguros disponíveis atualmente. Ele garante que suas senhas sejam armazenadas de forma segura e protegida contra ameaças externas, como ataques de hackers e vazamentos de dados.
 
 > **Aqui está um exemplo de como a senha `HASH` fica armazenada no banco:**
-> ![](./templates/DemonstraçãoSEnhaHask.png)
+> ![](./template/DemonstraçãoSEnhaHask.png)
 
 ## Licença
 
