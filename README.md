@@ -34,3 +34,5 @@
 [desenvolvendo...]
 
 Copyright :copyright: 2023 - Listify
+
+* [ ] pesquisar sobre piperline em projetos monorepo
