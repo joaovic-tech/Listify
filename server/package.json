@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "@listify/server",
   "version": "1.0.0",
   "description": "Listify backend",
   "main": "index.js",
