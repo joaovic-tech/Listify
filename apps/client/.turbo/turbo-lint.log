@@ -1,0 +1,16 @@
+
+> @listify/client@0.1.0 lint /home/joaovic/Desktop/project-git/listify/apps/client
+> eslint .
+
+
+Oops! Something went wrong! :(
+
+ESLint: 8.49.0
+
+ESLint couldn't find the config "@listify/eslint-config-custom" to extend from. Please check that the name of the config is correct.
+
+The config "@listify/eslint-config-custom" was referenced from the config file in "/home/joaovic/Desktop/project-git/listify/apps/client/.eslintrc.json".
+
+If you still have problems, please stop by https://eslint.org/chat/help to chat with the team.
+
+ ELIFECYCLE  Command failed with exit code 2.

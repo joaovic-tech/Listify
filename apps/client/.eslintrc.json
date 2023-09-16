@@ -1,0 +1,3 @@
+{
+  "extends": ["@listify/eslint-config-custom"]
+}

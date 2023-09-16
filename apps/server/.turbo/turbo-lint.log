@@ -1,0 +1,13 @@
+
+> @listify/server@1.0.0 lint /home/joaovic/Desktop/project-git/listify/apps/server
+> eslint .
+
+
+Oops! Something went wrong! :(
+
+ESLint: 8.49.0
+
+No files matching the pattern "." were found.
+Please check for typing mistakes in the pattern.
+
+ ELIFECYCLE  Command failed.

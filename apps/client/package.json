@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint ."
   },
   "dependencies": {
+    "@listify/eslint-config-custom": "workspace:^",
     "@types/node": "20.6.1",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",

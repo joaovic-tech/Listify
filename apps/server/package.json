@@ -9,8 +9,7 @@
     "test": "vitest",
     "build": "tsup src",
     "vercel-build": "npx prisma migrate deploy",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "lint": "eslint \"src/**/*.ts\" --fix"
+    "lint": "eslint ."
   },
   "author": "joaovic-tech",
   "license": "ISC",
@@ -25,6 +24,7 @@
     "vitest": "^0.34.3"
   },
   "dependencies": {
+    "@listify/eslint-config-custom": "workspace:^",
     "@prisma/client": "^5.2.0",
     "@types/bcrypt": "^5.0.0",
     "@types/uuid": "^9.0.3",

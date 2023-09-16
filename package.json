@@ -5,7 +5,10 @@
   "description": "",
   "scripts": {
     "dev": "turbo dev --parallel",
-    "build": "turbo build --parallel"
+    "build": "turbo build --parallel",
+    "lint:client": "pnpm workspace @listify/client lint",
+    "lint:server": "pnpm workspace @listify/server lint",
+    "lint": "pnpm lint:client && pnpm lint:server"
   },
   "workspaces": [
     "apps/*",
