@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String         @id @default(uuid())
+  username     String         @unique
+  email        String         @unique
+  name         String
+  password     String
+  createAt     DateTime       @default(now())
+  updateAt     DateTime       @updatedAt
+  task_rent    TaskRent[]     @relation("user")
+  RefreshToken RefreshToken[]
+
+  @@map("users")
+}
+
+model Task {
+  id           String     @id @default(uuid())
+  title        String
+  conclusion   DateTime
+  notification String
+  createAt     DateTime   @default(now())
+  task_rent    TaskRent[] @relation("task")
+
+  @@map("tasks")
+}
+
+model TaskRent {
+  user   User   @relation("user", fields: [userId], references: [id])
+  userId String
+  task   Task   @relation("task", fields: [taskId], references: [id])
+  taskId String
+
+  @@id([userId, taskId])
+  @@map("task_rent  ")
+}
+
+model RefreshToken {
+  id        String @id @default(uuid())
+  expiresIn Int
+  user      User   @relation(fields: [userId], references: [id])
+  userId    String
+
+  @@map("refresh_token")
+}

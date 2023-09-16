@@ -1,0 +1,41 @@
+{
+  "name": "@listify/server",
+  "version": "1.0.0",
+  "description": "Listify backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts",
+    "test": "vitest",
+    "build": "tsup src",
+    "vercel-build": "npx prisma migrate deploy",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint": "eslint \"src/**/*.ts\" --fix"
+  },
+  "author": "joaovic-tech",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/node": "^20.5.9",
+    "prisma": "^5.2.0",
+    "tsup": "^7.2.0",
+    "tsx": "^3.12.8",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.2.0",
+    "@types/bcrypt": "^5.0.0",
+    "@types/uuid": "^9.0.3",
+    "bcrypt": "^5.1.1",
+    "dayjs": "^1.11.9",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "http-status-codes": "^2.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^9.0.0",
+    "zod": "^3.22.2"
+  }
+}
