@@ -12,11 +12,16 @@
   },
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "packages/shared/*"
   ],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "turbo": "^1.10.14"
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.2",
+    "typescript": "^5.2.2"
   }
 }
