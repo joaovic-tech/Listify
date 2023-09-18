@@ -3,13 +3,17 @@ import { verify } from "jsonwebtoken";
 import { generatedUUID } from "../config/generateUUID";
 // import {v4 as uuidv4} from "uuid";
 
-export function ensureAuthenticated(req: Request, res: Response, next: NextFunction) {
+export function ensureAuthenticated(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   const authToken = req.headers.authorization;
 
   if (!authToken) {
     return res.status(401).json({
       status: "Error",
-      message: "Token is missing"
+      message: "Token is missing",
     });
   }
 
@@ -21,7 +25,7 @@ export function ensureAuthenticated(req: Request, res: Response, next: NextFunct
   } catch (error) {
     return res.status(401).json({
       status: "Error",
-      message: "Token invalid"
+      message: "Token invalid",
     });
   }
 }

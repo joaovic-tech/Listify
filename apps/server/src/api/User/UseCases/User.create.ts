@@ -18,8 +18,8 @@ class CreateUserUseCase {
         username,
         email,
         name,
-        password
-      }
+        password,
+      },
     });
 
     return userCreated;

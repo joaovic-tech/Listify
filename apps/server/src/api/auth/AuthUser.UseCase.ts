@@ -26,26 +26,27 @@ class AuthenticateUserUseCase {
       throw new Error("User or password incorrect!");
     }
 
-    const passwordMatch = await compare(userData.password, userAlreadyExists.password);
+    const passwordMatch = await compare(
+      userData.password,
+      userAlreadyExists.password,
+    );
 
     if (!passwordMatch) {
       throw new Error("User or password incorrect!");
     }
 
     // gerando token de usuário
-    const token = await GenerateTokenProvider.execute(
-      userAlreadyExists.id
-    );
+    const token = await GenerateTokenProvider.execute(userAlreadyExists.id);
 
     // removendo todos os refresh_token's do user
     await prisma.refreshToken.deleteMany({
       where: {
         userId: userAlreadyExists.id,
-      }
+      },
     });
 
     const refreshToken = await GenerateRefreshTokenProvider.execute(
-      userAlreadyExists.id
+      userAlreadyExists.id,
     );
 
     return { token, refreshToken };

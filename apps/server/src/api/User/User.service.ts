@@ -15,7 +15,7 @@ class UserService {
     const user = prisma.user.findUnique({
       where: {
         username,
-      }
+      },
     });
 
     return user;

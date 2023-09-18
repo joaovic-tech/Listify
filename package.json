@@ -18,7 +18,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "turbo": "^1.10.14"
+    "@types/bcrypt": "^5.0.0",
+    "bcrypt": "^5.1.1",
+    "turbo": "^1.10.14",
+    "zod": "^3.22.2"
   },
   "devDependencies": {
     "@types/node": "^20.6.2",
