@@ -1,4 +1,4 @@
-# Meu Gerenciador de Tarefas
+# Listify - Gerenciador de tarefas
 
 [![Em Desenvolvimento](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)](https://github.com/seu-usuario/seu-repositorio)
 [![Licença](https://img.shields.io/badge/Licença-GNU%20GENERAL%20PUBLIC%20LICENSE%20Version%203-blue)](https://github.com/seu-usuario/seu-repositorio/blob/main/LICENSE)
