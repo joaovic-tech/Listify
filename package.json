@@ -2,7 +2,7 @@
   "name": "listify",
   "private": true,
   "version": "1.0.0",
-  "description": "",
+  "description": "gerenciador de tarefas <TodoList>",
   "scripts": {
     "dev": "turbo dev --parallel",
     "build": "turbo build --parallel",
@@ -15,8 +15,8 @@
     "packages/*",
     "packages/shared/*"
   ],
-  "author": "",
-  "license": "MIT",
+  "author": "joaovic-tech <contato@joaovic.tech>",
+  "license": "GPL-3.0-only",
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
     "bcrypt": "^5.1.1",
